@@ -1,0 +1,155 @@
+[build]
+  publish = "."
+
+# Редирект с корня на главную страницу
+[[redirects]]
+  from = "/"
+  to = "/pages/public/index.html"
+  status = 200
+
+# Редиректы для публичных страниц (чистые URL)
+[[redirects]]
+  from = "/pricing"
+  to = "/pages/public/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/pages/public/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/sign-up"
+  to = "/pages/public/sign-up.html"
+  status = 200
+
+[[redirects]]
+  from = "/ways-to-pay"
+  to = "/pages/public/ways-to-pay.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/pages/public/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/legal-security"
+  to = "/pages/public/legal-security.html"
+  status = 200
+
+[[redirects]]
+  from = "/coming-soon"
+  to = "/pages/public/coming-soon.html"
+  status = 200
+
+[[redirects]]
+  from = "/reset-password"
+  to = "/pages/public/reset-password.html"
+  status = 200
+
+[[redirects]]
+  from = "/create-new-password"
+  to = "/pages/public/create-new-password.html"
+  status = 200
+
+[[redirects]]
+  from = "/success-password"
+  to = "/pages/public/success-password.html"
+  status = 200
+
+# Редиректы для дашборда
+[[redirects]]
+  from = "/dashboard"
+  to = "/pages/dashboard/home.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/home"
+  to = "/pages/dashboard/home.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/balance"
+  to = "/pages/dashboard/balance.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/payments"
+  to = "/pages/dashboard/payments.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/faq"
+  to = "/pages/dashboard/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/help-center"
+  to = "/pages/dashboard/help-center.html"
+  status = 200
+
+# Редиректы для онбординга
+[[redirects]]
+  from = "/onboarding/welcome"
+  to = "/pages/onboarding/welcome-page.html"
+  status = 200
+
+[[redirects]]
+  from = "/onboarding/add-brand"
+  to = "/pages/onboarding/add-your-brand.html"
+  status = 200
+
+[[redirects]]
+  from = "/onboarding/set-up-store"
+  to = "/pages/onboarding/set-up-store.html"
+  status = 200
+
+[[redirects]]
+  from = "/onboarding/invite-team"
+  to = "/pages/onboarding/invite-team-member.html"
+  status = 200
+
+[[redirects]]
+  from = "/onboarding/create-type"
+  to = "/pages/onboarding/create-type.html"
+  status = 200
+
+[[redirects]]
+  from = "/onboarding/create-page"
+  to = "/pages/onboarding/create-page.html"
+  status = 200
+
+# Редиректы для продуктов
+[[redirects]]
+  from = "/product/*"
+  to = "/pages/product/:splat.html"
+  status = 200
+
+# Редиректы для решений
+[[redirects]]
+  from = "/solutions/*"
+  to = "/pages/solutions/:splat.html"
+  status = 200
+
+# Статические файлы - пропускаем редиректы
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/pages/*"
+  to = "/pages/:splat"
+  status = 200
+
+# Ошибки
+[[redirects]]
+  from = "/401"
+  to = "/pages/public/401.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/pages/public/404.html"
+  status = 404

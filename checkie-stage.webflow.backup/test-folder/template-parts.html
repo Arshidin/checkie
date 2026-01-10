@@ -1,0 +1,1201 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Sat Jan 10 2026 14:29:17 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="677fd45284c761345e688df5" data-wf-site="670cc1eb0ffec391588fa8d9" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>template-parts</title>
+  <meta content="template-parts" property="og:title">
+  <meta content="template-parts" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="../css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="../css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="../css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:100,200,300,regular,500,600,700,800,900:cyrillic,latin","Plus Jakarta Sans:200,300,regular,500,600,700,800:cyrillic-ext,latin","Inter:italic"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="../images/favicon.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="../images/webclip.jpg" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--  Memberstack webflow package  -->
+  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript"></script>
+  <script id="jetboost-script" type="text/javascript"> window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2"; (function(d) { var s = d.createElement("script"); s.src = "https://cdn.jetboost.io/jetboost.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })(document); </script>
+</head>
+<body>
+  <div class="main-template-page">
+    <div class="page-wrapper">
+      <div class="global-styles w-embed">
+        <style>
+/* Make text look crisper and more legible in all browsers */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+/* Set color style to inherit */
+.inherit-color * {
+    color: inherit;
+}
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+/* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+/*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+.margin-0 {
+  margin: 0rem !important;
+}
+.padding-0 {
+  padding: 0rem !important;
+}
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+textarea {
+  resize: none;
+}
+ .background-dw-menu {
+ 	scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Цвет полосы и фона для Firefox */
+  /* Для WebKit-браузеров (Chrome, Safari) */
+  /*overflow-y: auto;*/
+}
+.background-dw-menu::-webkit-scrollbar {
+ 	width: 4px; /* Ширина полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-track {
+	background: transparent; /* Фон полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.2); /* Цвет ползунка */
+	border-radius: 10px; /* Скругление ползунка */
+}
+.tabs-menu {
+    overflow-x: auto; /* Включаем горизонтальный скролл */
+    overflow-y: hidden; /* Убираем вертикальный скролл */
+    white-space: nowrap; /* Предотвращаем перенос элементов на новую строку */
+}
+/* Скрываем скролл-бары для всех браузеров */
+.tabs-menu::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+.tabs-menu, .page-full-height-container-scroll {
+    scrollbar-width: none;  /* Для Firefox */
+}
+.hero-image-1, .hero-image-2 { transition: filter 0.5s; } 
+.blur { filter: blur(5px); }
+#descriptionTextArea {
+	resize: vertical; 
+}
+#descriptionTextArea::-webkit-resizer {
+display: none;
+}
+#descriptionTextArea::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+#descriptionTextArea {
+	scrollbar-width: none; 
+}
+[draggable] {
+  user-select: none;
+}
+[data-value] {
+	pointer-events: none;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-bg {
+	background-color: #10945C;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-dot {
+	left: 19px;
+}
+/* Отключаем стили фокуса для всех ссылок и инпутов */
+a:focus,
+a:focus-visible,
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+*[tabindex]:focus-visible, input[type="file"]:focus-visible {
+    outline: none;
+    outline-offset: 0;
+}
+</style>
+      </div>
+      <section class="section-navbar">
+        <div class="navbar-v-grid">
+          <div id="w-node-_0d064561-a154-30fd-9a32-382c6f0b8624-5e688df5">
+            <div class="padding-bottom padding-medium-x"></div>
+            <a href="../dashboard/pages/home.html" class="logo-wrapper w-inline-block"><img loading="lazy" src="../images/logo.svg" alt=""></a>
+            <div class="padding-bottom padding-medium-x"></div>
+          </div>
+          <div id="w-node-_0d064561-a154-30fd-9a32-382c6f0b8629-5e688df5" class="navbar-menu-wrapper">
+            <ul role="list" class="navlink-list-wrapper--js w-list-unstyled">
+              <li class="navlink-item-wrapper">
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.13797 19.7714L8.15722 16.7047C8.1572 15.9246 8.79312 15.2908 9.58101 15.2856H12.4671C13.2587 15.2856 13.9005 15.9209 13.9005 16.7047V19.7809C13.9003 20.4432 14.4343 20.9845 15.103 21H17.0271C18.9451 21 20.5 19.4607 20.5 17.5618V8.83784C20.4898 8.09083 20.1355 7.38935 19.538 6.93303L12.9577 1.6853C11.8049 0.771566 10.1662 0.771566 9.01342 1.6853L2.46203 6.94256C1.86226 7.39702 1.50739 8.09967 1.5 8.84736V17.5618C1.5 19.4607 3.05488 21 4.97291 21H6.89696C7.58235 21 8.13797 20.4499 8.13797 19.7714Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.13797 19.7714L8.15722 16.7047C8.1572 15.9246 8.79312 15.2908 9.58101 15.2856H12.4671C13.2587 15.2856 13.9005 15.9209 13.9005 16.7047V19.7809C13.9003 20.4432 14.4343 20.9845 15.103 21H17.0271C18.9451 21 20.5 19.4607 20.5 17.5618V8.83784C20.4898 8.09083 20.1355 7.38935 19.538 6.93303L12.9577 1.6853C11.8049 0.771566 10.1662 0.771566 9.01342 1.6853L2.46203 6.94256C1.86226 7.39702 1.50739 8.09967 1.5 8.84736V17.5618C1.5 19.4607 3.05488 21 4.97291 21H6.89696C7.58235 21 8.13797 20.4499 8.13797 19.7714Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Home</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Payments</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewbox="0 0 22 20" fill="none">
+                        <path d="M20.6389 12.3957H16.5906C15.1042 12.3948 13.8994 11.1909 13.8985 9.70446C13.8985 8.21801 15.1042 7.01409 16.5906 7.01318H20.6389" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M17.0486 9.6427H16.7369" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.74766 1H15.3911C18.2892 1 20.6388 3.34951 20.6388 6.24766V13.4247C20.6388 16.3229 18.2892 18.6724 15.3911 18.6724H6.74766C3.84951 18.6724 1.5 16.3229 1.5 13.4247V6.24766C1.5 3.34951 3.84951 1 6.74766 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.03561 5.5382H11.4346" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewbox="0 0 22 20" fill="none">
+                        <path d="M20.6389 12.3957H16.5906C15.1042 12.3948 13.8994 11.1909 13.8985 9.70446C13.8985 8.21801 15.1042 7.01409 16.5906 7.01318H20.6389" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M17.0486 9.6427H16.7369" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.74766 1H15.3911C18.2892 1 20.6388 3.34951 20.6388 6.24766V13.4247C20.6388 16.3229 18.2892 18.6724 15.3911 18.6724H6.74766C3.84951 18.6724 1.5 16.3229 1.5 13.4247V6.24766C1.5 3.34951 3.84951 1 6.74766 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.03561 5.5382H11.4346" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Balance</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
+                        <path d="M17.5948 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5948 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.9291 11.085C19.4076 11.118 19.8833 11.1858 20.3517 11.2912C21.0026 11.4186 21.7854 11.6854 22.0641 12.2693C22.2419 12.6433 22.2419 13.0787 22.0641 13.4536C21.7863 14.0375 21.0026 14.3034 20.3517 14.4372" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.28998 7.93189C4.68765 7.93189 3.38782 6.63298 3.38782 5.03064C3.38782 3.42831 4.68765 2.12939 6.28998 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.95577 11.085C4.47727 11.118 4.00152 11.1858 3.5331 11.2912C2.88227 11.4186 2.09943 11.6854 1.82168 12.2693C1.64293 12.6433 1.64293 13.0787 1.82168 13.4536C2.09852 14.0375 2.88227 14.3034 3.5331 14.4372" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 11.7095C15.1846 11.7095 17.9584 12.2008 17.9584 14.1671C17.9584 16.1324 15.2029 16.6421 11.9378 16.6421C8.69003 16.6421 5.91711 16.1507 5.91711 14.1845C5.91711 12.2182 8.67261 11.7095 11.9378 11.7095Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9377 8.90492C9.79638 8.90492 8.07947 7.188 8.07947 5.04575C8.07947 2.90442 9.79638 1.1875 11.9377 1.1875C14.0791 1.1875 15.796 2.90442 15.796 5.04575C15.796 7.188 14.0791 8.90492 11.9377 8.90492Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
+                        <path d="M17.5949 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5949 2.12939" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.9291 11.085C19.4076 11.118 19.8833 11.1858 20.3517 11.2912C21.0026 11.4186 21.7854 11.6854 22.0641 12.2693C22.2419 12.6433 22.2419 13.0787 22.0641 13.4536C21.7863 14.0375 21.0026 14.3034 20.3517 14.4372" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.28998 7.93189C4.68765 7.93189 3.38782 6.63298 3.38782 5.03064C3.38782 3.42831 4.68765 2.12939 6.28998 2.12939" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.95578 11.085C4.47728 11.118 4.00153 11.1858 3.53312 11.2912C2.88228 11.4186 2.09945 11.6854 1.8217 12.2693C1.64295 12.6433 1.64295 13.0787 1.8217 13.4536C2.09853 14.0375 2.88228 14.3034 3.53312 14.4372" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 11.7095C15.1846 11.7095 17.9584 12.2008 17.9584 14.1671C17.9584 16.1324 15.2029 16.6421 11.9378 16.6421C8.69002 16.6421 5.9171 16.1507 5.9171 14.1845C5.9171 12.2182 8.6726 11.7095 11.9378 11.7095Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 8.90492C9.79643 8.90492 8.07951 7.188 8.07951 5.04575C8.07951 2.90442 9.79643 1.1875 11.9378 1.1875C14.0791 1.1875 15.796 2.90442 15.796 5.04575C15.796 7.188 14.0791 8.90492 11.9378 8.90492Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Customers</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 1H18.5521C19.9036 1 21 2.1059 21 3.47018V6.7641C21 8.12735 19.9036 9.23429 18.5521 9.23429H15.2855C13.933 9.23429 12.8366 8.12735 12.8366 6.7641V3.47018C12.8366 2.1059 13.933 1 15.2855 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.44892 1H6.71449C8.06703 1 9.16341 2.1059 9.16341 3.47018V6.7641C9.16341 8.12735 8.06703 9.23429 6.71449 9.23429H3.44892C2.09638 9.23429 1 8.12735 1 6.7641V3.47018C1 2.1059 2.09638 1 3.44892 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.44892 12.7656H6.71449C8.06703 12.7656 9.16341 13.8715 9.16341 15.2368V18.5297C9.16341 19.894 8.06703 20.9999 6.71449 20.9999H3.44892C2.09638 20.9999 1 19.894 1 18.5297V15.2368C1 13.8715 2.09638 12.7656 3.44892 12.7656Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 12.7656H18.5521C19.9036 12.7656 21 13.8715 21 15.2368V18.5297C21 19.894 19.9036 20.9999 18.5521 20.9999H15.2855C13.933 20.9999 12.8366 19.894 12.8366 18.5297V15.2368C12.8366 13.8715 13.933 12.7656 15.2855 12.7656Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 1H18.5521C19.9036 1 21 2.1059 21 3.47018V6.7641C21 8.12735 19.9036 9.23429 18.5521 9.23429H15.2855C13.933 9.23429 12.8366 8.12735 12.8366 6.7641V3.47018C12.8366 2.1059 13.933 1 15.2855 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.44892 1H6.71449C8.06703 1 9.16341 2.1059 9.16341 3.47018V6.7641C9.16341 8.12735 8.06703 9.23429 6.71449 9.23429H3.44892C2.09638 9.23429 1 8.12735 1 6.7641V3.47018C1 2.1059 2.09638 1 3.44892 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.44892 12.7656H6.71449C8.06703 12.7656 9.16341 13.8715 9.16341 15.2368V18.5297C9.16341 19.894 8.06703 20.9999 6.71449 20.9999H3.44892C2.09638 20.9999 1 19.894 1 18.5297V15.2368C1 13.8715 2.09638 12.7656 3.44892 12.7656Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 12.7656H18.5521C19.9036 12.7656 21 13.8715 21 15.2368V18.5297C21 19.894 19.9036 20.9999 18.5521 20.9999H15.2855C13.933 20.9999 12.8366 19.894 12.8366 18.5297V15.2368C12.8366 13.8715 13.933 12.7656 15.2855 12.7656Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Pages</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 14.2065C5.0334 14.2065 1.7504 14.7875 1.7504 17.1155C1.7504 19.4425 5.0124 20.0455 8.8774 20.0455C12.7214 20.0455 16.0044 19.4635 16.0044 17.1365C16.0044 14.8095 12.7424 14.2065 8.8774 14.2065Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 10.886C11.4134 10.886 13.4454 8.853 13.4454 6.318C13.4454 3.782 11.4134 1.75 8.8774 1.75C6.3424 1.75 4.3094 3.782 4.3094 6.318C4.3094 8.853 6.3424 10.886 8.8774 10.886Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.2041 7.66943V11.6794" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M20.25 9.67432H16.16" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 14.2065C5.0334 14.2065 1.7504 14.7875 1.7504 17.1155C1.7504 19.4425 5.0124 20.0455 8.8774 20.0455C12.7214 20.0455 16.0044 19.4635 16.0044 17.1365C16.0044 14.8095 12.7424 14.2065 8.8774 14.2065Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 10.886C11.4134 10.886 13.4454 8.853 13.4454 6.318C13.4454 3.782 11.4134 1.75 8.8774 1.75C6.3424 1.75 4.3094 3.782 4.3094 6.318C4.3094 8.853 6.3424 10.886 8.8774 10.886Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.2041 7.66943V11.6794" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M20.25 9.67432H16.16" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Subscriptions</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Adpay</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div id="w-node-_0d064561-a154-30fd-9a32-382c6f0b866e-5e688df5" class="navbar-bottom-menu-wrapper">
+            <ul role="list" class="w-list-unstyled">
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C17.109 2.75 21.25 6.892 21.25 12C21.25 17.108 17.109 21.25 12 21.25C6.892 21.25 2.75 17.108 2.75 12C2.75 6.892 6.892 2.75 12 2.75Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M11.995 15.7959H12.005" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 13V12.7692C12 12.0151 12.505 11.6062 13.011 11.2924C13.505 10.985 14 10.5845 14 9.84604C14 8.8261 13.105 8 12 8C10.895 8 10 8.8261 10 9.84604" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C17.109 2.75 21.25 6.892 21.25 12C21.25 17.108 17.109 21.25 12 21.25C6.892 21.25 2.75 17.108 2.75 12C2.75 6.892 6.892 2.75 12 2.75Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M11.995 15.7959H12.005" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12 13V12.7692C12 12.0151 12.505 11.6062 13.011 11.2924C13.505 10.985 14 10.5845 14 9.84604C14 8.8261 13.105 8 12 8C10.895 8 10 8.8261 10 9.84604" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">FAQ</div>
+                </a>
+              </li>
+              <li>
+                <a href="../dashboard/help-center.html" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.69524 12.3909C6.05048 12.3909 5.52667 11.8671 5.52667 11.2223C5.52667 10.5795 6.05048 10.0557 6.69524 10.0557C7.34001 10.0557 7.86382 10.5795 7.86382 11.2223C7.86382 11.8671 7.34001 12.3909 6.69524 12.3909ZM11.2381 12.3909C10.5933 12.3909 10.0695 11.8671 10.0695 11.2223C10.0695 10.5795 10.5933 10.0557 11.2381 10.0557C11.8829 10.0557 12.4067 10.5795 12.4067 11.2223C12.4067 11.8671 11.8829 12.3909 11.2381 12.3909ZM14.6125 11.2223C14.6125 11.8671 15.1363 12.3909 15.7811 12.3909C16.4258 12.3909 16.9496 11.8671 16.9496 11.2223C16.9496 10.5795 16.4258 10.0557 15.7811 10.0557C15.1363 10.0557 14.6125 10.5795 14.6125 11.2223Z" fill="#333333"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.02 1C5.21 1 1 5.74612 1 11.015C1 12.6975 1.49 14.4291 2.35 16.0115C2.51 16.2729 2.53 16.6024 2.42 16.9139L1.75 19.1572C1.6 19.698 2.06 20.0976 2.57 19.9374L4.59 19.3375C5.14 19.1572 5.57 19.3866 6.08 19.698C7.54 20.5583 9.36 21 11 21C15.96 21 21 17.1642 21 10.985C21 5.65598 16.7 1 11.02 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.69524 12.3909C6.05048 12.3909 5.52667 11.8671 5.52667 11.2223C5.52667 10.5795 6.05048 10.0557 6.69524 10.0557C7.34001 10.0557 7.86382 10.5795 7.86382 11.2223C7.86382 11.8671 7.34001 12.3909 6.69524 12.3909ZM11.2381 12.3909C10.5933 12.3909 10.0695 11.8671 10.0695 11.2223C10.0695 10.5795 10.5933 10.0557 11.2381 10.0557C11.8829 10.0557 12.4067 10.5795 12.4067 11.2223C12.4067 11.8671 11.8829 12.3909 11.2381 12.3909ZM14.6125 11.2223C14.6125 11.8671 15.1363 12.3909 15.7811 12.3909C16.4258 12.3909 16.9496 11.8671 16.9496 11.2223C16.9496 10.5795 16.4258 10.0557 15.7811 10.0557C15.1363 10.0557 14.6125 10.5795 14.6125 11.2223Z" fill="#333333"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.02 1C5.21 1 1 5.74612 1 11.015C1 12.6975 1.49 14.4291 2.35 16.0115C2.51 16.2729 2.53 16.6024 2.42 16.9139L1.75 19.1572C1.6 19.698 2.06 20.0976 2.57 19.9374L4.59 19.3375C5.14 19.1572 5.57 19.3866 6.08 19.698C7.54 20.5583 9.36 21 11 21C15.96 21 21 17.1642 21 10.985C21 5.65598 16.7 1 11.02 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Help center</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-icon--js w-embed w-script">
+          <script>
+document.addEventListener('DOMContentLoaded',() => {
+  const navLink = document.querySelectorAll('.navbar-link');
+  const iconActive = document.querySelectorAll('.icon-active');
+  navLink.forEach( (item, i) => {
+    if (!item.classList.contains('w--current')) {
+          item.querySelector('.icon-active').style.display = 'none';
+  	} 
+	});
+})
+</script>
+        </div>
+      </section>
+      <div class="section-top-bar">
+        <div class="navbar-h-grid">
+          <div id="w-node-df252d2a-bff8-c921-3b46-f03040499f04-5e688df5" class="h-flex left-center">
+            <div class="padding-left padding-medium"></div>
+            <div class="text-size-large-x text-weight-semibold">Payments</div>
+          </div>
+          <div id="w-node-df252d2a-bff8-c921-3b46-f03040499f08-5e688df5" class="h-flex">
+            <div class="navbar-btn-wrapper">
+              <div class="notigication-point"></div>
+              <div class="square-btn-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M1.50083 12.7871V12.5681C1.53295 11.9202 1.7406 11.2925 2.10236 10.7496C2.7045 10.0975 3.1167 9.29831 3.29571 8.43598C3.29571 7.7695 3.29571 7.0935 3.35393 6.42703C3.65469 3.21842 6.82728 1 9.96106 1H10.0387C13.1725 1 16.345 3.21842 16.6555 6.42703C16.7137 7.0935 16.6555 7.7695 16.704 8.43598C16.8854 9.3003 17.2972 10.1019 17.8974 10.7591C18.2618 11.2972 18.4698 11.9227 18.4989 12.5681V12.7776C18.5206 13.648 18.2208 14.4968 17.6548 15.1674C16.907 15.9515 15.8921 16.4393 14.8024 16.5384C11.607 16.8812 8.38303 16.8812 5.18762 16.5384C4.09914 16.435 3.08576 15.9479 2.33521 15.1674C1.778 14.4963 1.48224 13.6526 1.50083 12.7871Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M7.55493 19.8518C8.05421 20.4785 8.78739 20.884 9.59222 20.9788C10.3971 21.0735 11.2072 20.8495 11.8433 20.3564C12.0389 20.2106 12.2149 20.041 12.3672 19.8518" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></div>
+              <div id="notification" class="btn-trigger"></div>
+            </div>
+            <div class="padding-right padding-medium-s"></div>
+            <div class="navbar-btn-wrapper">
+              <div class="dynamic-icon-wrapper">
+                <div class="square-btn-icon hide w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8067 6.62361L18.1842 5.54352C17.6577 4.6296 16.4907 4.31432 15.5755 4.83872V4.83872C15.1399 5.09534 14.6201 5.16815 14.1307 5.04109C13.6413 4.91402 13.2226 4.59752 12.9668 4.16137C12.8023 3.88415 12.7139 3.56839 12.7105 3.24604V3.24604C12.7254 2.72922 12.5304 2.2284 12.17 1.85767C11.8096 1.48694 11.3145 1.27786 10.7975 1.27808H9.5435C9.03697 1.27807 8.55131 1.47991 8.194 1.83895C7.83669 2.19798 7.63717 2.68459 7.63961 3.19112V3.19112C7.6246 4.23693 6.77248 5.07681 5.72657 5.0767C5.40421 5.07336 5.08846 4.98494 4.81123 4.82041V4.82041C3.89606 4.29601 2.72911 4.61129 2.20254 5.52522L1.53435 6.62361C1.00841 7.53639 1.3194 8.70261 2.23 9.23231V9.23231C2.8219 9.57404 3.18653 10.2056 3.18653 10.8891C3.18653 11.5725 2.8219 12.2041 2.23 12.5458V12.5458C1.32056 13.0719 1.00923 14.2353 1.53435 15.1454V15.1454L2.16593 16.2346C2.41265 16.6798 2.8266 17.0083 3.31619 17.1474C3.80578 17.2866 4.33064 17.2249 4.77462 16.976V16.976C5.21108 16.7213 5.73119 16.6516 6.21934 16.7822C6.70749 16.9128 7.12324 17.233 7.37416 17.6717C7.5387 17.9489 7.62711 18.2646 7.63046 18.587V18.587C7.63046 19.6435 8.48696 20.5 9.5435 20.5H10.7975C11.8505 20.5001 12.7055 19.6491 12.7105 18.5962V18.5962C12.7081 18.088 12.9089 17.6 13.2682 17.2407C13.6275 16.8814 14.1155 16.6807 14.6236 16.6831C14.9452 16.6917 15.2596 16.7798 15.5389 16.9394V16.9394C16.4517 17.4653 17.6179 17.1544 18.1476 16.2438V16.2438L18.8067 15.1454C19.0618 14.7075 19.1318 14.186 19.0012 13.6964C18.8706 13.2067 18.5502 12.7894 18.111 12.5367V12.5367C17.6718 12.284 17.3514 11.8666 17.2208 11.3769C17.0902 10.8873 17.1603 10.3658 17.4154 9.92796C17.5812 9.63834 17.8214 9.3982 18.111 9.23231V9.23231C19.0161 8.70289 19.3264 7.54349 18.8067 6.63277V6.63277V6.62361Z" stroke="#EE5A29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle cx="10.175" cy="10.8891" r="2.63616" stroke="#EE5A29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                  </svg></div>
+                <div class="square-btn-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8067 6.62361L18.1842 5.54352C17.6577 4.6296 16.4907 4.31432 15.5755 4.83872V4.83872C15.1399 5.09534 14.6201 5.16815 14.1307 5.04109C13.6413 4.91402 13.2226 4.59752 12.9668 4.16137C12.8023 3.88415 12.7139 3.56839 12.7105 3.24604V3.24604C12.7254 2.72922 12.5304 2.2284 12.17 1.85767C11.8096 1.48694 11.3145 1.27786 10.7975 1.27808H9.5435C9.03697 1.27807 8.55131 1.47991 8.194 1.83895C7.83669 2.19798 7.63717 2.68459 7.63961 3.19112V3.19112C7.6246 4.23693 6.77248 5.07681 5.72657 5.0767C5.40421 5.07336 5.08846 4.98494 4.81123 4.82041V4.82041C3.89606 4.29601 2.72911 4.61129 2.20254 5.52522L1.53435 6.62361C1.00841 7.53639 1.3194 8.70261 2.23 9.23231V9.23231C2.8219 9.57404 3.18653 10.2056 3.18653 10.8891C3.18653 11.5725 2.8219 12.2041 2.23 12.5458V12.5458C1.32056 13.0719 1.00923 14.2353 1.53435 15.1454V15.1454L2.16593 16.2346C2.41265 16.6798 2.8266 17.0083 3.31619 17.1474C3.80578 17.2866 4.33064 17.2249 4.77462 16.976V16.976C5.21108 16.7213 5.73119 16.6516 6.21934 16.7822C6.70749 16.9128 7.12324 17.233 7.37416 17.6717C7.5387 17.9489 7.62711 18.2646 7.63046 18.587V18.587C7.63046 19.6435 8.48696 20.5 9.5435 20.5H10.7975C11.8505 20.5001 12.7055 19.6491 12.7105 18.5962V18.5962C12.7081 18.088 12.9089 17.6 13.2682 17.2407C13.6275 16.8814 14.1155 16.6807 14.6236 16.6831C14.9452 16.6917 15.2596 16.7798 15.5389 16.9394V16.9394C16.4517 17.4653 17.6179 17.1544 18.1476 16.2438V16.2438L18.8067 15.1454C19.0618 14.7075 19.1318 14.186 19.0012 13.6964C18.8706 13.2067 18.5502 12.7894 18.111 12.5367V12.5367C17.6718 12.284 17.3514 11.8666 17.2208 11.3769C17.0902 10.8873 17.1603 10.3658 17.4154 9.92796C17.5812 9.63834 17.8214 9.3982 18.111 9.23231V9.23231C19.0161 8.70289 19.3264 7.54349 18.8067 6.63277V6.63277V6.62361Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <circle cx="10.1751" cy="10.8891" r="2.63616" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                  </svg></div>
+              </div>
+              <div id="settings" class="btn-trigger"></div>
+            </div>
+            <div class="padding-right padding-medium-s"></div>
+            <div class="nav-menu-divider nav-bar"></div>
+            <div class="padding-right padding-medium-s"></div>
+            <div class="store-panel-btn">
+              <div class="h-flex left-center"><img loading="lazy" src="../images/Screenshot-2024-02-27-at-11.17-1.avif" alt="" class="brand-logo">
+                <div class="padding-left padding-small"></div>
+                <div class="text-size-regular text-weight-semibold">MyStore Global</div>
+                <div class="doted-btn w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="4" height="12" viewbox="0 0 4 12" fill="none">
+                    <path d="M3.19749 10.4792C3.19749 11.1402 2.66049 11.6772 2.00049 11.6772C1.34049 11.6772 0.80249 11.1402 0.80249 10.4792C0.80249 9.81825 1.34049 9.28125 2.00049 9.28125C2.66049 9.28125 3.19749 9.81825 3.19749 10.4792Z" fill="#333333"></path>
+                    <path d="M3.19749 5.99975C3.19749 6.66075 2.66049 7.19775 2.00049 7.19775C1.34049 7.19775 0.80249 6.66075 0.80249 5.99975C0.80249 5.33875 1.34049 4.80175 2.00049 4.80175C2.66049 4.80175 3.19749 5.33875 3.19749 5.99975Z" fill="#333333"></path>
+                    <path d="M3.19749 1.52075C3.19749 2.18175 2.66049 2.71875 2.00049 2.71875C1.34049 2.71875 0.80249 2.18175 0.80249 1.52075C0.80249 0.85975 1.34049 0.32275 2.00049 0.32275C2.66049 0.32275 3.19749 0.85975 3.19749 1.52075Z" fill="#333333"></path>
+                  </svg></div>
+              </div>
+              <div id="storePanelBtn" class="btn-trigger"></div>
+            </div>
+            <div class="padding-right padding-medium"></div>
+          </div>
+        </div>
+      </div>
+      <main class="main-wrapper dashboard">
+        <section class="section-main">
+          <div class="padding-global_dashboard">
+            <div class="w-layout-blockcontainer container-large w-container">
+              <div class="spacer-medium"></div>
+              <div class="page-top-navigation w-form">
+                <form id="email-form" name="email-form" data-name="Email Form" method="get" data-wf-page-id="677fd45284c761345e688df5" data-wf-element-id="df252d2a-bff8-c921-3b46-f03040499f0f">
+                  <div class="page-navigation-bar">
+                    <div class="h-flex gap-medium-s">
+                      <div data-w-id="df252d2a-bff8-c921-3b46-f03040499f12" class="btn-link-block">
+                        <div class="div-block-48">
+                          <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29332 21L13.0696 18.7519V12.8603L20.5593 5.26456C20.8416 4.97995 21 4.58933 21 4.18027V2.51754C21 1.67869 20.3417 1 19.5295 1H2.47049C1.65826 1 1 1.67869 1 2.51754V4.2183C1 4.60431 1.14169 4.97534 1.39719 5.2565L8.29332 12.8603V21Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                          <div style="opacity:0" class="dynamic-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29332 21L13.0696 18.7519V12.8603L20.5593 5.26456C20.8416 4.97995 21 4.58933 21 4.18027V2.51754C21 1.67869 20.3417 1 19.5295 1H2.47049C1.65826 1 1 1.67869 1 2.51754V4.2183C1 4.60431 1.14169 4.97534 1.39719 5.2565L8.29332 12.8603V21Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-regular text-weight-medium">Filter</div>
+                      </div>
+                      <div data-w-id="df252d2a-bff8-c921-3b46-f03040499f18" class="btn-link-block">
+                        <div class="div-block-48">
+                          <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 21 21" fill="none">
+                              <path d="M5.4668 13.5032L8.45993 9.61305L11.8741 12.295L14.8032 8.51465" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <circle cx="18.2174" cy="2.9222" r="1.9222" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                              <path d="M13.1465 1.84229H5.87872C2.86728 1.84229 1 3.97501 1 6.98645V15.0688C1 18.0803 2.83066 20.2038 5.87872 20.2038H14.4828C17.4943 20.2038 19.3616 18.0803 19.3616 15.0688V8.02993" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                          <div style="opacity:0" class="dynamic-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 21 21" fill="none">
+                              <path d="M5.4668 13.5032L8.45993 9.61305L11.8741 12.295L14.8032 8.51465" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <circle cx="18.2174" cy="2.9222" r="1.9222" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                              <path d="M13.1465 1.84229H5.87872C2.86728 1.84229 1 3.97501 1 6.98645V15.0688C1 18.0803 2.83066 20.2038 5.87872 20.2038H14.4828C17.4943 20.2038 19.3616 18.0803 19.3616 15.0688V8.02993" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-regular text-weight-medium">Analyze</div>
+                      </div>
+                    </div>
+                    <div class="h-flex gap-medium-s">
+                      <div class="div-block-49">
+                        <div class="code-embed-7 w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 21 21" fill="none">
+                            <circle cx="9.76663" cy="9.76639" r="8.98856" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                            <circle cx="9.76663" cy="9.76639" r="8.98856" stroke="#333333" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                            <path d="M16.0183 16.4849L19.5423 19.9997" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M16.0183 16.4849L19.5423 19.9997" stroke="#333333" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg></div><input class="form_input dashboard-custom w-input" maxlength="256" name="search-2" data-name="Search 2" placeholder="Search" type="text" id="search-2" required="">
+                      </div>
+                      <div data-w-id="df252d2a-bff8-c921-3b46-f03040499f22" class="btn-link-block">
+                        <div class="div-block-48">
+                          <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewbox="0 0 18 20" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7363 0.761719H5.08431C3.02531 0.761719 1.25031 2.43072 1.25031 4.49072V15.2277C1.25031 17.4037 2.90831 19.1147 5.08431 19.1147H13.0723C15.1323 19.1147 16.8023 17.2877 16.8023 15.2277V6.03772L11.7363 0.761719Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M11.4736 0.75V3.659C11.4736 5.079 12.6226 6.231 14.0426 6.234C15.3586 6.237 16.7056 6.238 16.7966 6.232" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M8.64062 7.44043V14.0134" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M5.80219 10.2909L8.64019 7.43994L11.4792 10.2909" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                          <div style="opacity:0" class="dynamic-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewbox="0 0 18 20" fill="none">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7363 0.761719H5.08431C3.02531 0.761719 1.25031 2.43072 1.25031 4.49072V15.2277C1.25031 17.4037 2.90831 19.1147 5.08431 19.1147H13.0723C15.1323 19.1147 16.8023 17.2877 16.8023 15.2277V6.03772L11.7363 0.761719Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M11.4736 0.75V3.659C11.4736 5.079 12.6226 6.231 14.0426 6.234C15.3586 6.237 16.7056 6.238 16.7966 6.232" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M8.64062 7.44043V14.0134" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M5.80219 10.2909L8.64019 7.43994L11.4792 10.2909" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                        </div>
+                        <div class="text-size-regular text-weight-medium">Export</div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="w-form-done">
+                  <div>Thank you! Your submission has been received!</div>
+                </div>
+                <div class="w-form-fail">
+                  <div>Oops! Something went wrong while submitting the form.</div>
+                </div>
+              </div>
+              <div class="spacer-medium"></div>
+              <div class="table-header">
+                <div class="w-layout-grid grid-col-6">
+                  <div class="h-flex">
+                    <div class="padding-left padding-thin-x"></div>
+                    <div class="text-size-small text-color-primary-opacity-65">Title</div>
+                  </div>
+                  <div class="h-flex">
+                    <div class="padding-left padding-thin-x"></div>
+                    <div class="text-size-small text-color-primary-opacity-65">Title</div>
+                  </div>
+                  <div class="h-flex">
+                    <div class="padding-left padding-thin-x"></div>
+                    <div class="text-size-small text-color-primary-opacity-65">Title</div>
+                  </div>
+                  <div class="h-flex">
+                    <div class="padding-left padding-thin-x"></div>
+                    <div class="text-size-small text-color-primary-opacity-65">Title</div>
+                  </div>
+                  <div class="h-flex">
+                    <div class="padding-left padding-thin-x"></div>
+                    <div class="text-size-small text-color-primary-opacity-65">Title</div>
+                  </div>
+                </div>
+              </div>
+              <div class="table-body">
+                <div class="w-dyn-list">
+                  <div role="list" class="w-dyn-items">
+                    <div role="listitem" class="grid-col-6 bg-none w-dyn-item">
+                      <div>This is some text inside of a div block.</div>
+                      <div id="w-node-df252d2a-bff8-c921-3b46-f03040499f4a-5e688df5">This is some text inside of a div block.</div>
+                      <div>This is some text inside of a div block.</div>
+                      <div>This is some text inside of a div block.</div>
+                      <div>This is some text inside of a div block.</div>
+                      <div class="btn-options">
+                        <div class="doted-btn w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="4" height="12" viewbox="0 0 4 12" fill="none">
+                            <path d="M3.19749 10.4792C3.19749 11.1402 2.66049 11.6772 2.00049 11.6772C1.34049 11.6772 0.80249 11.1402 0.80249 10.4792C0.80249 9.81825 1.34049 9.28125 2.00049 9.28125C2.66049 9.28125 3.19749 9.81825 3.19749 10.4792Z" fill="#333333"></path>
+                            <path d="M3.19749 5.99975C3.19749 6.66075 2.66049 7.19775 2.00049 7.19775C1.34049 7.19775 0.80249 6.66075 0.80249 5.99975C0.80249 5.33875 1.34049 4.80175 2.00049 4.80175C2.66049 4.80175 3.19749 5.33875 3.19749 5.99975Z" fill="#333333"></path>
+                            <path d="M3.19749 1.52075C3.19749 2.18175 2.66049 2.71875 2.00049 2.71875C1.34049 2.71875 0.80249 2.18175 0.80249 1.52075C0.80249 0.85975 1.34049 0.32275 2.00049 0.32275C2.66049 0.32275 3.19749 0.85975 3.19749 1.52075Z" fill="#333333"></path>
+                          </svg></div>
+                        <div class="btn-trigger"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="w-dyn-empty">
+                    <div>No items found.</div>
+                  </div>
+                </div>
+                <div class="w-layout-grid grid-col-6 bg-none"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div data-w-id="b376e6bb-cba6-8505-ca12-1568bf88f808" class="preloader">
+        <div class="preloader-css w-embed">
+          <style>
+.preloader-icon {
+  animation: rotate 2s infinite ease-in-out;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+        </div>
+        <div class="preloader-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewbox="0 0 104 104" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.63904 63.361C1.27808 64 2.3066 64 4.36364 64H22.7143C23.4244 64 24 63.4244 24 62.7143C24 50.1695 13.8305 40 1.28571 40C0.575634 40 0 40.5756 0 41.2857L0 59.6364C0 61.6934 0 62.7219 0.63904 63.361ZM13.5427 50.0941C12.9037 49.4551 11.8752 49.4551 9.81813 49.4551H4.5454C4.24415 49.4551 3.99994 49.6993 3.99994 50.0005C3.99994 55.3225 8.31429 59.6369 13.6363 59.6369C13.9376 59.6369 14.1818 59.3927 14.1818 59.0914V53.8187C14.1818 51.7617 14.1818 50.7332 13.5427 50.0941Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64788 23.7157C7.64788 24.6194 8.37515 25.3467 9.8297 26.8013L22.8056 39.7771C23.3077 40.2792 24.1217 40.2792 24.6238 39.7771C33.4943 30.9066 33.4943 16.5248 24.6238 7.65427C24.1217 7.15217 23.3077 7.15217 22.8056 7.65427L9.8297 20.6301C8.37515 22.0847 7.64788 22.812 7.64788 23.7157ZM26.1532 23.4589C26.1532 22.5552 25.426 21.8279 23.9714 20.3734L20.243 16.645C20.03 16.432 19.6847 16.432 19.4716 16.645C15.7084 20.4082 15.7084 26.5096 19.4716 30.2728C19.6847 30.4859 20.03 30.4859 20.243 30.2728L23.9714 26.5445C25.426 25.0899 26.1532 24.3626 26.1532 23.4589Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M40.639 0.63904C40 1.27808 40 2.3066 40 4.36364V22.7143C40 23.4244 40.5756 24 41.2857 24C53.8305 24 64 13.8305 64 1.28571C64 0.575634 63.4244 0 62.7143 0H44.3636C42.3066 0 41.2781 0 40.639 0.63904ZM53.9059 13.5427C54.5449 12.9037 54.5449 11.8752 54.5449 9.81813V4.5454C54.5449 4.24415 54.3007 3.99994 53.9995 3.99994C48.6775 3.99994 44.3631 8.31429 44.3631 13.6363C44.3631 13.9376 44.6073 14.1818 44.9086 14.1818H50.1813C52.2383 14.1818 53.2668 14.1818 53.9059 13.5427Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M80.2852 7.64886C79.3814 7.64886 78.6541 8.37613 77.1996 9.83067L64.2237 22.8065C63.7216 23.3086 63.7216 24.1227 64.2237 24.6248C73.0942 33.4953 87.4761 33.4953 96.3466 24.6248C96.8487 24.1227 96.8487 23.3086 96.3466 22.8065L83.3707 9.83067C81.9162 8.37613 81.1889 7.64886 80.2852 7.64886ZM80.5419 26.1542C81.4457 26.1542 82.173 25.4269 83.6275 23.9724L87.3559 20.244C87.5689 20.031 87.5689 19.6856 87.3559 19.4726C83.5927 15.7094 77.4912 15.7094 73.728 19.4726C73.515 19.6856 73.515 20.031 73.728 20.244L77.4564 23.9724C78.9109 25.4269 79.6382 26.1542 80.5419 26.1542Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M103.361 40.639C102.722 40 101.693 40 99.6364 40H81.2857C80.5756 40 80 40.5756 80 41.2857C80 53.8305 90.1695 64 102.714 64C103.424 64 104 63.4244 104 62.7143V44.3636C104 42.3066 104 41.2781 103.361 40.639ZM90.4573 53.9059C91.0963 54.5449 92.1248 54.5449 94.1819 54.5449H99.4546C99.7558 54.5449 100 54.3007 100 53.9995C100 48.6775 95.6857 44.3631 90.3637 44.3631C90.0624 44.3631 89.8182 44.6073 89.8182 44.9086V50.1813C89.8182 52.2383 89.8182 53.2668 90.4573 53.9059Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M96.3521 80.2843C96.3521 79.3806 95.6248 78.6533 94.1703 77.1987L81.1944 64.2229C80.6923 63.7208 79.8783 63.7208 79.3762 64.2229C70.5057 73.0934 70.5057 87.4752 79.3762 96.3457C79.8783 96.8478 80.6923 96.8478 81.1944 96.3457L94.1703 83.3699C95.6248 81.9153 96.3521 81.188 96.3521 80.2843ZM77.8468 80.5411C77.8468 81.4448 78.574 82.1721 80.0286 83.6266L83.757 87.355C83.97 87.568 84.3153 87.568 84.5284 87.355C88.2916 83.5918 88.2916 77.4904 84.5284 73.7272C84.3153 73.5141 83.97 73.5141 83.757 73.7272L80.0286 77.4555C78.574 78.9101 77.8468 79.6374 77.8468 80.5411Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M63.361 103.361C64 102.722 64 101.693 64 99.6364V81.2857C64 80.5756 63.4244 80 62.7143 80C50.1695 80 40 90.1695 40 102.714C40 103.424 40.5756 104 41.2857 104H59.6364C61.6934 104 62.7219 104 63.361 103.361ZM50.0941 90.4573C49.4551 91.0963 49.4551 92.1248 49.4551 94.1819V99.4546C49.4551 99.7558 49.6993 100 50.0005 100C55.3225 100 59.6369 95.6857 59.6369 90.3637C59.6369 90.0624 59.3927 89.8182 59.0914 89.8182H53.8187C51.7617 89.8182 50.7332 89.8182 50.0941 90.4573Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23.7148 96.3511C24.6186 96.3511 25.3459 95.6239 26.8004 94.1693L39.7763 81.1935C40.2784 80.6914 40.2784 79.8773 39.7763 79.3752C30.9058 70.5047 16.5239 70.5047 7.65342 79.3752C7.15131 79.8773 7.15131 80.6914 7.65342 81.1935L20.6293 94.1693C22.0838 95.6239 22.8111 96.3511 23.7148 96.3511ZM23.4581 77.8458C22.5543 77.8458 21.827 78.5731 20.3725 80.0276L16.6441 83.756C16.4311 83.969 16.4311 84.3144 16.6441 84.5274C20.4073 88.2906 26.5088 88.2906 30.272 84.5274C30.485 84.3144 30.485 83.969 30.272 83.756L26.5436 80.0276C25.0891 78.5731 24.3618 77.8458 23.4581 77.8458Z" fill="#EE5A29"></path>
+          </svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="dnd-temp">
+    <div class="dnd-input w-embed">
+      <style>
+.file-drop-area {
+  border: 1px dashed #ee5a29;
+  border-radius: 0.5rem;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.file-drop-area:hover {
+  border-color: #33333350;
+}
+.preview-container {
+  text-align: left;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+.preview-container img {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  display: block;
+}
+.remove-button {
+  border: 1px solid #33333340;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+	align-items: center;
+}
+.remove-button:hover {
+  background-color: var(--background-color--background-secondary);
+}
+</style>
+      <div id="file-upload" class="file-drop-area">
+        <p class="font-inter">Drag and drop a file here or click to select</p>
+        <input type="file" id="fileInput" style="display: none;">
+      </div>
+      <div id="preview" class="preview-container" style="display: none;">
+        <img id="previewImage" src="" alt="Preview">
+        <div id="removeFileButton" class="remove-button"><img src="../images/Delete-icon.svg"></div>
+      </div>
+    </div>
+    <div class="dnd-input--js w-embed w-script">
+      <script>
+const fileDropArea = document.getElementById('file-upload');
+const fileInput = document.getElementById('fileInput');
+const fileDropAreaText = fileDropArea.querySelector('p');
+const previewContainer = document.getElementById('preview');
+const previewImage = document.getElementById('previewImage');
+const removeFileButton = document.getElementById('removeFileButton');
+// Клик для открытия диалога выбора файла
+fileDropArea.addEventListener('click', () => {
+  fileInput.click();
+});
+// Отображение превью изображения и кнопки удаления
+function displayFile(file) {
+  // Проверяем, является ли файл изображением
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      previewImage.src = event.target.result;
+      fileDropArea.style.display = 'none'; // Скрываем зону загрузки
+      previewContainer.style.display = 'flex'; // Показываем превью
+    };
+    reader.readAsDataURL(file);
+  }
+}
+// Событие выбора файла через диалог
+fileInput.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    displayFile(file);
+  }
+});
+// Drag & Drop события
+fileDropArea.addEventListener('dragover', (event) => {
+  event.preventDefault();
+  fileDropArea.style.borderColor = '#007bff';
+});
+fileDropArea.addEventListener('dragleave', () => {
+  fileDropArea.style.borderColor = '#ccc';
+});
+fileDropArea.addEventListener('drop', (event) => {
+  event.preventDefault();
+  fileDropArea.style.borderColor = '#ccc';
+  const file = event.dataTransfer.files[0];
+  if (file) {
+    displayFile(file);
+  }
+});
+// Удаление файла
+removeFileButton.addEventListener('click', () => {
+  fileInput.value = ''; // Сбрасываем значение input
+  previewContainer.style.display = 'none'; // Скрываем превью
+  fileDropArea.style.display = 'flex'; // Показываем зону загрузки
+  fileDropAreaText.textContent = 'Drag and drop a file here or click to select';
+});
+</script>
+    </div>
+  </div>
+  <div class="template-chlild-page">
+    <div class="page-wrapper">
+      <div class="global-styles w-embed">
+        <style>
+/* Make text look crisper and more legible in all browsers */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+/* Set color style to inherit */
+.inherit-color * {
+    color: inherit;
+}
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+/* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+/*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+.margin-0 {
+  margin: 0rem !important;
+}
+.padding-0 {
+  padding: 0rem !important;
+}
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+textarea {
+  resize: none;
+}
+ .background-dw-menu {
+ 	scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Цвет полосы и фона для Firefox */
+  /* Для WebKit-браузеров (Chrome, Safari) */
+  /*overflow-y: auto;*/
+}
+.background-dw-menu::-webkit-scrollbar {
+ 	width: 4px; /* Ширина полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-track {
+	background: transparent; /* Фон полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.2); /* Цвет ползунка */
+	border-radius: 10px; /* Скругление ползунка */
+}
+.tabs-menu {
+    overflow-x: auto; /* Включаем горизонтальный скролл */
+    overflow-y: hidden; /* Убираем вертикальный скролл */
+    white-space: nowrap; /* Предотвращаем перенос элементов на новую строку */
+}
+/* Скрываем скролл-бары для всех браузеров */
+.tabs-menu::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+.tabs-menu, .page-full-height-container-scroll {
+    scrollbar-width: none;  /* Для Firefox */
+}
+.hero-image-1, .hero-image-2 { transition: filter 0.5s; } 
+.blur { filter: blur(5px); }
+#descriptionTextArea {
+	resize: vertical; 
+}
+#descriptionTextArea::-webkit-resizer {
+display: none;
+}
+#descriptionTextArea::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+#descriptionTextArea {
+	scrollbar-width: none; 
+}
+[draggable] {
+  user-select: none;
+}
+[data-value] {
+	pointer-events: none;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-bg {
+	background-color: #10945C;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-dot {
+	left: 19px;
+}
+/* Отключаем стили фокуса для всех ссылок и инпутов */
+a:focus,
+a:focus-visible,
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+*[tabindex]:focus-visible, input[type="file"]:focus-visible {
+    outline: none;
+    outline-offset: 0;
+}
+</style>
+      </div>
+      <section class="section-navbar">
+        <div class="navbar-v-grid-post-page">
+          <div id="w-node-d92ff652-5c1b-2ca3-ec64-2346923f7acb-5e688df5">
+            <div class="padding-bottom padding-medium-x"></div>
+            <a href="../dashboard/pages/home.html" class="logo-wrapper w-inline-block"><img loading="lazy" src="../images/logo.svg" alt=""></a>
+            <div class="padding-bottom padding-medium-x"></div>
+          </div>
+          <div id="w-node-d92ff652-5c1b-2ca3-ec64-2346923f7ad0-5e688df5" class="navbar-menu-wrapper">
+            <ul role="list" class="navlink-list-wrapper--js w-list-unstyled">
+              <li class="navlink-item-wrapper">
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="17" viewbox="0 0 21 17" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4115 8.30262C13.4115 10.0486 11.9955 11.4636 10.2495 11.4636C8.5035 11.4636 7.0885 10.0486 7.0885 8.30262C7.0885 6.55562 8.5035 5.14062 10.2495 5.14062C11.9955 5.14062 13.4115 6.55562 13.4115 8.30262Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.248 15.604C14.056 15.604 17.539 12.866 19.5 8.302C17.539 3.738 14.056 1 10.248 1H10.252C6.444 1 2.961 3.738 1 8.302C2.961 12.866 6.444 15.604 10.252 15.604H10.248Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="17" viewbox="0 0 21 17" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4115 8.30262C13.4115 10.0486 11.9955 11.4636 10.2495 11.4636C8.5035 11.4636 7.0885 10.0486 7.0885 8.30262C7.0885 6.55562 8.5035 5.14062 10.2495 5.14062C11.9955 5.14062 13.4115 6.55562 13.4115 8.30262Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.248 15.604C14.056 15.604 17.539 12.866 19.5 8.302C17.539 3.738 14.056 1 10.248 1H10.252C6.444 1 2.961 3.738 1 8.302C2.961 12.866 6.444 15.604 10.252 15.604H10.248Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Overview</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                        <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Payments</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
+                        <path d="M17.5948 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5948 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.9291 11.085C19.4076 11.118 19.8833 11.1858 20.3517 11.2912C21.0026 11.4186 21.7854 11.6854 22.0641 12.2693C22.2419 12.6433 22.2419 13.0787 22.0641 13.4536C21.7863 14.0375 21.0026 14.3034 20.3517 14.4372" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.28998 7.93189C4.68765 7.93189 3.38782 6.63298 3.38782 5.03064C3.38782 3.42831 4.68765 2.12939 6.28998 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.95577 11.085C4.47727 11.118 4.00152 11.1858 3.5331 11.2912C2.88227 11.4186 2.09943 11.6854 1.82168 12.2693C1.64293 12.6433 1.64293 13.0787 1.82168 13.4536C2.09852 14.0375 2.88227 14.3034 3.5331 14.4372" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 11.7095C15.1846 11.7095 17.9584 12.2008 17.9584 14.1671C17.9584 16.1324 15.2029 16.6421 11.9378 16.6421C8.69003 16.6421 5.91711 16.1507 5.91711 14.1845C5.91711 12.2182 8.67261 11.7095 11.9378 11.7095Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9377 8.90492C9.79638 8.90492 8.07947 7.188 8.07947 5.04575C8.07947 2.90442 9.79638 1.1875 11.9377 1.1875C14.0791 1.1875 15.796 2.90442 15.796 5.04575C15.796 7.188 14.0791 8.90492 11.9377 8.90492Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
+                        <path d="M17.5949 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5949 2.12939" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.9291 11.085C19.4076 11.118 19.8833 11.1858 20.3517 11.2912C21.0026 11.4186 21.7854 11.6854 22.0641 12.2693C22.2419 12.6433 22.2419 13.0787 22.0641 13.4536C21.7863 14.0375 21.0026 14.3034 20.3517 14.4372" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M6.28998 7.93189C4.68765 7.93189 3.38782 6.63298 3.38782 5.03064C3.38782 3.42831 4.68765 2.12939 6.28998 2.12939" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.95578 11.085C4.47728 11.118 4.00153 11.1858 3.53312 11.2912C2.88228 11.4186 2.09945 11.6854 1.8217 12.2693C1.64295 12.6433 1.64295 13.0787 1.8217 13.4536C2.09853 14.0375 2.88228 14.3034 3.53312 14.4372" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 11.7095C15.1846 11.7095 17.9584 12.2008 17.9584 14.1671C17.9584 16.1324 15.2029 16.6421 11.9378 16.6421C8.69002 16.6421 5.9171 16.1507 5.9171 14.1845C5.9171 12.2182 8.6726 11.7095 11.9378 11.7095Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 8.90492C9.79643 8.90492 8.07951 7.188 8.07951 5.04575C8.07951 2.90442 9.79643 1.1875 11.9378 1.1875C14.0791 1.1875 15.796 2.90442 15.796 5.04575C15.796 7.188 14.0791 8.90492 11.9378 8.90492Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Customers</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.524 8.75272C19.8849 4.81932 16.5439 1.89308 12.5606 1.77789C12.3712 1.77047 12.1867 1.83866 12.0476 1.96743C11.9085 2.0962 11.8264 2.27499 11.8192 2.46439V2.46439V2.52846L12.2677 9.23785C12.2971 9.6895 12.6854 10.0328 13.1373 10.0067L19.865 9.55821C20.0545 9.54419 20.2307 9.45516 20.3544 9.31084C20.4781 9.16651 20.5392 8.97882 20.524 8.78933V8.75272Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M7.90163 5.76877C8.32959 5.66978 8.76753 5.88875 8.94511 6.29051C8.99163 6.385 9.01959 6.48754 9.02749 6.59257C9.11902 7.89234 9.31124 10.739 9.42108 12.2768C9.43984 12.5538 9.56821 12.8119 9.77779 12.994C9.98737 13.1761 10.2609 13.2671 10.5378 13.247V13.247L16.1854 12.8992C16.4375 12.884 16.6847 12.9738 16.8684 13.1471C17.0522 13.3204 17.1561 13.562 17.1556 13.8145V13.8145C16.9268 17.2249 14.4765 20.0759 11.1393 20.815C7.80214 21.554 4.3773 20.0039 2.73001 17.009C2.23826 16.1471 1.92684 15.1941 1.81467 14.2081C1.76672 13.9055 1.74833 13.599 1.75975 13.2928C1.76947 9.6508 4.32726 6.51273 7.89248 5.76877" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M20.524 8.75272C19.8849 4.81932 16.5439 1.89308 12.5606 1.77789C12.3712 1.77047 12.1867 1.83866 12.0476 1.96743C11.9085 2.0962 11.8264 2.27499 11.8192 2.46439V2.46439V2.52846L12.2677 9.23785C12.2971 9.6895 12.6854 10.0328 13.1373 10.0067L19.865 9.55821C20.0545 9.54419 20.2307 9.45516 20.3544 9.31084C20.4781 9.16651 20.5392 8.97882 20.524 8.78933V8.75272Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M7.90163 5.76877C8.32959 5.66978 8.76753 5.88875 8.94511 6.29051C8.99163 6.385 9.01959 6.48754 9.02749 6.59257C9.11902 7.89234 9.31124 10.739 9.42108 12.2768C9.43984 12.5538 9.56821 12.8119 9.77779 12.994C9.98737 13.1761 10.2609 13.2671 10.5378 13.247V13.247L16.1854 12.8992C16.4375 12.884 16.6847 12.9738 16.8684 13.1471C17.0522 13.3204 17.1561 13.562 17.1556 13.8145V13.8145C16.9268 17.2249 14.4765 20.0759 11.1393 20.815C7.80214 21.554 4.3773 20.0039 2.73001 17.009C2.23826 16.1471 1.92684 15.1941 1.81467 14.2081C1.76672 13.9055 1.74833 13.599 1.75975 13.2928C1.76947 9.6508 4.32726 6.51273 7.89248 5.76877" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Analytics</div>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="navbar-link w-inline-block">
+                  <div class="icon-block-relative">
+                    <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewbox="0 0 21 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8067 6.62386L18.1842 5.54377C17.6577 4.62985 16.4907 4.31456 15.5755 4.83896V4.83896C15.1399 5.09559 14.6201 5.1684 14.1307 5.04133C13.6413 4.91427 13.2226 4.59776 12.9668 4.16162C12.8023 3.88439 12.7139 3.56864 12.7105 3.24628V3.24628C12.7254 2.72947 12.5304 2.22865 12.17 1.85791C11.8096 1.48718 11.3145 1.27811 10.7975 1.27832H9.5435C9.03697 1.27831 8.55131 1.48016 8.194 1.83919C7.83669 2.19822 7.63717 2.68484 7.63961 3.19136V3.19136C7.6246 4.23717 6.77248 5.07706 5.72657 5.07695C5.40421 5.0736 5.08846 4.98519 4.81123 4.82065V4.82065C3.89606 4.29626 2.72911 4.61154 2.20254 5.52546L1.53435 6.62386C1.00841 7.53664 1.3194 8.70285 2.23 9.23255V9.23255C2.8219 9.57428 3.18653 10.2058 3.18653 10.8893C3.18653 11.5728 2.8219 12.2043 2.23 12.5461V12.5461C1.32056 13.0722 1.00923 14.2356 1.53435 15.1456V15.1456L2.16593 16.2348C2.41265 16.68 2.8266 17.0085 3.31619 17.1477C3.80578 17.2868 4.33064 17.2251 4.77462 16.9763V16.9763C5.21108 16.7216 5.73119 16.6518 6.21934 16.7824C6.70749 16.9131 7.12324 17.2333 7.37416 17.6719C7.5387 17.9491 7.62711 18.2649 7.63046 18.5872V18.5872C7.63046 19.6438 8.48696 20.5003 9.5435 20.5003H10.7975C11.8505 20.5003 12.7055 19.6494 12.7105 18.5964V18.5964C12.7081 18.0883 12.9089 17.6003 13.2682 17.241C13.6275 16.8817 14.1155 16.6809 14.6236 16.6834C14.9452 16.692 15.2596 16.78 15.5389 16.9396V16.9396C16.4517 17.4656 17.6179 17.1546 18.1476 16.244V16.244L18.8067 15.1456C19.0618 14.7077 19.1318 14.1863 19.0012 13.6966C18.8706 13.207 18.5502 12.7896 18.111 12.5369V12.5369C17.6718 12.2842 17.3514 11.8668 17.2208 11.3772C17.0902 10.8875 17.1603 10.3661 17.4154 9.92821C17.5812 9.63858 17.8214 9.39844 18.111 9.23255V9.23255C19.0161 8.70314 19.3264 7.54374 18.8067 6.63301V6.63301V6.62386Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="10.1751" cy="10.8891" r="2.63616" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                      </svg></div>
+                    <div class="icon-static w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewbox="0 0 21 22" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8067 6.62386L18.1842 5.54377C17.6577 4.62985 16.4907 4.31456 15.5755 4.83896V4.83896C15.1399 5.09559 14.6201 5.1684 14.1307 5.04133C13.6413 4.91427 13.2226 4.59776 12.9668 4.16162C12.8023 3.88439 12.7139 3.56864 12.7105 3.24628V3.24628C12.7254 2.72947 12.5304 2.22865 12.17 1.85791C11.8096 1.48718 11.3145 1.27811 10.7975 1.27832H9.5435C9.03697 1.27831 8.55131 1.48016 8.194 1.83919C7.83669 2.19822 7.63717 2.68484 7.63961 3.19136V3.19136C7.6246 4.23717 6.77248 5.07706 5.72657 5.07695C5.40421 5.0736 5.08846 4.98519 4.81123 4.82065V4.82065C3.89606 4.29626 2.72911 4.61154 2.20254 5.52546L1.53435 6.62386C1.00841 7.53664 1.3194 8.70285 2.23 9.23255V9.23255C2.8219 9.57428 3.18653 10.2058 3.18653 10.8893C3.18653 11.5728 2.8219 12.2043 2.23 12.5461V12.5461C1.32056 13.0722 1.00923 14.2356 1.53435 15.1456V15.1456L2.16593 16.2348C2.41265 16.68 2.8266 17.0085 3.31619 17.1477C3.80578 17.2868 4.33064 17.2251 4.77462 16.9763V16.9763C5.21108 16.7216 5.73119 16.6518 6.21934 16.7824C6.70749 16.9131 7.12324 17.2333 7.37416 17.6719C7.5387 17.9491 7.62711 18.2649 7.63046 18.5872V18.5872C7.63046 19.6438 8.48696 20.5003 9.5435 20.5003H10.7975C11.8505 20.5003 12.7055 19.6494 12.7105 18.5964V18.5964C12.7081 18.0883 12.9089 17.6003 13.2682 17.241C13.6275 16.8817 14.1155 16.6809 14.6236 16.6834C14.9452 16.692 15.2596 16.78 15.5389 16.9396V16.9396C16.4517 17.4656 17.6179 17.1546 18.1476 16.244V16.244L18.8067 15.1456C19.0618 14.7077 19.1318 14.1863 19.0012 13.6966C18.8706 13.207 18.5502 12.7896 18.111 12.5369V12.5369C17.6718 12.2842 17.3514 11.8668 17.2208 11.3772C17.0902 10.8875 17.1603 10.3661 17.4154 9.92821C17.5812 9.63858 17.8214 9.39844 18.111 9.23255V9.23255C19.0161 8.70314 19.3264 7.54374 18.8067 6.63301V6.63301V6.62386Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <circle cx="10.1751" cy="10.8891" r="2.63616" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                      </svg></div>
+                  </div>
+                  <div class="text-size-medium text-weight-semibold">Settings</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-icon--js w-embed w-script">
+          <script>
+document.addEventListener('DOMContentLoaded',() => {
+  const navLink = document.querySelectorAll('.navbar-link');
+  const iconActive = document.querySelectorAll('.icon-active');
+  navLink.forEach( (item, i) => {
+    if (!item.classList.contains('w--current')) {
+          item.querySelector('.icon-active').style.display = 'none';
+  	} 
+	});
+})
+</script>
+        </div>
+      </section>
+      <div class="section-top-bar">
+        <div class="navbar-h-grid-post-page">
+          <div id="w-node-d92ff652-5c1b-2ca3-ec64-2346923f7af8-5e688df5" class="h-flex left-center">
+            <div class="padding-left padding-medium"></div>
+            <div>
+              <a data-w-id="d92ff652-5c1b-2ca3-ec64-2346923f7afb" href="#" class="btn-backinhistory-block w-inline-block">
+                <div class="div-block-48">
+                  <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewbox="0 0 18 15" fill="none">
+                      <path d="M1.25 7.27441L16.25 7.27441" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path d="M7.2998 13.299L1.2498 7.275L7.2998 1.25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                  <div style="opacity:0" class="dynamic-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
+                      <path d="M1.00024 7.02441L16.0002 7.02441" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path d="M7.05005 13.049L1.00005 7.025L7.05005 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg></div>
+                </div>
+                <div class="text-size-large-x text-weight-semibold">Pages</div>
+                <div class="btn-trigger"></div>
+              </a>
+            </div>
+          </div>
+          <div class="h-flex position-right">
+            <div class="margin-left margin-auto">
+              <div data-w-id="d92ff652-5c1b-2ca3-ec64-2346923f7b04" class="btn-link-block">
+                <div class="text-size-regular text-weight-medium">Share &amp; embed</div>
+              </div>
+            </div>
+            <div class="padding-left padding-medium-s"></div>
+            <div>
+              <div data-w-id="d92ff652-5c1b-2ca3-ec64-2346923f7b09" class="btn-link-block">
+                <div class="text-size-regular text-weight-medium">Edit page</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <main class="main-wrapper dashboard">
+        <section class="section-main">
+          <div class="padding-global_dashboard">
+            <div class="w-layout-blockcontainer container-large w-container">
+              <div class="spacer-medium"></div>
+              <div class="spacer-medium"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div data-w-id="b376e6bb-cba6-8505-ca12-1568bf88f808" class="preloader">
+        <div class="preloader-css w-embed">
+          <style>
+.preloader-icon {
+  animation: rotate 2s infinite ease-in-out;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+        </div>
+        <div class="preloader-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewbox="0 0 104 104" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.63904 63.361C1.27808 64 2.3066 64 4.36364 64H22.7143C23.4244 64 24 63.4244 24 62.7143C24 50.1695 13.8305 40 1.28571 40C0.575634 40 0 40.5756 0 41.2857L0 59.6364C0 61.6934 0 62.7219 0.63904 63.361ZM13.5427 50.0941C12.9037 49.4551 11.8752 49.4551 9.81813 49.4551H4.5454C4.24415 49.4551 3.99994 49.6993 3.99994 50.0005C3.99994 55.3225 8.31429 59.6369 13.6363 59.6369C13.9376 59.6369 14.1818 59.3927 14.1818 59.0914V53.8187C14.1818 51.7617 14.1818 50.7332 13.5427 50.0941Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64788 23.7157C7.64788 24.6194 8.37515 25.3467 9.8297 26.8013L22.8056 39.7771C23.3077 40.2792 24.1217 40.2792 24.6238 39.7771C33.4943 30.9066 33.4943 16.5248 24.6238 7.65427C24.1217 7.15217 23.3077 7.15217 22.8056 7.65427L9.8297 20.6301C8.37515 22.0847 7.64788 22.812 7.64788 23.7157ZM26.1532 23.4589C26.1532 22.5552 25.426 21.8279 23.9714 20.3734L20.243 16.645C20.03 16.432 19.6847 16.432 19.4716 16.645C15.7084 20.4082 15.7084 26.5096 19.4716 30.2728C19.6847 30.4859 20.03 30.4859 20.243 30.2728L23.9714 26.5445C25.426 25.0899 26.1532 24.3626 26.1532 23.4589Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M40.639 0.63904C40 1.27808 40 2.3066 40 4.36364V22.7143C40 23.4244 40.5756 24 41.2857 24C53.8305 24 64 13.8305 64 1.28571C64 0.575634 63.4244 0 62.7143 0H44.3636C42.3066 0 41.2781 0 40.639 0.63904ZM53.9059 13.5427C54.5449 12.9037 54.5449 11.8752 54.5449 9.81813V4.5454C54.5449 4.24415 54.3007 3.99994 53.9995 3.99994C48.6775 3.99994 44.3631 8.31429 44.3631 13.6363C44.3631 13.9376 44.6073 14.1818 44.9086 14.1818H50.1813C52.2383 14.1818 53.2668 14.1818 53.9059 13.5427Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M80.2852 7.64886C79.3814 7.64886 78.6541 8.37613 77.1996 9.83067L64.2237 22.8065C63.7216 23.3086 63.7216 24.1227 64.2237 24.6248C73.0942 33.4953 87.4761 33.4953 96.3466 24.6248C96.8487 24.1227 96.8487 23.3086 96.3466 22.8065L83.3707 9.83067C81.9162 8.37613 81.1889 7.64886 80.2852 7.64886ZM80.5419 26.1542C81.4457 26.1542 82.173 25.4269 83.6275 23.9724L87.3559 20.244C87.5689 20.031 87.5689 19.6856 87.3559 19.4726C83.5927 15.7094 77.4912 15.7094 73.728 19.4726C73.515 19.6856 73.515 20.031 73.728 20.244L77.4564 23.9724C78.9109 25.4269 79.6382 26.1542 80.5419 26.1542Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M103.361 40.639C102.722 40 101.693 40 99.6364 40H81.2857C80.5756 40 80 40.5756 80 41.2857C80 53.8305 90.1695 64 102.714 64C103.424 64 104 63.4244 104 62.7143V44.3636C104 42.3066 104 41.2781 103.361 40.639ZM90.4573 53.9059C91.0963 54.5449 92.1248 54.5449 94.1819 54.5449H99.4546C99.7558 54.5449 100 54.3007 100 53.9995C100 48.6775 95.6857 44.3631 90.3637 44.3631C90.0624 44.3631 89.8182 44.6073 89.8182 44.9086V50.1813C89.8182 52.2383 89.8182 53.2668 90.4573 53.9059Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M96.3521 80.2843C96.3521 79.3806 95.6248 78.6533 94.1703 77.1987L81.1944 64.2229C80.6923 63.7208 79.8783 63.7208 79.3762 64.2229C70.5057 73.0934 70.5057 87.4752 79.3762 96.3457C79.8783 96.8478 80.6923 96.8478 81.1944 96.3457L94.1703 83.3699C95.6248 81.9153 96.3521 81.188 96.3521 80.2843ZM77.8468 80.5411C77.8468 81.4448 78.574 82.1721 80.0286 83.6266L83.757 87.355C83.97 87.568 84.3153 87.568 84.5284 87.355C88.2916 83.5918 88.2916 77.4904 84.5284 73.7272C84.3153 73.5141 83.97 73.5141 83.757 73.7272L80.0286 77.4555C78.574 78.9101 77.8468 79.6374 77.8468 80.5411Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M63.361 103.361C64 102.722 64 101.693 64 99.6364V81.2857C64 80.5756 63.4244 80 62.7143 80C50.1695 80 40 90.1695 40 102.714C40 103.424 40.5756 104 41.2857 104H59.6364C61.6934 104 62.7219 104 63.361 103.361ZM50.0941 90.4573C49.4551 91.0963 49.4551 92.1248 49.4551 94.1819V99.4546C49.4551 99.7558 49.6993 100 50.0005 100C55.3225 100 59.6369 95.6857 59.6369 90.3637C59.6369 90.0624 59.3927 89.8182 59.0914 89.8182H53.8187C51.7617 89.8182 50.7332 89.8182 50.0941 90.4573Z" fill="#EE5A29"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23.7148 96.3511C24.6186 96.3511 25.3459 95.6239 26.8004 94.1693L39.7763 81.1935C40.2784 80.6914 40.2784 79.8773 39.7763 79.3752C30.9058 70.5047 16.5239 70.5047 7.65342 79.3752C7.15131 79.8773 7.15131 80.6914 7.65342 81.1935L20.6293 94.1693C22.0838 95.6239 22.8111 96.3511 23.7148 96.3511ZM23.4581 77.8458C22.5543 77.8458 21.827 78.5731 20.3725 80.0276L16.6441 83.756C16.4311 83.969 16.4311 84.3144 16.6441 84.5274C20.4073 88.2906 26.5088 88.2906 30.272 84.5274C30.485 84.3144 30.485 83.969 30.272 83.756L26.5436 80.0276C25.0891 78.5731 24.3618 77.8458 23.4581 77.8458Z" fill="#EE5A29"></path>
+          </svg></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=670cc1eb0ffec391588fa8d9" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="../js/webflow.js" type="text/javascript"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  function checkLinkContainsDashboard(link) {
+    if (link.includes("faq")) {
+        return true;
+    } else {
+        return false;
+    	}
+	}
+// Пример использования
+const link = window.location.pathname;
+if (!checkLinkContainsDashboard(link)) {
+// Создание элемента canvas
+    const canvas = document.createElement('canvas');
+    canvas.id = 'noiseCanvas';
+    canvas.style.position = 'fixed'; 
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw'; 
+    canvas.style.height = '100vh'; 
+    canvas.style.zIndex = '-1'; 
+    canvas.style.pointerEvents = 'none'; 
+    canvas.style.overflow = 'hidden'; 
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    // Функция изменения размера Canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    // Функция генерации статического шума
+    function generateNoise() {
+        const imageData = ctx.createImageData(canvas.width, canvas.height);
+        for (let i = 0; i < imageData.data.length; i += 4) {
+            const noise = Math.random() * 255;
+            imageData.data[i] = noise;
+            imageData.data[i + 1] = noise;
+            imageData.data[i + 2] = noise;
+            imageData.data[i + 3] = 12; // Прозрачность 15
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+    // Вызываем функции
+    resizeCanvas();
+    generateNoise(); // Генерируем шум один раз
+    // Обновляем размер Canvas при изменении размера окна
+    window.addEventListener('resize', function () {
+        resizeCanvas();
+        generateNoise(); // Перегенерируем шум при изменении размера окна
+    });
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import helmet from 'helmet';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  // Security
+  app.use(helmet());
+
+  // CORS
+  app.enableCors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3001'],
+    credentials: true,
+  });
+
+  // Global prefix
+  app.setGlobalPrefix('api');
+
+  // Validation
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    }),
+  );
+
+  // Swagger
+  const config = new DocumentBuilder()
+    .setTitle('Checkie API')
+    .setDescription('Hosted Checkout Page Platform API')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .addTag('auth', 'Authentication endpoints')
+    .addTag('users', 'User management')
+    .addTag('stores', 'Store management')
+    .addTag('pages', 'Checkout pages')
+    .addTag('payments', 'Payment processing')
+    .addTag('subscriptions', 'Subscription management')
+    .addTag('balance', 'Balance & transactions')
+    .addTag('webhooks', 'Webhook management')
+    .addTag('widget', 'Public widget API')
+    .addTag('portal', 'Customer portal')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
+
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+
+  console.log(`Application is running on: http://localhost:${port}`);
+  console.log(`Swagger documentation: http://localhost:${port}/api/docs`);
+}
+
+bootstrap();

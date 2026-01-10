@@ -1,0 +1,1046 @@
+// ============================================================================
+// CHECKIE DATABASE SCHEMA - REVISED VERSION
+// Version: 2.0 (Post-Architecture Review)
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum StoreUserRole {
+  OWNER
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+enum PricingType {
+  FIXED
+  PAY_WHAT_YOU_WANT
+  SUBSCRIPTION
+}
+
+enum SubscriptionInterval {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum PageStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum CustomFieldType {
+  TEXT
+  TEXTAREA
+  EMAIL
+  PHONE
+  NUMBER
+  DROPDOWN
+  CHECKBOX
+  RADIO
+  DATE
+  DATETIME
+  FILE
+  HIDDEN
+}
+
+enum CheckoutSessionStatus {
+  OPEN              // Customer browsing/filling form
+  PROCESSING        // Payment in progress
+  AWAITING_ACTION   // Requires 3DS or redirect
+  COMPLETED         // Payment successful
+  EXPIRED           // Session timed out
+  ABANDONED         // Customer left without completing
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+  CANCELLED
+}
+
+enum PaymentAttemptStatus {
+  PENDING
+  REQUIRES_ACTION   // 3DS, redirect
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  INCOMPLETE
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  UNPAID
+  PAUSED
+}
+
+enum RefundStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum RefundReason {
+  REQUESTED_BY_CUSTOMER
+  DUPLICATE
+  FRAUDULENT
+  PRODUCT_NOT_RECEIVED
+  PRODUCT_UNACCEPTABLE
+  OTHER
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  IN_TRANSIT
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum PayoutMethod {
+  BANK_TRANSFER
+  STRIPE_CONNECT
+  PAYPAL
+}
+
+enum BalanceTransactionType {
+  PAYMENT_RECEIVED
+  REFUND
+  PAYOUT_REQUESTED
+  PAYOUT_COMPLETED
+  ADJUSTMENT
+  FEE
+}
+
+enum EmbedType {
+  STANDALONE
+  IFRAME
+  POPUP
+  BUTTON
+  QR_CODE
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  RUB
+  KZT
+  UZS
+  INR
+  SGD
+  CNY
+}
+
+enum Language {
+  EN
+  HI
+}
+
+enum WebhookDeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+  RETRYING
+}
+
+// ============================================================================
+// USER & AUTH
+// ============================================================================
+
+model User {
+  id                 String      @id @default(cuid())
+  email              String      @unique
+  passwordHash       String
+  firstName          String?
+  lastName           String?
+  avatarUrl          String?
+  language           Language    @default(EN)
+  status             UserStatus  @default(ACTIVE)
+  emailVerified      Boolean     @default(false)
+  emailVerifiedAt    DateTime?
+  lastLoginAt        DateTime?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  storeUsers         StoreUser[]
+  refreshTokens      RefreshToken[]
+  passwordResets     PasswordReset[]
+
+  @@index([email])
+  @@index([status])
+}
+
+model RefreshToken {
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  revokedAt   DateTime?
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model PasswordReset {
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  expiresAt   DateTime
+  usedAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([expiresAt])
+}
+
+// ============================================================================
+// IDEMPOTENCY (NEW)
+// ============================================================================
+
+model IdempotencyKey {
+  id             String   @id @default(cuid())
+  key            String   @unique
+  storeId        String?
+  endpoint       String   // /checkout, /refund, /payment
+  requestHash    String
+  responseStatus Int
+  responseBody   Json?
+  createdAt      DateTime @default(now())
+  expiresAt      DateTime
+
+  @@index([key])
+  @@index([expiresAt])
+}
+
+// ============================================================================
+// STORE (MERCHANT ACCOUNT)
+// ============================================================================
+
+model Store {
+  id                 String      @id @default(cuid())
+  name               String
+  slug               String      @unique
+  description        String?
+  logoUrl            String?
+  faviconUrl         String?
+  primaryColor       String?     @default("#333333")
+  secondaryColor     String?     @default("#ee5a29")
+  defaultCurrency    Currency    @default(USD)
+  defaultLanguage    Language    @default(EN)
+  customDomain       String?     @unique
+  timezone           String      @default("UTC")
+  isActive           Boolean     @default(true)
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  // Branding
+  brandName          String?
+  supportEmail       String?
+  websiteUrl         String?
+
+  // Relations
+  storeUsers         StoreUser[]
+  pages              Page[]
+  customers          Customer[]
+  payments           Payment[]
+  subscriptions      Subscription[]
+  balanceTransactions BalanceTransaction[]
+  balanceSnapshots   BalanceSnapshot[]
+  paymentMethods     StorePaymentMethod[]
+  coupons            Coupon[]
+  checkoutSessions   CheckoutSession[]
+  webhookEndpoints   WebhookEndpoint[]
+  webhookEvents      WebhookEvent[]
+  payouts            Payout[]
+  routingRules       ProviderRoutingRule[]
+
+  @@index([slug])
+  @@index([customDomain])
+  @@index([isActive])
+}
+
+model StoreUser {
+  id          String         @id @default(cuid())
+  storeId     String
+  userId      String
+  role        StoreUserRole  @default(ADMIN)
+  invitedBy   String?
+  acceptedAt  DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  store       Store          @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, userId])
+  @@index([userId])
+  @@index([storeId])
+}
+
+// ============================================================================
+// PAYMENT PROVIDERS & ROUTING (NEW)
+// ============================================================================
+
+model PaymentProvider {
+  id                    String    @id @default(cuid())
+  code                  String    @unique  // stripe, paypal, razorpay
+  name                  String
+  isActive              Boolean   @default(true)
+  supportedCurrencies   Currency[]
+  supportedPaymentMethods String[] // card, bank_transfer, wallet
+  supportedCountries    String[]
+  defaultPriority       Int       @default(0)
+  lastHealthCheck       DateTime?
+  isHealthy             Boolean   @default(true)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  storePaymentMethods   StorePaymentMethod[]
+  routingRules          ProviderRoutingRule[]
+}
+
+model StorePaymentMethod {
+  id                      String   @id @default(cuid())
+  storeId                 String
+  providerId              String
+  
+  // Encrypted credentials
+  providerConfigEncrypted String   // AES-256 encrypted JSON
+  providerConfigIV        String   // Initialization vector
+  providerConfigKeyId     String   // For key rotation
+  
+  isActive                Boolean  @default(true)
+  isDefault               Boolean  @default(false)
+  displayName             String?
+  displayOrder            Int      @default(0)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  store                   Store           @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  provider                PaymentProvider @relation(fields: [providerId], references: [id])
+
+  @@index([storeId])
+  @@index([providerId])
+}
+
+model ProviderRoutingRule {
+  id              String    @id @default(cuid())
+  storeId         String?   // null = global rule
+  providerId      String
+  
+  // Conditions
+  currency        Currency?
+  country         String?
+  amountMin       Decimal?  @db.Decimal(12, 2)
+  amountMax       Decimal?  @db.Decimal(12, 2)
+  paymentMethod   String?
+  
+  priority        Int       @default(0)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  store           Store?          @relation(fields: [storeId], references: [id])
+  provider        PaymentProvider @relation(fields: [providerId], references: [id])
+
+  @@index([storeId])
+  @@index([providerId])
+}
+
+// ============================================================================
+// PAGE (CHECKOUT PAGE CONFIGURATION)
+// ============================================================================
+
+model Page {
+  id                  String        @id @default(cuid())
+  storeId             String
+  name                String
+  slug                String
+  description         String?
+  
+  // Pricing
+  pricingType         PricingType   @default(FIXED)
+  price               Decimal?      @db.Decimal(12, 2)
+  currency            Currency      @default(USD)
+  minPrice            Decimal?      @db.Decimal(12, 2)
+  maxPrice            Decimal?      @db.Decimal(12, 2)
+  suggestedPrice      Decimal?      @db.Decimal(12, 2)
+  
+  // Subscription settings
+  subscriptionInterval    SubscriptionInterval?
+  subscriptionIntervalCount Int?    @default(1)
+  trialDays              Int?       @default(0)
+  
+  // Content
+  headline            String?
+  subheadline         String?
+  buttonText          String       @default("Pay Now")
+  imageUrl            String?
+  galleryImages       String[]
+  
+  // Confirmation
+  confirmationTitle   String?      @default("Thank you!")
+  confirmationMessage String?
+  redirectUrl         String?
+  
+  // Settings
+  status              PageStatus   @default(DRAFT)
+  requireShipping     Boolean      @default(false)
+  allowCoupons        Boolean      @default(true)
+  
+  // Layout & Design
+  layoutType          String       @default("standard")
+  customCss           String?
+  
+  // SEO
+  metaTitle           String?
+  metaDescription     String?
+  
+  // Session settings
+  sessionTtlMinutes   Int          @default(60)
+  
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  publishedAt         DateTime?
+  archivedAt          DateTime?    // Soft delete
+
+  // Relations
+  store               Store        @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  variants            PageVariant[]
+  customFields        PageCustomField[]
+  embeds              PageEmbed[]
+  payments            Payment[]
+  subscriptions       Subscription[]
+  pageCoupons         PageCoupon[]
+  checkoutSessions    CheckoutSession[]
+  stats               PageStats?
+
+  @@unique([storeId, slug])
+  @@index([storeId])
+  @@index([status])
+  @@index([pricingType])
+}
+
+// Separate stats table to avoid race conditions
+model PageStats {
+  id              String   @id @default(cuid())
+  pageId          String   @unique
+  viewCount       Int      @default(0)
+  conversionCount Int      @default(0)
+  totalRevenue    Decimal  @default(0) @db.Decimal(12, 2)
+  lastViewAt      DateTime?
+  lastConversionAt DateTime?
+  updatedAt       DateTime @updatedAt
+
+  page            Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+}
+
+// ============================================================================
+// VARIANTS (Product Options)
+// ============================================================================
+
+model PageVariant {
+  id              String   @id @default(cuid())
+  pageId          String
+  name            String
+  displayOrder    Int      @default(0)
+  isRequired      Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  page            Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  options         VariantOption[]
+
+  @@index([pageId])
+}
+
+model VariantOption {
+  id              String   @id @default(cuid())
+  variantId       String
+  name            String
+  priceModifier   Decimal? @db.Decimal(12, 2)
+  isDefault       Boolean  @default(false)
+  displayOrder    Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  variant         PageVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  paymentItems    PaymentItem[]
+
+  @@index([variantId])
+}
+
+// ============================================================================
+// CUSTOM FIELDS
+// ============================================================================
+
+model PageCustomField {
+  id              String          @id @default(cuid())
+  pageId          String
+  name            String
+  label           String
+  type            CustomFieldType
+  placeholder     String?
+  helpText        String?
+  isRequired      Boolean         @default(false)
+  displayOrder    Int             @default(0)
+  options         String[]
+  defaultValue    String?
+  validationRegex String?
+  minValue        String?
+  maxValue        String?
+  conditions      Json?
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  page            Page            @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  values          CustomFieldValue[]
+
+  @@index([pageId])
+}
+
+model CustomFieldValue {
+  id                String   @id @default(cuid())
+  customFieldId     String
+  checkoutSessionId String?
+  paymentId         String?
+  subscriptionId    String?
+  value             String
+  createdAt         DateTime @default(now())
+
+  customField       PageCustomField  @relation(fields: [customFieldId], references: [id], onDelete: Cascade)
+  checkoutSession   CheckoutSession? @relation(fields: [checkoutSessionId], references: [id])
+  payment           Payment?         @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  subscription      Subscription?    @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([customFieldId])
+  @@index([checkoutSessionId])
+  @@index([paymentId])
+  @@index([subscriptionId])
+}
+
+// ============================================================================
+// EMBEDS
+// ============================================================================
+
+model PageEmbed {
+  id              String    @id @default(cuid())
+  pageId          String
+  type            EmbedType
+  embedCode       String?
+  settings        Json?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  page            Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId])
+  @@index([type])
+}
+
+// ============================================================================
+// CUSTOMERS (BUYERS)
+// ============================================================================
+
+model Customer {
+  id              String   @id @default(cuid())
+  storeId         String
+  email           String
+  firstName       String?
+  lastName        String?
+  phone           String?
+  billingAddress  Json?
+  shippingAddress Json?
+  
+  // Portal access - support multiple sessions
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  store           Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  payments        Payment[]
+  subscriptions   Subscription[]
+  checkoutSessions CheckoutSession[]
+  portalSessions  CustomerPortalSession[]
+
+  @@unique([storeId, email])
+  @@index([storeId])
+  @@index([email])
+}
+
+model CustomerPortalSession {
+  id          String   @id @default(cuid())
+  customerId  String
+  token       String   @unique
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  usedAt      DateTime?
+
+  customer    Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([customerId])
+  @@index([expiresAt])
+}
+
+// ============================================================================
+// CHECKOUT SESSION (NEW - CRITICAL)
+// ============================================================================
+
+model CheckoutSession {
+  id                  String               @id @default(cuid())
+  storeId             String
+  pageId              String
+  customerId          String?              // May be null until customer enters email
+  
+  // Session state
+  status              CheckoutSessionStatus @default(OPEN)
+  expiresAt           DateTime
+  
+  // Pricing snapshot (frozen at session creation)
+  amount              Decimal              @db.Decimal(12, 2)
+  currency            Currency
+  pricingSnapshot     Json                 // Full pricing at time of session creation
+  
+  // Selected options
+  selectedVariants    Json?
+  couponId            String?
+  discountAmount      Decimal              @default(0) @db.Decimal(12, 2)
+  
+  // Tracking
+  ipAddress           String?
+  userAgent           String?
+  referrer            String?
+  utmSource           String?
+  utmMedium           String?
+  utmCampaign         String?
+  utmTerm             String?
+  utmContent          String?
+  
+  // Completion
+  paymentId           String?              @unique
+  completedAt         DateTime?
+  abandonedAt         DateTime?
+  
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+
+  store               Store                @relation(fields: [storeId], references: [id])
+  page                Page                 @relation(fields: [pageId], references: [id])
+  customer            Customer?            @relation(fields: [customerId], references: [id])
+  coupon              Coupon?              @relation(fields: [couponId], references: [id])
+  payment             Payment?             @relation(fields: [paymentId], references: [id])
+  paymentAttempts     PaymentAttempt[]
+  customFieldValues   CustomFieldValue[]
+
+  @@index([storeId, status])
+  @@index([pageId, status])
+  @@index([customerId])
+  @@index([expiresAt])
+  @@index([status, createdAt])
+}
+
+// ============================================================================
+// PAYMENTS
+// ============================================================================
+
+model Payment {
+  id                  String        @id @default(cuid())
+  storeId             String
+  pageId              String
+  customerId          String
+  
+  // Amount
+  amount              Decimal       @db.Decimal(12, 2)
+  currency            Currency
+  
+  // Status
+  status              PaymentStatus @default(PENDING)
+  
+  // Provider info
+  paymentProvider     String
+  providerPaymentId   String?
+  providerData        Json?
+  
+  // Fees (calculated)
+  platformFee         Decimal       @default(0) @db.Decimal(12, 2)
+  processingFee       Decimal       @default(0) @db.Decimal(12, 2)
+  netAmount           Decimal       @default(0) @db.Decimal(12, 2)
+  
+  // Coupon
+  couponId            String?
+  discountAmount      Decimal       @default(0) @db.Decimal(12, 2)
+  
+  completedAt         DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  store               Store         @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  page                Page          @relation(fields: [pageId], references: [id])
+  customer            Customer      @relation(fields: [customerId], references: [id])
+  coupon              Coupon?       @relation(fields: [couponId], references: [id])
+  
+  items               PaymentItem[]
+  attempts            PaymentAttempt[]
+  customFieldValues   CustomFieldValue[]
+  balanceTransactions BalanceTransaction[]
+  refunds             Refund[]
+  checkoutSession     CheckoutSession?
+
+  @@index([storeId])
+  @@index([pageId])
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([providerPaymentId])
+}
+
+model PaymentItem {
+  id              String   @id @default(cuid())
+  paymentId       String
+  name            String
+  quantity        Int      @default(1)
+  unitPrice       Decimal  @db.Decimal(12, 2)
+  totalPrice      Decimal  @db.Decimal(12, 2)
+  variantOptionId String?
+  
+  payment         Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  variantOption   VariantOption? @relation(fields: [variantOptionId], references: [id])
+
+  @@index([paymentId])
+}
+
+// ============================================================================
+// PAYMENT ATTEMPTS (NEW - CRITICAL)
+// ============================================================================
+
+model PaymentAttempt {
+  id                  String               @id @default(cuid())
+  paymentId           String
+  checkoutSessionId   String
+  
+  // Attempt details
+  attemptNumber       Int
+  providerId          String               // stripe, paypal, etc.
+  providerAttemptId   String?
+  
+  // Status
+  status              PaymentAttemptStatus @default(PENDING)
+  failureCode         String?
+  failureMessage      String?
+  
+  // 3DS / SCA
+  requires3DS         Boolean              @default(false)
+  threeDSStatus       String?
+  redirectUrl         String?
+  
+  // Response data
+  providerResponse    Json?
+  
+  createdAt           DateTime             @default(now())
+  completedAt         DateTime?
+
+  payment             Payment              @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  checkoutSession     CheckoutSession      @relation(fields: [checkoutSessionId], references: [id])
+
+  @@index([paymentId])
+  @@index([checkoutSessionId])
+  @@index([status])
+}
+
+// ============================================================================
+// REFUNDS (NEW)
+// ============================================================================
+
+model Refund {
+  id                  String       @id @default(cuid())
+  paymentId           String
+  amount              Decimal      @db.Decimal(12, 2)
+  currency            Currency
+  reason              RefundReason
+  reasonDetails       String?
+  status              RefundStatus @default(PENDING)
+  
+  providerRefundId    String?
+  providerData        Json?
+  
+  requestedBy         String?      // userId
+  
+  createdAt           DateTime     @default(now())
+  processedAt         DateTime?
+
+  payment             Payment      @relation(fields: [paymentId], references: [id])
+  balanceTransaction  BalanceTransaction?
+
+  @@index([paymentId])
+  @@index([status])
+}
+
+// ============================================================================
+// SUBSCRIPTIONS
+// ============================================================================
+
+model Subscription {
+  id                    String             @id @default(cuid())
+  storeId               String
+  pageId                String
+  customerId            String
+  
+  // Status
+  status                SubscriptionStatus @default(INCOMPLETE)
+  
+  // Billing
+  amount                Decimal            @db.Decimal(12, 2)
+  currency              Currency
+  interval              SubscriptionInterval
+  intervalCount         Int                @default(1)
+  
+  // Dates
+  trialEndAt            DateTime?
+  currentPeriodStart    DateTime
+  currentPeriodEnd      DateTime
+  cancelledAt           DateTime?
+  cancelAtPeriodEnd     Boolean            @default(false)
+  
+  // Provider info
+  paymentProvider       String
+  providerSubscriptionId String?
+  providerData          Json?
+  
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  store                 Store              @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  page                  Page               @relation(fields: [pageId], references: [id])
+  customer              Customer           @relation(fields: [customerId], references: [id])
+  customFieldValues     CustomFieldValue[]
+
+  @@index([storeId])
+  @@index([pageId])
+  @@index([customerId])
+  @@index([status])
+  @@index([currentPeriodEnd])
+}
+
+// ============================================================================
+// BALANCE & LEDGER
+// ============================================================================
+
+model BalanceTransaction {
+  id                String                   @id @default(cuid())
+  storeId           String
+  paymentId         String?
+  refundId          String?                  @unique
+  payoutId          String?
+  type              BalanceTransactionType
+  amount            Decimal                  @db.Decimal(12, 2)
+  currency          Currency
+  balanceAfter      Decimal                  @db.Decimal(12, 2)
+  description       String?
+  metadata          Json?
+  
+  // Reconciliation
+  externalReference String?
+  reconciledAt      DateTime?
+  reconciledBy      String?
+  
+  createdAt         DateTime                 @default(now())
+
+  store             Store                    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  payment           Payment?                 @relation(fields: [paymentId], references: [id])
+  refund            Refund?                  @relation(fields: [refundId], references: [id])
+  payout            Payout?                  @relation(fields: [payoutId], references: [id])
+
+  @@index([storeId])
+  @@index([paymentId])
+  @@index([type])
+  @@index([createdAt])
+}
+
+model BalanceSnapshot {
+  id                  String   @id @default(cuid())
+  storeId             String
+  balance             Decimal  @db.Decimal(12, 2)
+  currency            Currency
+  asOfDate            DateTime
+  lastTransactionId   String
+
+  store               Store    @relation(fields: [storeId], references: [id])
+
+  @@unique([storeId, asOfDate, currency])
+  @@index([storeId])
+}
+
+// ============================================================================
+// PAYOUTS (NEW)
+// ============================================================================
+
+model Payout {
+  id                  String       @id @default(cuid())
+  storeId             String
+  amount              Decimal      @db.Decimal(12, 2)
+  currency            Currency
+  status              PayoutStatus @default(PENDING)
+  method              PayoutMethod
+  
+  // Destination (encrypted)
+  destinationEncrypted String
+  destinationIV       String
+  destinationKeyId    String
+  
+  providerPayoutId    String?
+  
+  requestedAt         DateTime     @default(now())
+  processedAt         DateTime?
+  completedAt         DateTime?
+  failedAt            DateTime?
+  failureReason       String?
+
+  store               Store        @relation(fields: [storeId], references: [id])
+  balanceTransactions BalanceTransaction[]
+
+  @@index([storeId])
+  @@index([status])
+}
+
+// ============================================================================
+// COUPONS
+// ============================================================================
+
+model Coupon {
+  id              String    @id @default(cuid())
+  storeId         String
+  code            String
+  discountType    String    // percent, fixed
+  discountValue   Decimal   @db.Decimal(12, 2)
+  maxUses         Int?
+  usedCount       Int       @default(0)
+  minPurchase     Decimal?  @db.Decimal(12, 2)
+  expiresAt       DateTime?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  store           Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  pageCoupons     PageCoupon[]
+  payments        Payment[]
+  checkoutSessions CheckoutSession[]
+
+  @@unique([storeId, code])
+  @@index([storeId])
+  @@index([code])
+  @@index([isActive])
+}
+
+model PageCoupon {
+  id        String   @id @default(cuid())
+  pageId    String
+  couponId  String
+  
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  coupon    Coupon   @relation(fields: [couponId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, couponId])
+}
+
+// ============================================================================
+// WEBHOOKS (NEW)
+// ============================================================================
+
+model WebhookEndpoint {
+  id          String    @id @default(cuid())
+  storeId     String
+  url         String
+  secret      String    // For HMAC signature
+  description String?
+  events      String[]  // ["payment.completed", "subscription.cancelled"]
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  store       Store     @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  deliveries  WebhookDelivery[]
+
+  @@index([storeId])
+  @@index([isActive])
+}
+
+model WebhookEvent {
+  id          String   @id @default(cuid())
+  storeId     String
+  type        String   // payment.completed, subscription.cancelled, etc.
+  payload     Json
+  resourceType String  // payment, subscription, refund
+  resourceId  String
+  createdAt   DateTime @default(now())
+
+  store       Store    @relation(fields: [storeId], references: [id])
+  deliveries  WebhookDelivery[]
+
+  @@index([storeId, type])
+  @@index([resourceType, resourceId])
+  @@index([createdAt])
+}
+
+model WebhookDelivery {
+  id              String                @id @default(cuid())
+  webhookEventId  String
+  endpointId      String
+  
+  attemptNumber   Int                   @default(1)
+  status          WebhookDeliveryStatus @default(PENDING)
+  httpStatus      Int?
+  responseBody    String?
+  errorMessage    String?
+  
+  scheduledAt     DateTime
+  attemptedAt     DateTime?
+  nextRetryAt     DateTime?
+  
+  createdAt       DateTime              @default(now())
+
+  event           WebhookEvent          @relation(fields: [webhookEventId], references: [id])
+  endpoint        WebhookEndpoint       @relation(fields: [endpointId], references: [id])
+
+  @@index([webhookEventId])
+  @@index([endpointId, status])
+  @@index([nextRetryAt])
+  @@index([status, scheduledAt])
+}

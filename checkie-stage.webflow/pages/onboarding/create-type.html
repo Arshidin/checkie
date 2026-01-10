@@ -1,0 +1,521 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Sat Jan 10 2026 14:29:17 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="67bed3d9e4a0315123112589" data-wf-site="670cc1eb0ffec391588fa8d9" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Create Type | Checkie</title>
+  <meta content="create-type" property="og:title">
+  <meta content="create-type" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:100,200,300,regular,500,600,700,800,900:cyrillic,latin","Plus Jakarta Sans:200,300,regular,500,600,700,800:cyrillic-ext,latin","Inter:italic"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="/assets/images/favicon.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="/assets/images/webclip.jpg" rel="apple-touch-icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--  Memberstack webflow package  -->
+  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript"></script>
+  <script id="jetboost-script" type="text/javascript"> window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2"; (function(d) { var s = d.createElement("script"); s.src = "https://cdn.jetboost.io/jetboost.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })(document); </script>
+</head>
+<body class="body">
+  <div class="page-wrapper">
+    <div class="global-styles w-embed">
+      <style>
+/* Make text look crisper and more legible in all browsers */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+/* Set color style to inherit */
+.inherit-color * {
+    color: inherit;
+}
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+/* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+/*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+.margin-0 {
+  margin: 0rem !important;
+}
+.padding-0 {
+  padding: 0rem !important;
+}
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+textarea {
+  resize: none;
+}
+ .background-dw-menu {
+ 	scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Цвет полосы и фона для Firefox */
+  /* Для WebKit-браузеров (Chrome, Safari) */
+  /*overflow-y: auto;*/
+}
+.background-dw-menu::-webkit-scrollbar {
+ 	width: 4px; /* Ширина полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-track {
+	background: transparent; /* Фон полосы прокрутки */
+}
+.background-dw-menu::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.2); /* Цвет ползунка */
+	border-radius: 10px; /* Скругление ползунка */
+}
+.tabs-menu {
+    overflow-x: auto; /* Включаем горизонтальный скролл */
+    overflow-y: hidden; /* Убираем вертикальный скролл */
+    white-space: nowrap; /* Предотвращаем перенос элементов на новую строку */
+}
+/* Скрываем скролл-бары для всех браузеров */
+.tabs-menu::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+.tabs-menu, .page-full-height-container-scroll {
+    scrollbar-width: none;  /* Для Firefox */
+}
+.hero-image-1, .hero-image-2 { transition: filter 0.5s; } 
+.blur { filter: blur(5px); }
+#descriptionTextArea {
+	resize: vertical; 
+}
+#descriptionTextArea::-webkit-resizer {
+display: none;
+}
+#descriptionTextArea::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari и Opera */
+}
+#descriptionTextArea {
+	scrollbar-width: none; 
+}
+[draggable] {
+  user-select: none;
+}
+[data-value] {
+	pointer-events: none;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-bg {
+	background-color: #10945C;
+}
+.ms-toggle-checkbox:checked ~.ms-toggle-dot {
+	left: 19px;
+}
+/* Отключаем стили фокуса для всех ссылок и инпутов */
+a:focus,
+a:focus-visible,
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+*[tabindex]:focus-visible, input[type="file"]:focus-visible {
+    outline: none;
+    outline-offset: 0;
+}
+</style>
+    </div>
+    <main class="main-wrapper background-color-alternate">
+      <section class="section-auth">
+        <div class="padding-global">
+          <div class="w-layout-blockcontainer container-large w-container">
+            <div class="page-full-height-container">
+              <div class="spacer-large"></div>
+              <div class="create-form-wrapper">
+                <div class="w-form">
+                  <form id="wf-form-create-page" name="wf-form-create-page" data-name="create-page" redirect="/dashboard/new-checkout/create-type" data-redirect="/dashboard/new-checkout/create-type" method="post" class="form_form" data-wf-page-id="67bed3d9e4a0315123112589" data-wf-element-id="8d1f646f-5a2c-8a71-b817-1d1657b62454">
+                    <div class="wrapper--js">
+                      <div data-ms-member="id" class="uid"></div>
+                      <div class="uid--js w-embed w-script"><!--  Поле, в которое нужно подставить значение uid  -->
+                        <input type="hidden" name="uid" value="">
+                        <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Находим элемент с классом .uid
+  const uidElement = document.querySelector(".uid");
+  // Считываем текстовое содержимое
+  const uid = uidElement ? uidElement.textContent.trim() : "";
+  // Находим ваше скрытое поле и присваиваем ему значение
+  const hiddenInput = document.querySelector('input[name="uid"]');
+  if (hiddenInput) {
+    hiddenInput.value = uid;
+  }
+});
+</script>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="h-flex center">
+                        <div class="align-center">
+                          <div class="text-align-center">
+                            <div class="text-size-large-x text-weight-semibold">Create type</div>
+                          </div>
+                        </div>
+                        <div class="close-btn">
+                          <div class="code-embed-30 w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+                              <path d="M18 6L6 18" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path d="M18 18L6 6" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                          <div class="btn-trigger"></div>
+                        </div>
+                      </div>
+                      <div class="spacer-medium-s"></div>
+                      <div class="text-align-center">
+                        <div class="text-size-medium">How you will use your checkout page</div>
+                      </div>
+                    </div>
+                    <div class="spacer-large"></div>
+                    <div data-name="billing-model" class="radio-wrapper">
+                      <div class="h-flex space-between-center"><label class="radio-button-page-setup size-big_title w-radio">
+                          <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-check w-radio-input w--redirected-checked"></div><input type="radio" name="billing-model" id="onetime" data-name="billing-model" required="" style="opacity:0;position:absolute;z-index:-1" checked="" value="onetime"><span class="text-size-medium text-weight-semibold w-form-label" for="onetime">Hosted page <br></span>
+                          <div class="div-block-95">
+                            <div class="radio-check-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                                <circle cx="11" cy="11" r="10" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M7.43994 11L9.81394 13.373L14.5599 8.62695" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                          </div>
+                          <div class="div-block-94">
+                            <div>Link to a hosted checkout page</div>
+                          </div>
+                        </label>
+                        <div class="padding-left padding-medium-s"></div><label class="radio-button-page-setup size-big_title w-radio">
+                          <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-check w-radio-input"></div><input type="radio" name="billing-model" id="onetime" data-name="billing-model" required="" style="opacity:0;position:absolute;z-index:-1" value="onetime"><span class="text-size-medium text-weight-semibold w-form-label" for="onetime">Add to site<br></span>
+                          <div class="div-block-95">
+                            <div class="radio-check-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                                <circle cx="11" cy="11" r="10" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M7.43994 11L9.81394 13.373L14.5599 8.62695" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                          </div>
+                          <div class="div-block-94">
+                            <div>Add checkout to your site</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="spacer-large"></div>
+                    <div class="radio-wrapper fixed-height"><label for="" class="form_label">Layout</label>
+                      <div class="h-flex"><label class="radio-button-page-setup layout-type-radio w-radio">
+                          <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-check_custom w-radio-input w--redirected-checked"></div><input type="radio" name="pricing-model" id="singleprice" data-name="pricing-model" required="" style="opacity:0;position:absolute;z-index:-1" checked="" value="singleprice"><span class="hide w-form-label" for="singleprice">Single price</span>
+                          <div class="layout-type"></div>
+                          <div class="div-block-97">
+                            <div class="text-size-medium text-weight-semibold">Center</div>
+                          </div>
+                          <div class="div-block-96">
+                            <div class="radio-check-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                                <circle cx="11" cy="11" r="10" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M7.43994 11L9.81394 13.373L14.5599 8.62695" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                          </div>
+                        </label>
+                        <div class="padding-left padding-medium-s"></div><label class="radio-button-page-setup layout-type-radio w-radio">
+                          <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-check_custom w-radio-input"></div><input type="radio" name="pricing-model" id="singleprice" data-name="pricing-model" required="" style="opacity:0;position:absolute;z-index:-1" value="singleprice"><span class="hide w-form-label" for="singleprice">Single price</span>
+                          <div class="layout-type"></div>
+                          <div class="padding-left padding-thin-x"></div>
+                          <div class="layout-type"></div>
+                          <div class="div-block-97">
+                            <div class="text-size-medium text-weight-semibold">Double</div>
+                          </div>
+                          <div class="div-block-96">
+                            <div class="radio-check-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                                <circle cx="11" cy="11" r="10" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M7.43994 11L9.81394 13.373L14.5599 8.62695" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                          </div>
+                        </label>
+                        <div class="padding-left padding-medium-s"></div><label class="radio-button-page-setup layout-type-radio w-radio">
+                          <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-check_custom w-radio-input"></div><input type="radio" name="pricing-model" id="singleprice" data-name="pricing-model" required="" style="opacity:0;position:absolute;z-index:-1" value="singleprice"><span class="hide w-form-label" for="singleprice">Single price</span>
+                          <div class="layout-type"></div>
+                          <div class="div-block-97">
+                            <div class="text-size-medium text-weight-semibold">Split</div>
+                          </div>
+                          <div class="div-block-96">
+                            <div class="radio-check-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
+                                <circle cx="11" cy="11" r="10" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                <path d="M7.43994 11L9.81394 13.373L14.5599 8.62695" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="spacer-large"></div>
+                    <div class="h-flex gap-1-5">
+                      <a href="/pages/onboarding/create-page.html" class="back-to-prev w-inline-block">
+                        <div class="code-embed-31 w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
+                            <path d="M1.25 7.27441L16.25 7.27441" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M7.2998 13.299L1.2498 7.275L7.2998 1.25" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                          </svg></div>
+                      </a><input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Continue ">
+                    </div>
+                  </form>
+                  <div class="form_message-success w-form-done">
+                    <div class="page-full-height-container">
+                      <div class="success-icon-wrapper"><img src="/assets/images/vector-checkbox-white.svg" loading="lazy" alt=""></div>
+                      <div class="spacer-medium"></div>
+                      <div class="v-flex">
+                        <div class="heading-style-h2">Congrats!</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form_message-error w-form-fail">
+                    <div>Oops! Something went wrong while submitting the form.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="spacer-large"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div data-w-id="b376e6bb-cba6-8505-ca12-1568bf88f808" class="preloader">
+      <div class="preloader-css w-embed">
+        <style>
+.preloader-icon {
+  animation: rotate 2s infinite ease-in-out;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+      </div>
+      <div class="preloader-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewbox="0 0 104 104" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.63904 63.361C1.27808 64 2.3066 64 4.36364 64H22.7143C23.4244 64 24 63.4244 24 62.7143C24 50.1695 13.8305 40 1.28571 40C0.575634 40 0 40.5756 0 41.2857L0 59.6364C0 61.6934 0 62.7219 0.63904 63.361ZM13.5427 50.0941C12.9037 49.4551 11.8752 49.4551 9.81813 49.4551H4.5454C4.24415 49.4551 3.99994 49.6993 3.99994 50.0005C3.99994 55.3225 8.31429 59.6369 13.6363 59.6369C13.9376 59.6369 14.1818 59.3927 14.1818 59.0914V53.8187C14.1818 51.7617 14.1818 50.7332 13.5427 50.0941Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64788 23.7157C7.64788 24.6194 8.37515 25.3467 9.8297 26.8013L22.8056 39.7771C23.3077 40.2792 24.1217 40.2792 24.6238 39.7771C33.4943 30.9066 33.4943 16.5248 24.6238 7.65427C24.1217 7.15217 23.3077 7.15217 22.8056 7.65427L9.8297 20.6301C8.37515 22.0847 7.64788 22.812 7.64788 23.7157ZM26.1532 23.4589C26.1532 22.5552 25.426 21.8279 23.9714 20.3734L20.243 16.645C20.03 16.432 19.6847 16.432 19.4716 16.645C15.7084 20.4082 15.7084 26.5096 19.4716 30.2728C19.6847 30.4859 20.03 30.4859 20.243 30.2728L23.9714 26.5445C25.426 25.0899 26.1532 24.3626 26.1532 23.4589Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M40.639 0.63904C40 1.27808 40 2.3066 40 4.36364V22.7143C40 23.4244 40.5756 24 41.2857 24C53.8305 24 64 13.8305 64 1.28571C64 0.575634 63.4244 0 62.7143 0H44.3636C42.3066 0 41.2781 0 40.639 0.63904ZM53.9059 13.5427C54.5449 12.9037 54.5449 11.8752 54.5449 9.81813V4.5454C54.5449 4.24415 54.3007 3.99994 53.9995 3.99994C48.6775 3.99994 44.3631 8.31429 44.3631 13.6363C44.3631 13.9376 44.6073 14.1818 44.9086 14.1818H50.1813C52.2383 14.1818 53.2668 14.1818 53.9059 13.5427Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M80.2852 7.64886C79.3814 7.64886 78.6541 8.37613 77.1996 9.83067L64.2237 22.8065C63.7216 23.3086 63.7216 24.1227 64.2237 24.6248C73.0942 33.4953 87.4761 33.4953 96.3466 24.6248C96.8487 24.1227 96.8487 23.3086 96.3466 22.8065L83.3707 9.83067C81.9162 8.37613 81.1889 7.64886 80.2852 7.64886ZM80.5419 26.1542C81.4457 26.1542 82.173 25.4269 83.6275 23.9724L87.3559 20.244C87.5689 20.031 87.5689 19.6856 87.3559 19.4726C83.5927 15.7094 77.4912 15.7094 73.728 19.4726C73.515 19.6856 73.515 20.031 73.728 20.244L77.4564 23.9724C78.9109 25.4269 79.6382 26.1542 80.5419 26.1542Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M103.361 40.639C102.722 40 101.693 40 99.6364 40H81.2857C80.5756 40 80 40.5756 80 41.2857C80 53.8305 90.1695 64 102.714 64C103.424 64 104 63.4244 104 62.7143V44.3636C104 42.3066 104 41.2781 103.361 40.639ZM90.4573 53.9059C91.0963 54.5449 92.1248 54.5449 94.1819 54.5449H99.4546C99.7558 54.5449 100 54.3007 100 53.9995C100 48.6775 95.6857 44.3631 90.3637 44.3631C90.0624 44.3631 89.8182 44.6073 89.8182 44.9086V50.1813C89.8182 52.2383 89.8182 53.2668 90.4573 53.9059Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M96.3521 80.2843C96.3521 79.3806 95.6248 78.6533 94.1703 77.1987L81.1944 64.2229C80.6923 63.7208 79.8783 63.7208 79.3762 64.2229C70.5057 73.0934 70.5057 87.4752 79.3762 96.3457C79.8783 96.8478 80.6923 96.8478 81.1944 96.3457L94.1703 83.3699C95.6248 81.9153 96.3521 81.188 96.3521 80.2843ZM77.8468 80.5411C77.8468 81.4448 78.574 82.1721 80.0286 83.6266L83.757 87.355C83.97 87.568 84.3153 87.568 84.5284 87.355C88.2916 83.5918 88.2916 77.4904 84.5284 73.7272C84.3153 73.5141 83.97 73.5141 83.757 73.7272L80.0286 77.4555C78.574 78.9101 77.8468 79.6374 77.8468 80.5411Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M63.361 103.361C64 102.722 64 101.693 64 99.6364V81.2857C64 80.5756 63.4244 80 62.7143 80C50.1695 80 40 90.1695 40 102.714C40 103.424 40.5756 104 41.2857 104H59.6364C61.6934 104 62.7219 104 63.361 103.361ZM50.0941 90.4573C49.4551 91.0963 49.4551 92.1248 49.4551 94.1819V99.4546C49.4551 99.7558 49.6993 100 50.0005 100C55.3225 100 59.6369 95.6857 59.6369 90.3637C59.6369 90.0624 59.3927 89.8182 59.0914 89.8182H53.8187C51.7617 89.8182 50.7332 89.8182 50.0941 90.4573Z" fill="#EE5A29"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M23.7148 96.3511C24.6186 96.3511 25.3459 95.6239 26.8004 94.1693L39.7763 81.1935C40.2784 80.6914 40.2784 79.8773 39.7763 79.3752C30.9058 70.5047 16.5239 70.5047 7.65342 79.3752C7.15131 79.8773 7.15131 80.6914 7.65342 81.1935L20.6293 94.1693C22.0838 95.6239 22.8111 96.3511 23.7148 96.3511ZM23.4581 77.8458C22.5543 77.8458 21.827 78.5731 20.3725 80.0276L16.6441 83.756C16.4311 83.969 16.4311 84.3144 16.6441 84.5274C20.4073 88.2906 26.5088 88.2906 30.272 84.5274C30.485 84.3144 30.485 83.969 30.272 83.756L26.5436 80.0276C25.0891 78.5731 24.3618 77.8458 23.4581 77.8458Z" fill="#EE5A29"></path>
+        </svg></div>
+    </div>
+    <div class="page--js w-embed w-script">
+      <script>
+// Находим элементы формы
+const form = document.querySelector('#wf-form-create-page');
+const submitButton = form.querySelector('.submit-button');
+const formFields = form.querySelectorAll('input[required]');
+const selectFields = form.querySelectorAll('select[required]');
+// По дефолту кнопка не доступна
+submitButton.disabled = true; // Добавляем атрибут disabled
+submitButton.classList.add('disable'); // Добавляем класс disabled
+// Функция проверки заполненности всех полей
+function checkFormFields() {
+  const allInputsFilled = Array.from(formFields).every(field => field.value.trim() !== '');
+  const allSelectsFilled = Array.from(selectFields).every(select => select.value.trim() !== '');
+  if (allInputsFilled && allSelectsFilled) {
+    submitButton.disabled = false; // Убираем атрибут disabled
+    submitButton.classList.remove('disable'); // Убираем класс disabled
+  } else {
+    submitButton.disabled = true; // Добавляем атрибут disabled
+    submitButton.classList.add('disable'); // Добавляем класс disabled
+  }
+}
+// Вешаем обработчики событий на поля формы для проверки заполненности
+formFields.forEach(field => {
+  field.addEventListener('input', checkFormFields);
+});
+selectFields.forEach(select => {
+  select.addEventListener('change', checkFormFields); // Проверяем при изменении селекта
+});
+// Собираем данные формы при клике на кнопку "submit"
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+  const formData = new FormData(form); // Собираем данные
+  const data = Object.fromEntries(formData.entries()); // Преобразуем в объект
+  console.log('Form Data:', data);
+  // Дополнительные действия с данными, например, отправка на сервер
+});
+</script>
+    </div>
+  </div>
+  <script src="/assets/js/webflow.js" type="text/javascript"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  function checkLinkContainsDashboard(link) {
+    if (link.includes("faq")) {
+        return true;
+    } else {
+        return false;
+    	}
+	}
+// Пример использования
+const link = window.location.pathname;
+if (!checkLinkContainsDashboard(link)) {
+// Создание элемента canvas
+    const canvas = document.createElement('canvas');
+    canvas.id = 'noiseCanvas';
+    canvas.style.position = 'fixed'; 
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw'; 
+    canvas.style.height = '100vh'; 
+    canvas.style.zIndex = '-1'; 
+    canvas.style.pointerEvents = 'none'; 
+    canvas.style.overflow = 'hidden'; 
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    // Функция изменения размера Canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    // Функция генерации статического шума
+    function generateNoise() {
+        const imageData = ctx.createImageData(canvas.width, canvas.height);
+        for (let i = 0; i < imageData.data.length; i += 4) {
+            const noise = Math.random() * 255;
+            imageData.data[i] = noise;
+            imageData.data[i + 1] = noise;
+            imageData.data[i + 2] = noise;
+            imageData.data[i + 3] = 12; // Прозрачность 15
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+    // Вызываем функции
+    resizeCanvas();
+    generateNoise(); // Генерируем шум один раз
+    // Обновляем размер Canvas при изменении размера окна
+    window.addEventListener('resize', function () {
+        resizeCanvas();
+        generateNoise(); // Перегенерируем шум при изменении размера окна
+    });
+}
+});
+</script>
+</body>
+</html>
