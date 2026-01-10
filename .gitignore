@@ -1,3 +1,11 @@
 # Local Netlify folder
 .netlify
 checkie-stage.webflow.zip
+
+# Large video files (stored on Netlify, not GitHub)
+checkie-frontend/assets/videos/
+*.mp4
+*.webm
+
+# Backup folder
+checkie-stage.webflow.backup/
