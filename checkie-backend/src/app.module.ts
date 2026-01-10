@@ -3,6 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import * as Joi from 'joi';
 import { PrismaModule } from './prisma/prisma.module';
+import { RedisModule } from './modules/redis/redis.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { StoresModule } from './modules/stores/stores.module';
+import { configuration } from './config';
 
 @Module({
   imports: [
@@ -10,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+      load: [configuration],
       validationSchema: Joi.object({
         NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
         PORT: Joi.number().default(3000),
@@ -63,10 +69,15 @@ import { PrismaModule } from './prisma/prisma.module';
     // Database
     PrismaModule,
 
-    // Modules will be added here as we implement them:
-    // AuthModule,
-    // UsersModule,
-    // StoresModule,
+    // Cache
+    RedisModule,
+
+    // Feature Modules
+    AuthModule,
+    UsersModule,
+    StoresModule,
+
+    // Modules to be added:
     // PagesModule,
     // CheckoutModule,
     // PaymentsModule,
