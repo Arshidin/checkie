@@ -9,6 +9,10 @@ import { UsersModule } from './modules/users/users.module';
 import { StoresModule } from './modules/stores/stores.module';
 import { PagesModule } from './modules/pages/pages.module';
 import { CouponsModule } from './modules/coupons/coupons.module';
+import { CheckoutModule } from './modules/checkout/checkout.module';
+import { ProvidersModule } from './modules/providers/providers.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { BalanceModule } from './modules/balance/balance.module';
 import { configuration } from './config';
 
 @Module({
@@ -36,9 +40,9 @@ import { configuration } from './config';
         // Encryption
         ENCRYPTION_KEY: Joi.string().min(32).required(),
 
-        // Stripe
-        STRIPE_SECRET_KEY: Joi.string().required(),
-        STRIPE_WEBHOOK_SECRET: Joi.string().required(),
+        // Stripe (optional in dev mode - stub provider used if not set)
+        STRIPE_SECRET_KEY: Joi.string().optional().allow(''),
+        STRIPE_WEBHOOK_SECRET: Joi.string().optional().allow(''),
 
         // URLs
         APP_URL: Joi.string().default('http://localhost:3000'),
@@ -80,17 +84,19 @@ import { configuration } from './config';
     StoresModule,
     PagesModule,
     CouponsModule,
+    CheckoutModule,
+
+    // Phase 4: Payments & PSP
+    ProvidersModule,
+    PaymentsModule,
+    BalanceModule,
 
     // Modules to be added:
-    // CheckoutModule,
-    // PaymentsModule,
     // SubscriptionsModule,
     // CustomersModule,
-    // BalanceModule,
     // PayoutsModule,
     // RefundsModule,
     // WebhooksModule,
-    // ProvidersModule,
     // NotificationsModule,
     // WidgetModule,
   ],

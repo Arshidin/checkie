@@ -2,6 +2,12 @@
 <html data-wf-page="67251c2437f2f8cc2dd28c95" data-wf-site="670cc1eb0ffec391588fa8d9" lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- Performance: DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://code.jquery.com">
+  <link rel="dns-prefetch" href="https://static.memberstack.com">
+  <link rel="dns-prefetch" href="https://cdn.jetboost.io">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <title>Payment Button | Checkie</title>
   <meta content="Payment Button" property="og:title">
   <meta content="Payment Button" property="twitter:title">
@@ -12,14 +18,14 @@
   <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript" async></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Inter:100,200,300,regular,500,600,700,800,900:cyrillic,latin","Plus Jakarta Sans:200,300,regular,500,600,700,800:cyrillic-ext,latin","Inter:italic"]  }});</script>
   <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="/assets/images/favicon.jpg" rel="shortcut icon" type="image/x-icon">
   <link href="/assets/images/webclip.jpg" rel="apple-touch-icon">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
   <!--  Memberstack webflow package  -->
-  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript"></script>
+  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript" defer></script>
   <script id="jetboost-script" type="text/javascript"> window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2"; (function(d) { var s = d.createElement("script"); s.src = "https://cdn.jetboost.io/jetboost.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })(document); </script>
 </head>
 <body class="body">
@@ -250,7 +256,7 @@ input:focus-visible {
         <div class="container-large w-container">
           <div class="h-flex custom-position">
             <div class="h-flex align-center-adaptive-nav">
-              <a href="/pages/public/index.html" class="logo w-inline-block"><img src="/assets/images/logo.svg" loading="lazy" alt="" class="image"></a>
+              <a href="/pages/public/index.html" class="logo w-inline-block"><img src="/assets/images/logo.svg" loading="lazy" alt="" class="image" decoding="async"></a>
               <div class="hide-mobile-portrait">
                 <div class="padding-left padding-small"></div>
               </div>
@@ -261,7 +267,7 @@ input:focus-visible {
                     <div status="close" class="h-flex gap-custom-xsmall">
                       <div class="nowrapp">
                         <div class="text-size-regular text-color-primary">Product</div>
-                      </div><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="menu-arrow-icon-down">
+                      </div><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="menu-arrow-icon-down" decoding="async">
                     </div>
                     <div id="menu1" class="menu-trigger"></div>
                     <div class="dw-container hide">
@@ -270,7 +276,7 @@ input:focus-visible {
                         <div class="spacer-small"></div>
                       </div>
                       <div class="background-dw-menu">
-                        <div class="close-menu-bth-wrapper"><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="close-menu-icon">
+                        <div class="close-menu-bth-wrapper"><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="close-menu-icon" decoding="async">
                           <div class="text-size-regular text-weight-semibold">Back</div>
                           <div class="close-button"></div>
                         </div>
@@ -284,7 +290,7 @@ input:focus-visible {
                           <div class="spacer-medium-s"></div>
                           <div class="dw-menu-grid _3-2-adaptive">
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8ae" href="/pages/product/checkout.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/checkout-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/checkout-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8b1" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -310,7 +316,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8bf" href="/pages/product/payment-links.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/payment-link-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/payment-link-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8c2" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -336,7 +342,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8d0" href="/pages/product/chat-checkout.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/chat-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/chat-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8d3" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -362,7 +368,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8e1" href="/pages/product/payment-button.html" aria-current="page" class="dw-link-wrapper w-inline-block w--current">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8e4" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -388,7 +394,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8f2" href="/pages/public/ways-to-pay.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/local-payment-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/local-payment-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc8f5" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -425,7 +431,7 @@ input:focus-visible {
                           <div class="spacer-medium-s"></div>
                           <div class="dw-menu-grid _3-1-adaptive">
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc90b" href="/pages/public/coming-soon.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/wallet-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/wallet-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc90e" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -464,7 +470,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc91c" href="/pages/public/coming-soon.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/analytics-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/analytics-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc91f" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -503,7 +509,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc92d" href="/pages/public/coming-soon.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/pie-chart-dashboard-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/pie-chart-dashboard-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc930" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -554,7 +560,7 @@ input:focus-visible {
                             <div class="spacer-medium-s"></div>
                             <div class="dw-menu-grid _1-2-adaptive">
                               <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc947" href="/pages/product/subscriptions.html" class="dw-link-wrapper w-inline-block">
-                                <div class="interactive-icon-wrapper"><img src="/assets/images/followers-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                                <div class="interactive-icon-wrapper"><img src="/assets/images/followers-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                   <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc94a" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                                 </div>
                                 <div class="link-text-wrapper">
@@ -580,7 +586,7 @@ input:focus-visible {
                                 </div>
                               </a>
                               <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc958" href="/pages/product/adpay.html" class="dw-link-wrapper w-inline-block">
-                                <div class="interactive-icon-wrapper"><img src="/assets/images/marketing-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                                <div class="interactive-icon-wrapper"><img src="/assets/images/marketing-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                   <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc95b" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                                 </div>
                                 <div class="link-text-wrapper">
@@ -617,7 +623,7 @@ input:focus-visible {
                             <div class="spacer-medium-s"></div>
                             <div class="dw-menu-grid _1-2-adaptive">
                               <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc971" href="/pages/product/shop-builder.html" class="dw-link-wrapper w-inline-block">
-                                <div class="interactive-icon-wrapper"><img src="/assets/images/shopping-bags-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                                <div class="interactive-icon-wrapper"><img src="/assets/images/shopping-bags-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                   <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc974" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                                 </div>
                                 <div class="link-text-wrapper">
@@ -656,7 +662,7 @@ input:focus-visible {
                                 </div>
                               </a>
                               <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc982" href="/pages/product/product-catalog.html" class="dw-link-wrapper w-inline-block">
-                                <div class="interactive-icon-wrapper"><img src="/assets/images/list-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                                <div class="interactive-icon-wrapper"><img src="/assets/images/list-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                   <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc985" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                                 </div>
                                 <div class="link-text-wrapper">
@@ -704,7 +710,7 @@ input:focus-visible {
                     <div status="close" class="h-flex gap-custom-xsmall">
                       <div class="nowrapp">
                         <div class="text-size-regular text-color-primary">Solutions</div>
-                      </div><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="menu-arrow-icon-down">
+                      </div><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="menu-arrow-icon-down" decoding="async">
                     </div>
                     <div id="menu2" class="menu-trigger"></div>
                     <div class="dw-container-2 hide">
@@ -713,7 +719,7 @@ input:focus-visible {
                         <div class="spacer-small"></div>
                       </div>
                       <div class="background-dw-menu">
-                        <div class="close-menu-bth-wrapper"><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="close-menu-icon">
+                        <div class="close-menu-bth-wrapper"><img src="/assets/images/arrow-down-black.svg" loading="lazy" alt="" class="close-menu-icon" decoding="async">
                           <div class="text-size-regular text-weight-semibold">Back</div>
                           <div class="close-button"></div>
                         </div>
@@ -727,7 +733,7 @@ input:focus-visible {
                           <div class="spacer-medium-s"></div>
                           <div class="dw-menu-grid _2-1-adaptive">
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9ab" href="/pages/solutions/creators-health-fitness.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/creators-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/creators-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9ae" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -751,7 +757,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9bb" href="/pages/solutions/e-commerce-solution.html" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/online-shopping-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/online-shopping-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9be" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -786,7 +792,7 @@ input:focus-visible {
                           <div class="spacer-medium-s"></div>
                           <div class="dw-menu-grid _2-1-adaptive">
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9d3" href="/solutions/e-commerce-solution#section-social-media-shop" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/feedback-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/feedback-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9d6" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -810,7 +816,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9e3" href="/solutions/e-commerce-solution#section-messenger" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/chat-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/chat-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9e6" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -834,7 +840,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9f3" href="/solutions/e-commerce-solution#section-website" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/browser-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/browser-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbc9f6" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -858,7 +864,7 @@ input:focus-visible {
                               </div>
                             </a>
                             <a data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbca03" href="#" class="dw-link-wrapper w-inline-block">
-                              <div class="interactive-icon-wrapper"><img src="/assets/images/self-love-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                              <div class="interactive-icon-wrapper"><img src="/assets/images/self-love-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                                 <div class="lottie-animation" data-w-id="4d977f0c-54f6-4e4c-4568-e24503dbca06" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="0" data-duration="2.5"></div>
                               </div>
                               <div class="link-text-wrapper">
@@ -906,7 +912,7 @@ input:focus-visible {
                   </a>
                 </div>
                 <div data-hover="false" data-delay="0" data-ms-content="members" class="dropdown-6 w-dropdown">
-                  <div class="ms-profile-dropdown w-dropdown-toggle"><img src="/assets/images/transparent-white-profile-image.svg" alt="" data-ms-member="profile-image" class="ms-dropdown-image">
+                  <div class="ms-profile-dropdown w-dropdown-toggle"><img src="/assets/images/transparent-white-profile-image.svg" alt="" data-ms-member="profile-image" class="ms-dropdown-image" loading="lazy" decoding="async">
                     <div class="ms-dropdown-text">
                       <div class="ms-dropdown-name">
                         <div data-ms-member="first-name">First</div>
@@ -925,7 +931,7 @@ input:focus-visible {
                 </div>
               </div>
               <div class="menu-button">
-                <div class="humburger-trigger"></div><img src="/assets/images/hamburger-menu-icon.svg" loading="lazy" alt="" class="hamburger-menu-icon"><img src="/assets/images/x-close-icon.svg" loading="lazy" alt="" class="hamburger-close-menu-icon hide">
+                <div class="humburger-trigger"></div><img src="/assets/images/hamburger-menu-icon.svg" loading="lazy" alt="" class="hamburger-menu-icon" decoding="async"><img src="/assets/images/x-close-icon.svg" loading="lazy" alt="" class="hamburger-close-menu-icon hide" decoding="async">
               </div>
             </div>
           </div>
@@ -1092,7 +1098,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="grid-conteiner grid-2-adaptive_template-50-50">
               <div id="w-node-_82c6549f-6664-cca1-32b4-959cd85c9a0b-2dd28c95" class="hero-title-wrapper_template">
                 <div data-w-id="82c6549f-6664-cca1-32b4-959cd85c9a0c" class="hero-title-animation-wrapper">
-                  <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                  <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                     <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="82c6549f-6664-cca1-32b4-959cd85c9a0f" data-animation-type="lottie" data-src="/assets/animations/Pay-button.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                   </div>
                   <div class="link-text-wrapper">
@@ -1128,8 +1134,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
               </div>
               <div id="w-node-_82c6549f-6664-cca1-32b4-959cd85c9a2c-2dd28c95" class="hero-image-wrapper_template">
-                <div class="div-block-23"><img src="/assets/images/hero-image-pay-button_1.avif" loading="lazy" alt="" class="background-video-hero-section_template hide"><img src="/assets/images/hero-image-pay-button-front_1.avif" loading="lazy" style="opacity:0" data-w-id="5beb7da3-7748-343c-ccb2-ed06fabdf058" alt="" class="image-61"><img src="/assets/images/instagram-icon.svg" loading="lazy" style="opacity:0" data-w-id="3ecc7e25-357f-8b0b-4a6e-f58494975b5e" alt="" class="image-62"><img src="/assets/images/tik-tok-icon.svg" loading="lazy" style="opacity:0" data-w-id="dbe80209-69a2-9b73-3c83-7a7cfd912a0d" alt="" class="image-63"><img src="/assets/images/youtube-icon.svg" loading="lazy" style="opacity:0" data-w-id="eddb96b8-6fd8-9bc2-c48a-1ac63912817c" alt="" class="image-64">
-                  <div data-poster-url="/assets/videos/1108114_1080p_4k_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/1108114_1080p_4k_1280x720-transcode.mp4,../videos/1108114_1080p_4k_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-hero-section_template w-background-video w-background-video-atom"><video id="77e0576f-491c-55e1-4abe-2ec60a845493-video" autoplay="" loop="" style="background-image:url(&quot;../videos/1108114_1080p_4k_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+                <div class="div-block-23"><img src="/assets/images/hero-image-pay-button_1.avif" loading="lazy" alt="" class="background-video-hero-section_template hide" decoding="async"><img src="/assets/images/hero-image-pay-button-front_1.avif" loading="lazy" style="opacity:0" data-w-id="5beb7da3-7748-343c-ccb2-ed06fabdf058" alt="" class="image-61" decoding="async"><img src="/assets/images/instagram-icon.svg" loading="lazy" style="opacity:0" data-w-id="3ecc7e25-357f-8b0b-4a6e-f58494975b5e" alt="" class="image-62" decoding="async"><img src="/assets/images/tik-tok-icon.svg" loading="lazy" style="opacity:0" data-w-id="dbe80209-69a2-9b73-3c83-7a7cfd912a0d" alt="" class="image-63" decoding="async"><img src="/assets/images/youtube-icon.svg" loading="lazy" style="opacity:0" data-w-id="eddb96b8-6fd8-9bc2-c48a-1ac63912817c" alt="" class="image-64" decoding="async">
+                  <div data-poster-url="/assets/videos/1108114_1080p_4k_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/1108114_1080p_4k_1280x720-transcode.mp4,../videos/1108114_1080p_4k_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-hero-section_template w-background-video w-background-video-atom"><video id="77e0576f-491c-55e1-4abe-2ec60a845493-video" autoplay="" loop="" style="background-image:url(&quot;../videos/1108114_1080p_4k_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover" preload="none">
                       <source src="/assets/videos/1108114_1080p_4k_1280x720-transcode.mp4" data-wf-ignore="true">
                       <source src="/assets/videos/1108114_1080p_4k_1280x720-transcode.webm" data-wf-ignore="true">
                     </video></div>
@@ -1147,10 +1153,10 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="grid-conteiner grid-2-adaptive-donatino-2">
               <div id="w-node-c6f1d7bd-b5bf-8d8b-dc96-36fd60b9df04-2dd28c95" class="animation-dotation-wrapper">
                 <div class="background-container">
-                  <div data-poster-url="/assets/videos/5246009_Kid_Filming_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/5246009_Kid_Filming_1280x720-transcode.mp4,../videos/5246009_Kid_Filming_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-3 w-background-video w-background-video-atom"><video id="923b6450-cfa4-1fa6-94c5-892976f29b39-video" autoplay="" loop="" style="background-image:url(&quot;../videos/5246009_Kid_Filming_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+                  <div data-poster-url="/assets/videos/5246009_Kid_Filming_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/5246009_Kid_Filming_1280x720-transcode.mp4,../videos/5246009_Kid_Filming_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-3 w-background-video w-background-video-atom"><video id="923b6450-cfa4-1fa6-94c5-892976f29b39-video" autoplay="" loop="" style="background-image:url(&quot;../videos/5246009_Kid_Filming_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover" preload="none">
                       <source src="/assets/videos/5246009_Kid_Filming_1280x720-transcode.mp4" data-wf-ignore="true">
                       <source src="/assets/videos/5246009_Kid_Filming_1280x720-transcode.webm" data-wf-ignore="true">
-                    </video></div><img src="/assets/images/donatino-bg-image_1.avif" loading="lazy" alt="" class="donation-bg-image hide">
+                    </video></div><img src="/assets/images/donatino-bg-image_1.avif" loading="lazy" alt="" class="donation-bg-image hide" decoding="async">
                 </div>
                 <div data-w-id="c6f1d7bd-b5bf-8d8b-dc96-36fd60b9df07" class="animation-elements-container">
                   <div style="-webkit-transform:translate3d(null, -130px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, -130px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, -130px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, -130px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="donation-alerts position-1-1">
@@ -1282,7 +1288,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     </script>
-                  </div><img src="/assets/images/twich-icon.svg" loading="lazy" alt="" class="image-65"><img src="/assets/images/tik-tok-icon.svg" loading="lazy" alt="" class="image-66"><img src="/assets/images/youtube-icon.svg" loading="lazy" alt="" class="image-67">
+                  </div><img src="/assets/images/twich-icon.svg" loading="lazy" alt="" class="image-65" decoding="async"><img src="/assets/images/tik-tok-icon.svg" loading="lazy" alt="" class="image-66" decoding="async"><img src="/assets/images/youtube-icon.svg" loading="lazy" alt="" class="image-67" decoding="async">
                 </div>
               </div>
               <div id="w-node-_5b5723d6-88ad-d3c5-090c-7c761b2801bb-2dd28c95" class="section-title-wrapper_template padding-left-small">
@@ -1325,11 +1331,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div id="w-node-_82c6549f-6664-cca1-32b4-959cd85c9a8e-2dd28c95" class="section-image-wrapper">
                   <div data-w-id="99b41dff-08f0-6659-5200-56d60473097f" class="div-block-24">
-                    <div data-poster-url="/assets/videos/5944422_Dust_Clap_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/5944422_Dust_Clap_1280x720-transcode.mp4,../videos/5944422_Dust_Clap_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-2 w-background-video w-background-video-atom"><video id="d8f81997-9afc-b8ce-9165-a5c73440ae00-video" autoplay="" loop="" style="background-image:url(&quot;../videos/5944422_Dust_Clap_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+                    <div data-poster-url="/assets/videos/5944422_Dust_Clap_1280x720-poster-00001.jpg" data-video-urls="/assets/videos/5944422_Dust_Clap_1280x720-transcode.mp4,../videos/5944422_Dust_Clap_1280x720-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="background-video-2 w-background-video w-background-video-atom"><video id="d8f81997-9afc-b8ce-9165-a5c73440ae00-video" autoplay="" loop="" style="background-image:url(&quot;../videos/5944422_Dust_Clap_1280x720-poster-00001.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover" preload="none">
                         <source src="/assets/videos/5944422_Dust_Clap_1280x720-transcode.mp4" data-wf-ignore="true">
                         <source src="/assets/videos/5944422_Dust_Clap_1280x720-transcode.webm" data-wf-ignore="true">
                       </video></div>
-                    <div style="-webkit-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="div-block-25"><img src="/assets/images/price-image-1.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-68"><img src="/assets/images/price-image-2.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-69"><img src="/assets/images/price-image-3.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-70"><img src="/assets/images/subsribe-button.svg" loading="lazy" alt="" class="image-71"></div>
+                    <div style="-webkit-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(500px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="div-block-25"><img src="/assets/images/price-image-1.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-68" decoding="async"><img src="/assets/images/price-image-2.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-69" decoding="async"><img src="/assets/images/price-image-3.avif" loading="lazy" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" alt="" class="image-70" decoding="async"><img src="/assets/images/subsribe-button.svg" loading="lazy" alt="" class="image-71" decoding="async"></div>
                   </div>
                 </div>
                 <div id="w-node-_82c6549f-6664-cca1-32b4-959cd85c9a92-2dd28c95" class="section-description-wrapper_template padding-right-medium">
@@ -1381,7 +1387,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="spacer-large"></div>
                 <div class="menu-grid">
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eaba69-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba69" href="/pages/product/checkout.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/checkout-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/checkout-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba6c" data-animation-type="lottie" data-src="/assets/animations/Checkout.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="2.0166666666666666" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1400,7 +1406,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eaba75-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba75" href="/pages/product/payment-links.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/payment-link-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/payment-link-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba78" data-animation-type="lottie" data-src="/assets/animations/Biolink.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="2.5" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1419,7 +1425,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eaba81-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba81" href="/pages/product/payment-button.html" aria-current="page" class="menu-nav-link-wrapper w-inline-block w--current">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/pay-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba84" data-animation-type="lottie" data-src="/assets/animations/Pay-button.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1438,7 +1444,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eaba8d-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba8d" href="/pages/product/adpay.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/marketing-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/marketing-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba90" data-animation-type="lottie" data-src="/assets/animations/Adpay.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1457,7 +1463,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eaba99-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba99" href="/pages/product/subscriptions.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/followers-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/followers-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eaba9c" data-animation-type="lottie" data-src="/assets/animations/Subscriptions.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1476,7 +1482,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eabaa5-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eabaa5" href="/pages/product/shop-builder.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/shopping-bags-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/shopping-bags-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eabaa8" data-animation-type="lottie" data-src="/assets/animations/Store-Builder.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1495,7 +1501,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eabab1-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eabab1" href="/pages/product/dashboard.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/pie-chart-dashboard-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/pie-chart-dashboard-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eabab4" data-animation-type="lottie" data-src="/assets/animations/Dashboard.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1514,7 +1520,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                   </a>
                   <a id="w-node-_4b8dcad8-95b3-f1bd-b807-be67c5eababd-c5eaba50" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eababd" href="/pages/product/product-catalog.html" class="menu-nav-link-wrapper w-inline-block">
-                    <div class="interactive-icon-wrapper"><img src="/assets/images/list-color.svg" loading="lazy" alt="" class="icon-size-regural">
+                    <div class="interactive-icon-wrapper"><img src="/assets/images/list-color.svg" loading="lazy" alt="" class="icon-size-regural" decoding="async">
                       <div data-is-ix2-target="1" class="lottie-animation-3" data-w-id="4b8dcad8-95b3-f1bd-b807-be67c5eabac0" data-animation-type="lottie" data-src="/assets/animations/670d5ed04fe5aaecd3be04fb_Product-Catalog.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0"></div>
                     </div>
                     <div class="link-text-wrapper">
@@ -1544,11 +1550,11 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="padding-global">
         <div class="w-layout-blockcontainer container-large w-container">
           <div class="footer-main-grid">
-            <a id="w-node-_908276ab-9ee2-c323-7d2b-097bd03c1df8-d03c1df4" href="#" class="footer-logo-link min-size w-inline-block"><img src="/assets/images/logo-footer.svg" loading="lazy" alt=""></a>
+            <a id="w-node-_908276ab-9ee2-c323-7d2b-097bd03c1df8-d03c1df4" href="#" class="footer-logo-link min-size w-inline-block"><img src="/assets/images/logo-footer.svg" loading="lazy" alt="" decoding="async"></a>
             <div id="w-node-_908276ab-9ee2-c323-7d2b-097bd03c1dfa-d03c1df4" class="h-flex gap-1-5">
-              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dfb" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Facebook-icon-balck.svg" loading="lazy" alt=""></a>
-              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dfd" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Instagram-icon-black.svg" loading="lazy" alt=""></a>
-              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dff" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Twitter-icon-balck.svg" loading="lazy" alt=""></a>
+              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dfb" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Facebook-icon-balck.svg" loading="lazy" alt="" decoding="async"></a>
+              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dfd" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Instagram-icon-black.svg" loading="lazy" alt="" decoding="async"></a>
+              <a data-w-id="908276ab-9ee2-c323-7d2b-097bd03c1dff" href="#" target="_blank" class="social-link w-inline-block"><img src="/assets/images/Twitter-icon-balck.svg" loading="lazy" alt="" decoding="async"></a>
             </div>
             <div id="w-node-_908276ab-9ee2-c323-7d2b-097bd03c1e01-d03c1df4" class="footer-menu max-size-footer">
               <div class="text-weight-semibold">

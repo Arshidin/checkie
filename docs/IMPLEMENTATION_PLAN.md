@@ -9,16 +9,16 @@
 
 | Фаза | Название | Длительность | Статус |
 |------|----------|--------------|--------|
-| 0 | Project Setup | 1 день | ⬜ |
-| 1 | Foundation (Auth + Users + Stores) | 3 дня | ⬜ |
-| 2 | Pages & Configuration | 3 дня | ⬜ |
-| 3 | Checkout Session & State Machine | 3 дня | ⬜ |
-| 4 | Payments & PSP Integration | 3 дня | ⬜ |
-| 5 | Subscriptions | 2 дня | ⬜ |
-| 6 | Refunds & Payouts | 2 дня | ⬜ |
-| 7 | Webhooks System | 2 дня | ⬜ |
-| 8 | Widget API & Customer Portal | 2 дня | ⬜ |
-| 9 | Testing & Polish | 2 дня | ⬜ |
+| 0 | Project Setup | 1 день | ✅ Готово |
+| 1 | Foundation (Auth + Users + Stores) | 3 дня | ✅ Готово |
+| 2 | Pages & Configuration | 3 дня | ✅ Готово |
+| 3 | Checkout Session & State Machine | 3 дня | ✅ Готово |
+| 4 | Payments & PSP Integration | 3 дня | ✅ Готово (Stripe как заглушка) |
+| 5 | Subscriptions | 2 дня | ⬜ Не начато |
+| 6 | Refunds & Payouts | 2 дня | ⬜ Не начато |
+| 7 | Webhooks System | 2 дня | ⬜ Не начато |
+| 8 | Widget API & Customer Portal | 2 дня | ⬜ Не начато |
+| 9 | Testing & Polish | 2 дня | ⬜ Не начато |
 
 ---
 
@@ -116,11 +116,11 @@ npx prisma migrate dev --name init
 ```
 
 **Чеклист Phase 0:**
-- [ ] NestJS проект создан
-- [ ] Зависимости установлены
-- [ ] Docker Compose работает (postgres + redis)
-- [ ] Prisma schema применена
-- [ ] .env настроен
+- [x] NestJS проект создан
+- [x] Зависимости установлены
+- [x] Docker Compose работает (postgres + redis)
+- [x] Prisma schema применена
+- [x] .env настроен
 
 ---
 
@@ -227,13 +227,13 @@ npx prisma migrate dev --name init
 - `GET /api/stores/:storeId/stats`
 
 **Чеклист Phase 1:**
-- [ ] ConfigModule работает
-- [ ] PrismaService подключается к БД
-- [ ] Auth endpoints работают (register, login, refresh)
-- [ ] JWT guard защищает роуты
-- [ ] Users CRUD работает
-- [ ] Stores CRUD работает
-- [ ] StoreAccessGuard проверяет доступ к store
+- [x] ConfigModule работает
+- [x] PrismaService подключается к БД
+- [x] Auth endpoints работают (register, login, refresh)
+- [x] JWT guard защищает роуты
+- [x] Users CRUD работает
+- [x] Stores CRUD работает
+- [x] StoreAccessGuard проверяет доступ к store
 
 ---
 
@@ -323,12 +323,12 @@ async incrementConversion(pageId: string, amount: Decimal) {
 ```
 
 **Чеклист Phase 2:**
-- [ ] Pages CRUD работает
-- [ ] Variants CRUD работает
-- [ ] Custom Fields CRUD работает
-- [ ] Embeds генерируют код
-- [ ] Coupons CRUD работает
-- [ ] PageStats обновляется атомарно
+- [x] Pages CRUD работает
+- [x] Variants CRUD работает
+- [x] Custom Fields CRUD работает
+- [x] Embeds генерируют код
+- [x] Coupons CRUD работает
+- [x] PageStats обновляется атомарно
 
 ---
 
@@ -445,13 +445,13 @@ export class IdempotencyService {
 ```
 
 **Чеклист Phase 3:**
-- [ ] CheckoutSession entity создаётся
-- [ ] State machine работает
-- [ ] State сохраняется в Redis
-- [ ] Guards проверяют условия
-- [ ] Actions выполняются при переходах
-- [ ] IdempotencyKey предотвращает дубли
-- [ ] Session expiry работает
+- [x] CheckoutSession entity создаётся
+- [x] State machine работает
+- [x] State сохраняется в Redis
+- [x] Guards проверяют условия
+- [x] Actions выполняются при переходах
+- [x] IdempotencyKey предотвращает дубли
+- [x] Session expiry работает
 
 ---
 
@@ -573,13 +573,13 @@ async addTransaction(params: AddTransactionParams) {
 ```
 
 **Чеклист Phase 4:**
-- [ ] Stripe provider работает
-- [ ] PaymentIntent создаётся
-- [ ] Webhook обрабатывается
-- [ ] Payment создаётся при успехе
-- [ ] PaymentAttempt логирует попытки
-- [ ] Balance обновляется
-- [ ] 3DS redirect работает
+- [x] Stripe provider работает (STUB для разработки)
+- [x] PaymentIntent создаётся
+- [x] Webhook обрабатывается
+- [x] Payment создаётся при успехе
+- [x] PaymentAttempt логирует попытки
+- [x] Balance обновляется
+- [x] 3DS redirect работает (симуляция для сумм > $100)
 
 ---
 

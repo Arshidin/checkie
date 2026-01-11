@@ -5,6 +5,23 @@
 
 ---
 
+## 📊 Development Status
+
+| Phase | Description | Status |
+|-------|-------------|--------|
+| Phase 0 | Project Setup | ✅ Done |
+| Phase 1 | Auth + Users + Stores | ✅ Done |
+| Phase 2 | Pages & Coupons | ✅ Done |
+| Phase 3 | Checkout & State Machine | ✅ Done |
+| Phase 4 | Payments & PSP (Stripe STUB) | ✅ Done |
+| Phase 5 | Subscriptions | ⬜ Not started |
+| Phase 6 | Refunds & Payouts | ⬜ Not started |
+| Phase 7 | Webhooks System | ⬜ Not started |
+| Phase 8 | Widget & Customer Portal | ⬜ Not started |
+| Phase 9 | Testing & Polish | ⬜ Not started |
+
+---
+
 ## 🎯 Project Overview
 
 **Checkie** — hosted checkout page platform (аналог Checkout Page / Gumroad).
@@ -102,6 +119,42 @@ checkie-backend/
 ```
 
 ⭐ = Critical modules from architecture review
+
+---
+
+## 🗂 Implemented Modules
+
+### ✅ Phase 1-2: Foundation
+| Module | Path | Description |
+|--------|------|-------------|
+| Auth | `src/modules/auth/` | JWT auth, refresh tokens, register/login |
+| Users | `src/modules/users/` | User profile CRUD |
+| Stores | `src/modules/stores/` | Merchant stores CRUD, StoreAccessGuard |
+| Pages | `src/modules/pages/` | Checkout pages, variants, custom fields, embeds |
+| Coupons | `src/modules/coupons/` | Discount codes CRUD |
+| Redis | `src/modules/redis/` | Cache & session storage |
+
+### ✅ Phase 3: Checkout
+| Module | Path | Description |
+|--------|------|-------------|
+| Checkout | `src/modules/checkout/` | CheckoutSession lifecycle, XState machine |
+
+### ✅ Phase 4: Payments (STUB)
+| Module | Path | Description |
+|--------|------|-------------|
+| Providers | `src/modules/providers/` | PSP abstraction, StripeProvider (STUB) |
+| Payments | `src/modules/payments/` | Payment processing, webhook handling |
+| Balance | `src/modules/balance/` | Append-only ledger, balance transactions |
+
+### ⬜ Planned Modules
+| Module | Path | Phase |
+|--------|------|-------|
+| Subscriptions | `src/modules/subscriptions/` | Phase 5 |
+| Refunds | `src/modules/refunds/` | Phase 6 |
+| Payouts | `src/modules/payouts/` | Phase 6 |
+| Webhooks | `src/modules/webhooks/` | Phase 7 |
+| Widget | `src/modules/widget/` | Phase 8 |
+| Customers | `src/modules/customers/` | Phase 8 |
 
 ---
 
@@ -261,6 +314,35 @@ npx prisma migrate dev      # Run migrations
 npx prisma generate         # Generate client
 npx prisma studio           # DB GUI
 npm run build               # Production build
+```
+
+---
+
+## 💳 Stripe STUB Provider
+
+Для разработки без реальных Stripe ключей реализован STUB провайдер:
+
+### Особенности STUB:
+- Генерирует фейковые `pi_stub_*` и `cs_stub_*` идентификаторы
+- Симулирует 3DS для платежей > $100
+- Поддерживает тестовые webhook'и через `POST /api/webhooks/stripe/test`
+- Добавляет искусственную задержку 100-500ms для реалистичности
+
+### Переключение на реальный Stripe:
+1. Добавить в `.env`:
+   ```env
+   STRIPE_SECRET_KEY=sk_test_...
+   STRIPE_WEBHOOK_SECRET=whsec_...
+   ```
+2. Обновить `StripeProvider` для использования реального SDK
+3. Настроить webhook endpoint в Stripe Dashboard
+
+### Тестирование платежей (STUB):
+```bash
+# Симуляция успешного платежа
+curl -X POST http://localhost:3000/api/webhooks/stripe/test \
+  -H "Content-Type: application/json" \
+  -d '{"type": "payment_intent.succeeded", "paymentIntentId": "pi_test_123"}'
 ```
 
 ---

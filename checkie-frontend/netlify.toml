@@ -1,13 +1,70 @@
 [build]
   publish = "."
 
-# Редирект с корня на главную страницу
+# ===========================================
+# PERFORMANCE: Caching Headers
+# ===========================================
+
+# Static assets - cache for 1 year (immutable)
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/animations/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Videos - cache for 1 week (larger files, may change)
+[[headers]]
+  for = "/assets/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# HTML pages - no cache (always fresh)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/pages/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# ===========================================
+# REDIRECTS: Public Pages
+# ===========================================
+
 [[redirects]]
   from = "/"
   to = "/pages/public/index.html"
   status = 200
 
-# Редиректы для публичных страниц (чистые URL)
 [[redirects]]
   from = "/pricing"
   to = "/pages/public/pricing.html"
@@ -58,7 +115,10 @@
   to = "/pages/public/success-password.html"
   status = 200
 
-# Редиректы для дашборда
+# ===========================================
+# REDIRECTS: Dashboard
+# ===========================================
+
 [[redirects]]
   from = "/dashboard"
   to = "/pages/dashboard/home.html"
@@ -89,7 +149,10 @@
   to = "/pages/dashboard/help-center.html"
   status = 200
 
-# Редиректы для онбординга
+# ===========================================
+# REDIRECTS: Onboarding
+# ===========================================
+
 [[redirects]]
   from = "/onboarding/welcome"
   to = "/pages/onboarding/welcome-page.html"
@@ -120,19 +183,28 @@
   to = "/pages/onboarding/create-page.html"
   status = 200
 
-# Редиректы для продуктов
+# ===========================================
+# REDIRECTS: Product Pages
+# ===========================================
+
 [[redirects]]
   from = "/product/*"
   to = "/pages/product/:splat.html"
   status = 200
 
-# Редиректы для решений
+# ===========================================
+# REDIRECTS: Solutions
+# ===========================================
+
 [[redirects]]
   from = "/solutions/*"
   to = "/pages/solutions/:splat.html"
   status = 200
 
-# Статические файлы - пропускаем редиректы
+# ===========================================
+# REDIRECTS: Static Assets
+# ===========================================
+
 [[redirects]]
   from = "/assets/*"
   to = "/assets/:splat"
@@ -143,7 +215,10 @@
   to = "/pages/:splat"
   status = 200
 
-# Ошибки
+# ===========================================
+# REDIRECTS: Error Pages
+# ===========================================
+
 [[redirects]]
   from = "/401"
   to = "/pages/public/401.html"
