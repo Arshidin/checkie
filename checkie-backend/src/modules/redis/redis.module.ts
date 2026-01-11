@@ -21,7 +21,14 @@ const logger = new Logger('RedisModule');
         }
 
         const url = redisUrl || 'redis://localhost:6379';
-        logger.log(`Connecting to Redis...`);
+
+        // Log URL host for debugging (hide password)
+        try {
+          const parsed = new URL(url);
+          logger.log(`Connecting to Redis at ${parsed.host}...`);
+        } catch {
+          logger.log(`Connecting to Redis with URL: ${url.substring(0, 20)}...`);
+        }
 
         return new Redis(url, {
           maxRetriesPerRequest: 3,
