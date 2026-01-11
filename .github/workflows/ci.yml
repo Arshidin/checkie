@@ -154,6 +154,7 @@ jobs:
         with:
           context: ./checkie-backend
           push: false
+          load: true
           tags: checkie-backend:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
