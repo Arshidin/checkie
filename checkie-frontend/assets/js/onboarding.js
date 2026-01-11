@@ -34,12 +34,32 @@
   }
 
   function initWelcomeButton() {
-    // Find the "Get started" button and make it work
-    const getStartedBtn = document.querySelector('.submit-button');
-    if (!getStartedBtn) return;
-
     // Check if we're on welcome page
     if (!window.location.pathname.includes('welcome')) return;
+
+    // Find or create the "Get started" button
+    let getStartedBtn = document.querySelector('.submit-button');
+
+    // If button doesn't exist (Webflow CMS empty state), create one
+    if (!getStartedBtn) {
+      const wrapper = document.querySelector('.wrapper--js') || document.querySelector('.max-width-large');
+      if (wrapper) {
+        // Hide the "No items found" message
+        const emptyState = wrapper.querySelector('.w-dyn-empty');
+        if (emptyState) {
+          emptyState.style.display = 'none';
+        }
+
+        // Create new button
+        getStartedBtn = document.createElement('a');
+        getStartedBtn.href = '/pages/onboarding/set-up-store.html';
+        getStartedBtn.className = 'submit-button w-inline-block';
+        getStartedBtn.innerHTML = '<div class="text-size-regular">Get started</div>';
+        wrapper.appendChild(getStartedBtn);
+      }
+    }
+
+    if (!getStartedBtn) return;
 
     getStartedBtn.addEventListener('click', function(e) {
       e.preventDefault();
