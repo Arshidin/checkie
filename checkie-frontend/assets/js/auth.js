@@ -46,7 +46,7 @@
         await CheckieAPI.login(email, password);
 
         // Redirect to dashboard
-        window.location.href = '/dashboard';
+        window.location.href = '/pages/dashboard/home.html';
       } catch (error) {
         console.error('Login error:', error);
         showError(errorDiv, error.message || 'Invalid email or password');
@@ -101,7 +101,7 @@
         await CheckieAPI.register(email, password, firstName, lastName);
 
         // Redirect to onboarding
-        window.location.href = '/onboarding/welcome';
+        window.location.href = '/pages/onboarding/welcome-page.html';
       } catch (error) {
         console.error('Register error:', error);
         showError(errorDiv, error.message || 'Registration failed. Please try again.');
@@ -145,13 +145,13 @@
 
     if (!isAuthenticated && (isDashboardPage || isOnboardingPage)) {
       // Not logged in, trying to access protected page
-      window.location.href = '/login';
+      window.location.href = '/pages/public/login.html';
       return;
     }
 
     if (isAuthenticated && (currentPath === '/login' || currentPath === '/sign-up' || currentPath.includes('login.html') || currentPath.includes('sign-up.html'))) {
       // Already logged in, redirect to dashboard
-      window.location.href = '/dashboard';
+      window.location.href = '/pages/dashboard/home.html';
       return;
     }
 

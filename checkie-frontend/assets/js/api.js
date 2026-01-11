@@ -182,25 +182,25 @@ const CheckieAPI = (function() {
   // ============================================
 
   async function getProfile() {
-    const response = await request('/users/me');
-    const user = response.data;
+    // API returns data directly, not wrapped in {data: ...}
+    const user = await request('/users/me');
     setUser(user);
     return user;
   }
 
   async function updateProfile(data) {
-    const response = await request('/users/me', {
+    // API returns data directly, not wrapped in {data: ...}
+    const user = await request('/users/me', {
       method: 'PATCH',
       body: JSON.stringify(data),
     });
-    const user = response.data;
     setUser(user);
     return user;
   }
 
   async function getMyStores() {
-    const response = await request('/users/me/stores');
-    return response.data;
+    // API returns data directly, not wrapped in {data: ...}
+    return await request('/users/me/stores');
   }
 
   // ============================================
@@ -208,24 +208,24 @@ const CheckieAPI = (function() {
   // ============================================
 
   async function createStore(data) {
-    const response = await request('/stores', {
+    // API returns data directly, not wrapped in {data: ...}
+    return await request('/stores', {
       method: 'POST',
       body: JSON.stringify(data),
     });
-    return response.data;
   }
 
   async function getStore(storeId) {
-    const response = await request(`/stores/${storeId}`);
-    return response.data;
+    // API returns data directly, not wrapped in {data: ...}
+    return await request(`/stores/${storeId}`);
   }
 
   async function updateStore(storeId, data) {
-    const response = await request(`/stores/${storeId}`, {
+    // API returns data directly, not wrapped in {data: ...}
+    return await request(`/stores/${storeId}`, {
       method: 'PATCH',
       body: JSON.stringify(data),
     });
-    return response.data;
   }
 
   // ============================================
