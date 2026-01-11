@@ -95,16 +95,18 @@ const CheckieAPI = (function() {
   }
 
   async function handleResponse(response) {
-    const data = await response.json().catch(() => ({}));
+    const json = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      const error = new Error(data.message || 'Request failed');
+      const error = new Error(json.message || 'Request failed');
       error.status = response.status;
-      error.data = data;
+      error.data = json;
       throw error;
     }
 
-    return data;
+    // API wraps responses in {data: ..., meta: ...}
+    // Extract data if present, otherwise return as-is
+    return json.data !== undefined ? json.data : json;
   }
 
   async function refreshAccessToken() {
@@ -120,8 +122,9 @@ const CheckieAPI = (function() {
 
       if (!response.ok) return false;
 
-      const data = await response.json();
-      // API returns data directly, not wrapped in {data: ...}
+      const json = await response.json();
+      // API wraps responses in {data: ..., meta: ...}
+      const data = json.data || json;
       setTokens(data.accessToken, data.refreshToken);
       return true;
     } catch {
@@ -134,13 +137,12 @@ const CheckieAPI = (function() {
   // ============================================
 
   async function login(email, password) {
-    const response = await request('/auth/login', {
+    const data = await request('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
 
-    // API returns data directly, not wrapped in {data: ...}
-    const { accessToken, refreshToken, user } = response;
+    const { accessToken, refreshToken, user } = data;
     setTokens(accessToken, refreshToken);
     setUser(user);
 
@@ -148,13 +150,12 @@ const CheckieAPI = (function() {
   }
 
   async function register(email, password, firstName, lastName) {
-    const response = await request('/auth/register', {
+    const data = await request('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ email, password, firstName, lastName }),
     });
 
-    // API returns data directly, not wrapped in {data: ...}
-    const { accessToken, refreshToken, user } = response;
+    const { accessToken, refreshToken, user } = data;
     setTokens(accessToken, refreshToken);
     setUser(user);
 
@@ -182,14 +183,12 @@ const CheckieAPI = (function() {
   // ============================================
 
   async function getProfile() {
-    // API returns data directly, not wrapped in {data: ...}
     const user = await request('/users/me');
     setUser(user);
     return user;
   }
 
   async function updateProfile(data) {
-    // API returns data directly, not wrapped in {data: ...}
     const user = await request('/users/me', {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -199,7 +198,6 @@ const CheckieAPI = (function() {
   }
 
   async function getMyStores() {
-    // API returns data directly, not wrapped in {data: ...}
     return await request('/users/me/stores');
   }
 
@@ -207,24 +205,21 @@ const CheckieAPI = (function() {
   // Store API
   // ============================================
 
-  async function createStore(data) {
-    // API returns data directly, not wrapped in {data: ...}
+  async function createStore(storeData) {
     return await request('/stores', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(storeData),
     });
   }
 
   async function getStore(storeId) {
-    // API returns data directly, not wrapped in {data: ...}
     return await request(`/stores/${storeId}`);
   }
 
-  async function updateStore(storeId, data) {
-    // API returns data directly, not wrapped in {data: ...}
+  async function updateStore(storeId, storeData) {
     return await request(`/stores/${storeId}`, {
       method: 'PATCH',
-      body: JSON.stringify(data),
+      body: JSON.stringify(storeData),
     });
   }
 
