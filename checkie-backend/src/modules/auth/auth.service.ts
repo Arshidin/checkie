@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { UserStatus } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
 import { RegisterDto, LoginDto, AuthResponseDto, TokenResponseDto } from './dto';
@@ -45,7 +46,7 @@ export class AuthService {
         passwordHash: hashedPassword,
         firstName: dto.firstName,
         lastName: dto.lastName,
-        status: 'ACTIVE',
+        status: UserStatus.ACTIVE,
       },
     });
 
@@ -74,7 +75,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    if (user.status !== 'ACTIVE') {
+    if (user.status !== UserStatus.ACTIVE) {
       throw new UnauthorizedException('Account is not active');
     }
 
@@ -121,7 +122,7 @@ export class AuthService {
       where: { id: userId },
     });
 
-    if (!user || user.status !== 'ACTIVE') {
+    if (!user || user.status !== UserStatus.ACTIVE) {
       throw new UnauthorizedException('User not found or inactive');
     }
 
