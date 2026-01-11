@@ -121,7 +121,8 @@ const CheckieAPI = (function() {
       if (!response.ok) return false;
 
       const data = await response.json();
-      setTokens(data.data.accessToken, data.data.refreshToken);
+      // API returns data directly, not wrapped in {data: ...}
+      setTokens(data.accessToken, data.refreshToken);
       return true;
     } catch {
       return false;
@@ -138,7 +139,8 @@ const CheckieAPI = (function() {
       body: JSON.stringify({ email, password }),
     });
 
-    const { accessToken, refreshToken, user } = response.data;
+    // API returns data directly, not wrapped in {data: ...}
+    const { accessToken, refreshToken, user } = response;
     setTokens(accessToken, refreshToken);
     setUser(user);
 
@@ -151,7 +153,8 @@ const CheckieAPI = (function() {
       body: JSON.stringify({ email, password, firstName, lastName }),
     });
 
-    const { accessToken, refreshToken, user } = response.data;
+    // API returns data directly, not wrapped in {data: ...}
+    const { accessToken, refreshToken, user } = response;
     setTokens(accessToken, refreshToken);
     setUser(user);
 
