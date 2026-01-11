@@ -1,9 +1,11 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Module, Logger } from '@nestjs/common';
 import Redis from 'ioredis';
 import { RedisService } from './redis.service';
 import { REDIS_CLIENT } from './redis.constants';
 
 export { REDIS_CLIENT };
+
+const logger = new Logger('RedisModule');
 
 @Global()
 @Module({
@@ -11,8 +13,17 @@ export { REDIS_CLIENT };
     {
       provide: REDIS_CLIENT,
       useFactory: () => {
-        const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
-        return new Redis(redisUrl, {
+        const redisUrl = process.env.REDIS_URL;
+        logger.log(`REDIS_URL env: ${redisUrl ? 'set' : 'not set'}`);
+
+        if (!redisUrl) {
+          logger.warn('REDIS_URL not set, using localhost fallback');
+        }
+
+        const url = redisUrl || 'redis://localhost:6379';
+        logger.log(`Connecting to Redis...`);
+
+        return new Redis(url, {
           maxRetriesPerRequest: 3,
           lazyConnect: true,
         });
