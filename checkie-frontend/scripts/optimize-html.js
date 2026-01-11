@@ -3,10 +3,13 @@
  * HTML Optimization Script for Checkie Frontend
  *
  * This script optimizes HTML files exported from Webflow:
- * 1. Adds defer/async to blocking scripts
+ * 1. Adds defer to jQuery (safe - loaded before webflow.js)
  * 2. Adds loading="lazy" to images
  * 3. Adds preload="none" to videos
  * 4. Adds preconnect hints for external resources
+ *
+ * IMPORTANT: Does NOT modify memberstack.js or webfont.js
+ * as they are critical for Webflow functionality.
  *
  * Run: node scripts/optimize-html.js
  */
@@ -16,19 +19,15 @@ const path = require('path');
 
 const PAGES_DIR = path.join(__dirname, '..', 'pages');
 
-// Scripts that should be deferred (not block rendering)
+// Only jQuery is safe to defer - it's loaded before webflow.js at the end of body
 const DEFER_SCRIPTS = [
   'jquery-3.6.0.min.js',
-  'memberstack.js',
-  'owl.carousel.min.js',
-  'jquery.counterup',
 ];
 
-// Scripts that should be async
-const ASYNC_SCRIPTS = [
-  'webfont.js',
-  'jetboost.js',
-];
+// DO NOT add defer/async to these - they break Webflow functionality:
+// - memberstack.js (auth critical)
+// - webfont.js (needs sync call to WebFont.load())
+// - jetboost.js (already loads async via inline script)
 
 function getAllHtmlFiles(dir, files = []) {
   const items = fs.readdirSync(dir);
@@ -51,7 +50,7 @@ function optimizeHtml(filePath) {
   let html = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
-  // 1. Add defer to jQuery and other blocking scripts
+  // 1. Add defer to jQuery only
   for (const script of DEFER_SCRIPTS) {
     const regex = new RegExp(`<script([^>]*src="[^"]*${script}"[^>]*)>`, 'gi');
     const newHtml = html.replace(regex, (match, attrs) => {
@@ -64,35 +63,17 @@ function optimizeHtml(filePath) {
     html = newHtml;
   }
 
-  // 2. Add async to webfont and similar scripts
-  for (const script of ASYNC_SCRIPTS) {
-    const regex = new RegExp(`<script([^>]*src="[^"]*${script}"[^>]*)>`, 'gi');
-    const newHtml = html.replace(regex, (match, attrs) => {
-      if (!attrs.includes('defer') && !attrs.includes('async')) {
-        modified = true;
-        return `<script${attrs} async>`;
-      }
-      return match;
-    });
-    html = newHtml;
-  }
-
-  // 3. Add loading="lazy" to images that don't have it
-  // Skip images with loading="eager" or already lazy
+  // 2. Add loading="lazy" to images that don't have it
   const imgRegex = /<img([^>]*)>/gi;
   html = html.replace(imgRegex, (match, attrs) => {
     if (!attrs.includes('loading=') && !attrs.includes('data-src')) {
-      // Check if this is a critical above-fold image (hero, logo)
-      if (attrs.includes('hero') || attrs.includes('logo') || attrs.includes('navbar')) {
-        return match; // Keep eager loading for critical images
-      }
       modified = true;
       return `<img${attrs} loading="lazy">`;
     }
     return match;
   });
 
-  // 4. Add decoding="async" to images
+  // 3. Add decoding="async" to images
   html = html.replace(/<img([^>]*)>/gi, (match, attrs) => {
     if (!attrs.includes('decoding=')) {
       modified = true;
@@ -101,7 +82,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 5. Add preload="none" to background videos
+  // 4. Add preload="none" to background videos
   const videoRegex = /<video([^>]*)>/gi;
   html = html.replace(videoRegex, (match, attrs) => {
     if (!attrs.includes('preload=')) {
@@ -111,7 +92,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 6. Add preconnect hints if not present
+  // 5. Add preconnect hints if not present
   if (!html.includes('dns-prefetch')) {
     const preconnectHints = `
   <!-- Performance: DNS Prefetch & Preconnect -->
@@ -121,7 +102,6 @@ function optimizeHtml(filePath) {
   <link rel="dns-prefetch" href="https://cdn.jetboost.io">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">`;
 
-    // Insert after <head> or after charset meta
     const insertPoint = html.indexOf('<meta charset="utf-8">');
     if (insertPoint !== -1) {
       const insertAfter = html.indexOf('>', insertPoint) + 1;
