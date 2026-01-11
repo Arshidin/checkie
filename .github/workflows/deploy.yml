@@ -1,8 +1,8 @@
 name: Deploy
 
+# Railway auto-deploys from GitHub integration, so we disable automatic trigger
+# Use workflow_dispatch for manual deployments if needed
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
