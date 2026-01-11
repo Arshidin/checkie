@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Query,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param, Query, Body, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { StoreAccessGuard } from '../../common/guards/store-access.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
@@ -45,10 +37,7 @@ export class RefundsController {
 
   @Get('refunds/:refundId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
-  async getRefund(
-    @Param('storeId') storeId: string,
-    @Param('refundId') refundId: string,
-  ) {
+  async getRefund(@Param('storeId') storeId: string, @Param('refundId') refundId: string) {
     return this.refundsService.findById(refundId, storeId);
   }
 

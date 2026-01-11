@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Query,
-  Body,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param, Query, Body, Delete, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { StoreAccessGuard } from '../../common/guards/store-access.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
@@ -43,19 +34,13 @@ export class PayoutsController {
 
   @Get(':payoutId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
-  async getPayout(
-    @Param('storeId') storeId: string,
-    @Param('payoutId') payoutId: string,
-  ) {
+  async getPayout(@Param('storeId') storeId: string, @Param('payoutId') payoutId: string) {
     return this.payoutsService.findById(payoutId, storeId);
   }
 
   @Post()
   @Roles(StoreUserRole.OWNER)
-  async createPayout(
-    @Param('storeId') storeId: string,
-    @Body() dto: CreatePayoutDto,
-  ) {
+  async createPayout(@Param('storeId') storeId: string, @Body() dto: CreatePayoutDto) {
     return this.payoutsService.createPayout({
       storeId,
       amount: dto.amount,
@@ -67,10 +52,7 @@ export class PayoutsController {
 
   @Delete(':payoutId')
   @Roles(StoreUserRole.OWNER)
-  async cancelPayout(
-    @Param('storeId') storeId: string,
-    @Param('payoutId') payoutId: string,
-  ) {
+  async cancelPayout(@Param('storeId') storeId: string, @Param('payoutId') payoutId: string) {
     return this.payoutsService.cancelPayout(payoutId, storeId);
   }
 }

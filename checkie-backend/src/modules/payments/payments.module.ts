@@ -7,11 +7,7 @@ import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 import { WebhooksModule } from '../webhooks/webhooks.module';
 
 @Module({
-  imports: [
-    PrismaModule,
-    forwardRef(() => SubscriptionsModule),
-    forwardRef(() => WebhooksModule),
-  ],
+  imports: [PrismaModule, forwardRef(() => SubscriptionsModule), forwardRef(() => WebhooksModule)],
   controllers: [PaymentsController, PspWebhookController],
   providers: [PaymentsService],
   exports: [PaymentsService],

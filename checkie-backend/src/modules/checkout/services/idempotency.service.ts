@@ -42,9 +42,7 @@ export class IdempotencyService {
 
     if (cached) {
       if (cached.requestHash !== requestHash) {
-        throw new ConflictException(
-          'Idempotency key already used with different request body',
-        );
+        throw new ConflictException('Idempotency key already used with different request body');
       }
       return {
         isNew: false,
@@ -62,9 +60,7 @@ export class IdempotencyService {
 
     if (existing) {
       if (existing.requestHash !== requestHash) {
-        throw new ConflictException(
-          'Idempotency key already used with different request body',
-        );
+        throw new ConflictException('Idempotency key already used with different request body');
       }
 
       // Cache in Redis for future requests
@@ -112,9 +108,7 @@ export class IdempotencyService {
         });
 
         if (existing && existing.requestHash !== requestHash) {
-          throw new ConflictException(
-            'Idempotency key already used with different request body',
-          );
+          throw new ConflictException('Idempotency key already used with different request body');
         }
 
         if (existing?.responseStatus) {
@@ -133,11 +127,7 @@ export class IdempotencyService {
     return { isNew: true };
   }
 
-  async setResponse(
-    key: string,
-    status: number,
-    body: any,
-  ): Promise<void> {
+  async setResponse(key: string, status: number, body: any): Promise<void> {
     const redisKey = `${this.REDIS_PREFIX}${key}`;
 
     // Update database
@@ -166,11 +156,13 @@ export class IdempotencyService {
   async invalidate(key: string): Promise<void> {
     const redisKey = `${this.REDIS_PREFIX}${key}`;
     await this.redis.del(redisKey);
-    await this.prisma.idempotencyKey.delete({
-      where: { key },
-    }).catch(() => {
-      // Ignore if not found
-    });
+    await this.prisma.idempotencyKey
+      .delete({
+        where: { key },
+      })
+      .catch(() => {
+        // Ignore if not found
+      });
   }
 
   async cleanupExpired(): Promise<number> {

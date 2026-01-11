@@ -9,12 +9,7 @@ import { ProvidersModule } from '../providers/providers.module';
 import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 
 @Module({
-  imports: [
-    PrismaModule,
-    RedisModule,
-    ProvidersModule,
-    forwardRef(() => SubscriptionsModule),
-  ],
+  imports: [PrismaModule, RedisModule, ProvidersModule, forwardRef(() => SubscriptionsModule)],
   controllers: [CheckoutController],
   providers: [CheckoutService, CheckoutSessionService, IdempotencyService],
   exports: [CheckoutService, CheckoutSessionService, IdempotencyService],

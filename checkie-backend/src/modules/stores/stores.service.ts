@@ -15,8 +15,7 @@ export class StoresService {
 
   async create(userId: string, dto: CreateStoreDto) {
     // Generate slug if not provided
-    const slug =
-      dto.slug || slugify(dto.name, { lower: true, strict: true });
+    const slug = dto.slug || slugify(dto.name, { lower: true, strict: true });
 
     // Check if slug is taken
     const existingStore = await this.prisma.store.findUnique({
@@ -188,11 +187,7 @@ export class StoresService {
     return { message: 'Member removed successfully' };
   }
 
-  async updateMemberRole(
-    storeId: string,
-    memberId: string,
-    role: StoreUserRole,
-  ) {
+  async updateMemberRole(storeId: string, memberId: string, role: StoreUserRole) {
     const member = await this.prisma.storeUser.findUnique({
       where: {
         storeId_userId: {

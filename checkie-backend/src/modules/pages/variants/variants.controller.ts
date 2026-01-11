@@ -1,19 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
-  Body,
-  Param,
-  UseGuards,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StoreUserRole } from '@prisma/client';
 import { VariantsService } from './variants.service';
 import {
@@ -38,10 +24,7 @@ export class VariantsController {
   @Post()
   @ApiOperation({ summary: 'Create a new variant for a page' })
   @ApiResponse({ status: 201, description: 'Variant created' })
-  async create(
-    @Param('pageId') pageId: string,
-    @Body() dto: CreateVariantDto,
-  ) {
+  async create(@Param('pageId') pageId: string, @Body() dto: CreateVariantDto) {
     return this.variantsService.create(pageId, dto);
   }
 
@@ -55,10 +38,7 @@ export class VariantsController {
   @Get(':variantId')
   @ApiOperation({ summary: 'Get variant by ID' })
   @ApiResponse({ status: 200, description: 'Variant details' })
-  async findById(
-    @Param('pageId') pageId: string,
-    @Param('variantId') variantId: string,
-  ) {
+  async findById(@Param('pageId') pageId: string, @Param('variantId') variantId: string) {
     return this.variantsService.findById(pageId, variantId);
   }
 
@@ -76,20 +56,14 @@ export class VariantsController {
   @Delete(':variantId')
   @ApiOperation({ summary: 'Delete a variant' })
   @ApiResponse({ status: 200, description: 'Variant deleted' })
-  async delete(
-    @Param('pageId') pageId: string,
-    @Param('variantId') variantId: string,
-  ) {
+  async delete(@Param('pageId') pageId: string, @Param('variantId') variantId: string) {
     return this.variantsService.delete(pageId, variantId);
   }
 
   @Patch('reorder')
   @ApiOperation({ summary: 'Reorder variants' })
   @ApiResponse({ status: 200, description: 'Variants reordered' })
-  async reorder(
-    @Param('pageId') pageId: string,
-    @Body('variantIds') variantIds: string[],
-  ) {
+  async reorder(@Param('pageId') pageId: string, @Body('variantIds') variantIds: string[]) {
     return this.variantsService.reorder(pageId, variantIds);
   }
 
@@ -100,20 +74,14 @@ export class VariantsController {
   @Post(':variantId/options')
   @ApiOperation({ summary: 'Create a new option for a variant' })
   @ApiResponse({ status: 201, description: 'Option created' })
-  async createOption(
-    @Param('variantId') variantId: string,
-    @Body() dto: CreateVariantOptionDto,
-  ) {
+  async createOption(@Param('variantId') variantId: string, @Body() dto: CreateVariantOptionDto) {
     return this.variantsService.createOption(variantId, dto);
   }
 
   @Patch('options/:optionId')
   @ApiOperation({ summary: 'Update an option' })
   @ApiResponse({ status: 200, description: 'Option updated' })
-  async updateOption(
-    @Param('optionId') optionId: string,
-    @Body() dto: UpdateVariantOptionDto,
-  ) {
+  async updateOption(@Param('optionId') optionId: string, @Body() dto: UpdateVariantOptionDto) {
     return this.variantsService.updateOption(optionId, dto);
   }
 

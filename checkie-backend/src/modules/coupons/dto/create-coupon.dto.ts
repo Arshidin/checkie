@@ -10,7 +10,6 @@ import {
   MinLength,
   MaxLength,
   Min,
-  Max,
   Matches,
 } from 'class-validator';
 import { Type } from 'class-transformer';

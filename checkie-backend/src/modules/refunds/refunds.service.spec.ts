@@ -13,7 +13,7 @@ import {
   createMockRefund,
 } from '../../test/mocks';
 import { Decimal } from '@prisma/client/runtime/library';
-import { RefundReason, Currency } from '@prisma/client';
+import { RefundReason } from '@prisma/client';
 
 describe('RefundsService', () => {
   let service: RefundsService;
@@ -286,9 +286,9 @@ describe('RefundsService', () => {
     it('should throw NotFoundException for non-existent refund', async () => {
       (prisma.refund.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -305,9 +305,9 @@ describe('RefundsService', () => {
     it('should throw NotFoundException for non-existent payment', async () => {
       (prisma.payment.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findByPayment('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findByPayment('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  Req,
-  Headers,
-  HttpCode,
-  Logger,
-  RawBodyRequest,
-} from '@nestjs/common';
+import { Controller, Post, Req, Headers, HttpCode, Logger, RawBodyRequest } from '@nestjs/common';
 import { Request } from 'express';
 import { Public } from '../../../common/decorators/public.decorator';
 import { StripeProvider } from '../../providers/stripe/stripe.provider';
@@ -75,44 +67,27 @@ export class PspWebhookController {
 
     // Payment intent events
     if (eventType.startsWith('payment_intent.')) {
-      await this.paymentsService.handleWebhookEvent(
-        'stripe',
-        eventType,
-        data,
-        metadata,
-      );
+      await this.paymentsService.handleWebhookEvent('stripe', eventType, data, metadata);
       return;
     }
 
     this.logger.debug(`Unhandled webhook event type: ${eventType}`);
   }
 
-  private async handleSubscriptionEvent(
-    eventType: string,
-    data: any,
-  ): Promise<void> {
+  private async handleSubscriptionEvent(eventType: string, data: any): Promise<void> {
     const subscriptionId = data.id;
 
     switch (eventType) {
       case 'customer.subscription.created':
-        await this.subscriptionsService.handleSubscriptionCreated(
-          subscriptionId,
-          data,
-        );
+        await this.subscriptionsService.handleSubscriptionCreated(subscriptionId, data);
         break;
 
       case 'customer.subscription.updated':
-        await this.subscriptionsService.handleSubscriptionUpdated(
-          subscriptionId,
-          data,
-        );
+        await this.subscriptionsService.handleSubscriptionUpdated(subscriptionId, data);
         break;
 
       case 'customer.subscription.deleted':
-        await this.subscriptionsService.handleSubscriptionDeleted(
-          subscriptionId,
-          data,
-        );
+        await this.subscriptionsService.handleSubscriptionDeleted(subscriptionId, data);
         break;
 
       default:
@@ -120,25 +95,16 @@ export class PspWebhookController {
     }
   }
 
-  private async handleInvoiceEvent(
-    eventType: string,
-    data: any,
-  ): Promise<void> {
+  private async handleInvoiceEvent(eventType: string, data: any): Promise<void> {
     const invoiceId = data.id;
 
     switch (eventType) {
       case 'invoice.payment_succeeded':
-        await this.subscriptionsService.handleInvoicePaymentSucceeded(
-          invoiceId,
-          data,
-        );
+        await this.subscriptionsService.handleInvoicePaymentSucceeded(invoiceId, data);
         break;
 
       case 'invoice.payment_failed':
-        await this.subscriptionsService.handleInvoicePaymentFailed(
-          invoiceId,
-          data,
-        );
+        await this.subscriptionsService.handleInvoicePaymentFailed(invoiceId, data);
         break;
 
       default:
@@ -152,9 +118,7 @@ export class PspWebhookController {
   @Post('stripe/test')
   @Public()
   @HttpCode(200)
-  async simulateStripeWebhook(
-    @Req() req: Request,
-  ) {
+  async simulateStripeWebhook(@Req() req: Request) {
     const { type, paymentIntentId, metadata, status } = req.body;
 
     this.logger.log(`[TEST] Simulating webhook: ${type}`);
@@ -177,9 +141,7 @@ export class PspWebhookController {
   @Post('stripe/test/subscription')
   @Public()
   @HttpCode(200)
-  async simulateSubscriptionWebhook(
-    @Req() req: Request,
-  ) {
+  async simulateSubscriptionWebhook(@Req() req: Request) {
     const { type, subscriptionId, metadata, status } = req.body;
 
     this.logger.log(`[TEST] Simulating subscription webhook: ${type}`);
@@ -202,9 +164,7 @@ export class PspWebhookController {
   @Post('stripe/test/invoice')
   @Public()
   @HttpCode(200)
-  async simulateInvoiceWebhook(
-    @Req() req: Request,
-  ) {
+  async simulateInvoiceWebhook(@Req() req: Request) {
     const { type, subscriptionId, metadata, status } = req.body;
 
     this.logger.log(`[TEST] Simulating invoice webhook: ${type}`);

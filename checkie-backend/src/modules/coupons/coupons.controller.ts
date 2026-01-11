@@ -9,13 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { StoreUserRole } from '@prisma/client';
 import { CouponsService } from './coupons.service';
 import { CreateCouponDto, UpdateCouponDto, ValidateCouponDto } from './dto';
@@ -37,10 +31,7 @@ export class CouponsController {
   @ApiOperation({ summary: 'Create a new coupon' })
   @ApiResponse({ status: 201, description: 'Coupon created' })
   @ApiResponse({ status: 409, description: 'Coupon code already exists' })
-  async create(
-    @Param('storeId') storeId: string,
-    @Body() dto: CreateCouponDto,
-  ) {
+  async create(@Param('storeId') storeId: string, @Body() dto: CreateCouponDto) {
     return this.couponsService.create(storeId, dto);
   }
 
@@ -52,20 +43,14 @@ export class CouponsController {
     @Param('storeId') storeId: string,
     @Query('includeInactive') includeInactive?: string,
   ) {
-    return this.couponsService.findAllByStore(
-      storeId,
-      includeInactive === 'true',
-    );
+    return this.couponsService.findAllByStore(storeId, includeInactive === 'true');
   }
 
   @Get(':couponId')
   @ApiOperation({ summary: 'Get coupon by ID' })
   @ApiResponse({ status: 200, description: 'Coupon details' })
   @ApiResponse({ status: 404, description: 'Coupon not found' })
-  async findById(
-    @Param('storeId') storeId: string,
-    @Param('couponId') couponId: string,
-  ) {
+  async findById(@Param('storeId') storeId: string, @Param('couponId') couponId: string) {
     return this.couponsService.findById(storeId, couponId);
   }
 
@@ -89,20 +74,14 @@ export class CouponsController {
   @ApiOperation({ summary: 'Delete (deactivate) a coupon' })
   @ApiResponse({ status: 200, description: 'Coupon deactivated' })
   @ApiResponse({ status: 404, description: 'Coupon not found' })
-  async delete(
-    @Param('storeId') storeId: string,
-    @Param('couponId') couponId: string,
-  ) {
+  async delete(@Param('storeId') storeId: string, @Param('couponId') couponId: string) {
     return this.couponsService.delete(storeId, couponId);
   }
 
   @Post('validate')
   @ApiOperation({ summary: 'Validate a coupon code' })
   @ApiResponse({ status: 200, description: 'Validation result' })
-  async validate(
-    @Param('storeId') storeId: string,
-    @Body() dto: ValidateCouponDto,
-  ) {
+  async validate(@Param('storeId') storeId: string, @Body() dto: ValidateCouponDto) {
     return this.couponsService.validateCoupon(storeId, dto);
   }
 }

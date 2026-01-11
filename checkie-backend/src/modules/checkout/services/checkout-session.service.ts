@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { RedisService } from '../../redis/redis.service';
 import { ConfigService } from '@nestjs/config';
@@ -80,9 +75,9 @@ export class CheckoutSessionService {
     // Apply variant price modifiers
     if (params.selectedVariants) {
       for (const [variantId, optionId] of Object.entries(params.selectedVariants)) {
-        const variant = page.variants.find(v => v.id === variantId);
+        const variant = page.variants.find((v) => v.id === variantId);
         if (variant) {
-          const option = variant.options.find(o => o.id === optionId);
+          const option = variant.options.find((o) => o.id === optionId);
           if (option?.priceModifier) {
             amount += Number(option.priceModifier);
           }
@@ -95,18 +90,18 @@ export class CheckoutSessionService {
       price: page.price ? Number(page.price) : null,
       pricingType: page.pricingType,
       currency: page.currency,
-      variants: page.variants.map(v => ({
+      variants: page.variants.map((v) => ({
         id: v.id,
         name: v.name,
         isRequired: v.isRequired,
-        options: v.options.map(o => ({
+        options: v.options.map((o) => ({
           id: o.id,
           name: o.name,
           priceModifier: o.priceModifier ? Number(o.priceModifier) : null,
           isDefault: o.isDefault,
         })),
       })),
-      customFields: page.customFields.map(f => ({
+      customFields: page.customFields.map((f) => ({
         id: f.id,
         name: f.name,
         label: f.label,
@@ -147,13 +142,11 @@ export class CheckoutSessionService {
 
     // Create custom field values if provided
     if (params.customFieldValues) {
-      const fieldValueData = Object.entries(params.customFieldValues).map(
-        ([fieldId, value]) => ({
-          customFieldId: fieldId,
-          checkoutSessionId: session.id,
-          value: String(value),
-        }),
-      );
+      const fieldValueData = Object.entries(params.customFieldValues).map(([fieldId, value]) => ({
+        customFieldId: fieldId,
+        checkoutSessionId: session.id,
+        value: String(value),
+      }));
 
       if (fieldValueData.length > 0) {
         await this.prisma.customFieldValue.createMany({
@@ -297,8 +290,8 @@ export class CheckoutSessionService {
     const storedState = await this.loadState(sessionId);
 
     // Get current state and context
-    let currentState = storedState?.value || 'open';
-    let currentContext = storedState?.context || await this.getDefaultContext(sessionId);
+    const currentState = storedState?.value || 'open';
+    const currentContext = storedState?.context || (await this.getDefaultContext(sessionId));
 
     // Process event based on current state (simplified state machine logic)
     const { newState, newContext } = this.processEvent(
@@ -315,9 +308,7 @@ export class CheckoutSessionService {
       await this.syncDatabaseStatus(sessionId, newState, newContext);
     }
 
-    this.logger.debug(
-      `Session ${sessionId}: ${event.type} -> ${newState}`,
-    );
+    this.logger.debug(`Session ${sessionId}: ${event.type} -> ${newState}`);
 
     return { state: newState, context: newContext };
   }
@@ -468,11 +459,7 @@ export class CheckoutSessionService {
     };
   }
 
-  async handleWebhookEvent(
-    provider: string,
-    eventType: string,
-    payload: any,
-  ): Promise<void> {
+  async handleWebhookEvent(provider: string, eventType: string, payload: any): Promise<void> {
     const sessionId = payload.metadata?.checkoutSessionId;
     if (!sessionId) {
       this.logger.warn('Webhook missing checkoutSessionId in metadata');
@@ -584,7 +571,7 @@ export class CheckoutSessionService {
       discountAmount: Number(session.discountAmount),
       paymentId: session.paymentId,
       attempts:
-        session.paymentAttempts?.map(a => ({
+        session.paymentAttempts?.map((a) => ({
           id: a.id,
           attemptNumber: a.attemptNumber,
           status: a.status,
@@ -618,8 +605,7 @@ export class CheckoutSessionService {
           return {
             type: 'PAYMENT_FAILED',
             failureCode: payload.last_payment_error?.code || 'unknown',
-            failureMessage:
-              payload.last_payment_error?.message || 'Payment failed',
+            failureMessage: payload.last_payment_error?.message || 'Payment failed',
           };
 
         case 'payment_intent.requires_action':

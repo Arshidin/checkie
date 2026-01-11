@@ -9,11 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as crypto from 'crypto';
-import {
-  RequestPortalAccessDto,
-  VerifyPortalTokenDto,
-  PortalSessionResponseDto,
-} from './dto';
+import { RequestPortalAccessDto, VerifyPortalTokenDto, PortalSessionResponseDto } from './dto';
 
 @Injectable()
 export class CustomerPortalService {
@@ -36,7 +32,9 @@ export class CustomerPortalService {
 
     if (!store || !store.isActive) {
       // Don't reveal if store exists
-      return { message: 'If an account exists, you will receive an email with login instructions.' };
+      return {
+        message: 'If an account exists, you will receive an email with login instructions.',
+      };
     }
 
     // Find customer
@@ -49,7 +47,9 @@ export class CustomerPortalService {
 
     if (!customer) {
       // Don't reveal if customer exists
-      return { message: 'If an account exists, you will receive an email with login instructions.' };
+      return {
+        message: 'If an account exists, you will receive an email with login instructions.',
+      };
     }
 
     // Generate secure token
@@ -293,7 +293,9 @@ export class CustomerPortalService {
       },
     });
 
-    this.logger.log(`Subscription ${subscriptionId} marked for cancellation by customer ${customerId}`);
+    this.logger.log(
+      `Subscription ${subscriptionId} marked for cancellation by customer ${customerId}`,
+    );
 
     return {
       id: updated.id,

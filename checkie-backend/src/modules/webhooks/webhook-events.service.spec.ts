@@ -76,10 +76,7 @@ describe('WebhookEventsService', () => {
         createParams.storeId,
         createParams.type,
       );
-      expect(deliveryService.scheduleDelivery).toHaveBeenCalledWith(
-        mockEvent.id,
-        mockEndpoint.id,
-      );
+      expect(deliveryService.scheduleDelivery).toHaveBeenCalledWith(mockEvent.id, mockEndpoint.id);
       expect(result).toEqual(mockEvent);
     });
 
@@ -255,19 +252,16 @@ describe('WebhookEventsService', () => {
     it('should create subscription event', async () => {
       (prisma.webhookEvent.create as jest.Mock).mockResolvedValue(mockEvent);
 
-      await service.triggerSubscriptionEvent(
-        WebhookEventType.SUBSCRIPTION_CREATED,
-        {
-          id: 'subscription-123',
-          storeId: 'store-123',
-          customerId: 'customer-123',
-          pageId: 'page-123',
-          status: 'ACTIVE',
-          amount: 29.99,
-          currency: 'USD',
-          interval: 'MONTHLY',
-        },
-      );
+      await service.triggerSubscriptionEvent(WebhookEventType.SUBSCRIPTION_CREATED, {
+        id: 'subscription-123',
+        storeId: 'store-123',
+        customerId: 'customer-123',
+        pageId: 'page-123',
+        status: 'ACTIVE',
+        amount: 29.99,
+        currency: 'USD',
+        interval: 'MONTHLY',
+      });
 
       expect(prisma.webhookEvent.create).toHaveBeenCalledWith({
         data: expect.objectContaining({

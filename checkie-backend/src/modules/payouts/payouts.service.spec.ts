@@ -4,11 +4,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { PayoutsService, CreatePayoutParams } from './payouts.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { BalanceService } from '../balance/balance.service';
-import {
-  createMockPrismaService,
-  createMockConfigService,
-  createMockPayout,
-} from '../../test/mocks';
+import { createMockPrismaService, createMockPayout } from '../../test/mocks';
 import { Decimal } from '@prisma/client/runtime/library';
 import { PayoutMethod, PayoutStatus, Currency } from '@prisma/client';
 
@@ -104,15 +100,15 @@ describe('PayoutsService', () => {
         balance: new Decimal(100),
       });
 
-      await expect(
-        service.createPayout({ ...createParams, amount: 500 }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.createPayout({ ...createParams, amount: 500 })).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw BadRequestException for amount below minimum', async () => {
-      await expect(
-        service.createPayout({ ...createParams, amount: 5 }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.createPayout({ ...createParams, amount: 5 })).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw BadRequestException if pending payout exists', async () => {
@@ -121,9 +117,7 @@ describe('PayoutsService', () => {
         status: 'PENDING',
       });
 
-      await expect(service.createPayout(createParams)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(service.createPayout(createParams)).rejects.toThrow(BadRequestException);
     });
 
     it('should encrypt destination data', async () => {
@@ -167,9 +161,7 @@ describe('PayoutsService', () => {
     it('should throw NotFoundException for non-existent payout', async () => {
       (prisma.payout.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.processPayout('non-existent')).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.processPayout('non-existent')).rejects.toThrow(NotFoundException);
     });
 
     it('should throw BadRequestException for non-pending payout', async () => {
@@ -178,9 +170,7 @@ describe('PayoutsService', () => {
         status: 'COMPLETED',
       });
 
-      await expect(service.processPayout(mockPayout.id)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(service.processPayout(mockPayout.id)).rejects.toThrow(BadRequestException);
     });
   });
 
@@ -211,9 +201,7 @@ describe('PayoutsService', () => {
         status: 'PENDING',
       });
 
-      await expect(service.completePayout(mockPayout.id)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(service.completePayout(mockPayout.id)).rejects.toThrow(BadRequestException);
     });
   });
 
@@ -245,9 +233,9 @@ describe('PayoutsService', () => {
         status: 'COMPLETED',
       });
 
-      await expect(
-        service.failPayout(mockPayout.id, 'Some reason'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.failPayout(mockPayout.id, 'Some reason')).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -278,17 +266,17 @@ describe('PayoutsService', () => {
         status: 'PROCESSING',
       });
 
-      await expect(
-        service.cancelPayout(mockPayout.id, 'store-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.cancelPayout(mockPayout.id, 'store-123')).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw NotFoundException for non-existent payout', async () => {
       (prisma.payout.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.cancelPayout('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.cancelPayout('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -336,9 +324,9 @@ describe('PayoutsService', () => {
     it('should throw NotFoundException for non-existent payout', async () => {
       (prisma.payout.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 

@@ -6,12 +6,7 @@ import {
 } from '@nestjs/common';
 import { Decimal } from '@prisma/client/runtime/library';
 import { PrismaService } from '../../prisma/prisma.service';
-import {
-  CreateCouponDto,
-  UpdateCouponDto,
-  ValidateCouponDto,
-  CouponValidationResult,
-} from './dto';
+import { CreateCouponDto, UpdateCouponDto, ValidateCouponDto, CouponValidationResult } from './dto';
 
 @Injectable()
 export class CouponsService {
@@ -189,10 +184,7 @@ export class CouponsService {
     return { message: 'Coupon deactivated successfully' };
   }
 
-  async validateCoupon(
-    storeId: string,
-    dto: ValidateCouponDto,
-  ): Promise<CouponValidationResult> {
+  async validateCoupon(storeId: string, dto: ValidateCouponDto): Promise<CouponValidationResult> {
     try {
       const coupon = await this.findByCode(storeId, dto.code);
 
@@ -223,9 +215,7 @@ export class CouponsService {
 
       // Check if coupon is valid for this page
       if (coupon.pageCoupons.length > 0 && dto.pageId) {
-        const validForPage = coupon.pageCoupons.some(
-          (pc) => pc.pageId === dto.pageId,
-        );
+        const validForPage = coupon.pageCoupons.some((pc) => pc.pageId === dto.pageId);
         if (!validForPage) {
           return { valid: false, error: 'Coupon is not valid for this page' };
         }
@@ -237,10 +227,7 @@ export class CouponsService {
         if (coupon.discountType === 'percent') {
           discountAmount = (dto.amount * coupon.discountValue.toNumber()) / 100;
         } else {
-          discountAmount = Math.min(
-            coupon.discountValue.toNumber(),
-            dto.amount,
-          );
+          discountAmount = Math.min(coupon.discountValue.toNumber(), dto.amount);
         }
       }
 
@@ -271,12 +258,10 @@ export class CouponsService {
 
     return {
       ...rest,
-      discountValue: rest.discountValue instanceof Decimal
-        ? rest.discountValue.toNumber()
-        : rest.discountValue,
-      minPurchase: rest.minPurchase instanceof Decimal
-        ? rest.minPurchase.toNumber()
-        : rest.minPurchase,
+      discountValue:
+        rest.discountValue instanceof Decimal ? rest.discountValue.toNumber() : rest.discountValue,
+      minPurchase:
+        rest.minPurchase instanceof Decimal ? rest.minPurchase.toNumber() : rest.minPurchase,
       pages: pageCoupons?.map((pc: any) => pc.page) || [],
     };
   }

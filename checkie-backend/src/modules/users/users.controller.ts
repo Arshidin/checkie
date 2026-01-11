@@ -1,17 +1,5 @@
-import {
-  Controller,
-  Get,
-  Patch,
-  Post,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { Controller, Get, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { UpdateUserDto, ChangePasswordDto } from './dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -34,10 +22,7 @@ export class UsersController {
   @Patch('me')
   @ApiOperation({ summary: 'Update current user profile' })
   @ApiResponse({ status: 200, description: 'User updated' })
-  async updateProfile(
-    @CurrentUser() user: { id: string },
-    @Body() dto: UpdateUserDto,
-  ) {
+  async updateProfile(@CurrentUser() user: { id: string }, @Body() dto: UpdateUserDto) {
     return this.usersService.update(user.id, dto);
   }
 
@@ -45,10 +30,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Change password' })
   @ApiResponse({ status: 200, description: 'Password changed' })
   @ApiResponse({ status: 400, description: 'Current password incorrect' })
-  async changePassword(
-    @CurrentUser() user: { id: string },
-    @Body() dto: ChangePasswordDto,
-  ) {
+  async changePassword(@CurrentUser() user: { id: string }, @Body() dto: ChangePasswordDto) {
     return this.usersService.changePassword(user.id, dto);
   }
 

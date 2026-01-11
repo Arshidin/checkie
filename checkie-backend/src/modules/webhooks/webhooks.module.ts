@@ -1,4 +1,4 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { WebhookEndpointsService } from './webhook-endpoints.service';
@@ -26,10 +26,6 @@ import { WebhookProcessor } from '../../jobs/processors/webhook.processor';
     WebhookDeliveryService,
     WebhookProcessor,
   ],
-  exports: [
-    WebhookEndpointsService,
-    WebhookEventsService,
-    WebhookDeliveryService,
-  ],
+  exports: [WebhookEndpointsService, WebhookEventsService, WebhookDeliveryService],
 })
 export class WebhooksModule {}

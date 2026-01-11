@@ -232,9 +232,9 @@ describe('CheckoutService', () => {
         context: { error: 'Cannot initiate payment in completed state' },
       });
 
-      await expect(
-        service.initiatePayment({ sessionId: mockSession.id }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.initiatePayment({ sessionId: mockSession.id })).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should handle subscription page type', async () => {

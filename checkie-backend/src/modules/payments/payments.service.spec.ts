@@ -88,9 +88,9 @@ describe('PaymentsService', () => {
     it('should throw NotFoundException for non-existent session', async () => {
       (prisma.checkoutSession.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.initiatePayment({ checkoutSessionId: 'non-existent' }),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.initiatePayment({ checkoutSessionId: 'non-existent' })).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw BadRequestException for non-OPEN session', async () => {
@@ -99,9 +99,9 @@ describe('PaymentsService', () => {
         status: 'COMPLETED',
       });
 
-      await expect(
-        service.initiatePayment({ checkoutSessionId: mockSession.id }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.initiatePayment({ checkoutSessionId: mockSession.id })).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should handle 3DS requirement', async () => {
@@ -154,9 +154,9 @@ describe('PaymentsService', () => {
       };
       (prisma.checkoutSession.findUnique as jest.Mock).mockResolvedValue(sessionWithoutCustomer);
 
-      await expect(
-        service.initiatePayment({ checkoutSessionId: mockSession.id }),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.initiatePayment({ checkoutSessionId: mockSession.id })).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -221,7 +221,7 @@ describe('PaymentsService', () => {
 
       it('should calculate platform fee correctly', async () => {
         const paymentAmount = 100;
-        const expectedPlatformFee = paymentAmount * 0.029;
+        // Platform fee is 2.9% of payment amount
 
         (prisma.payment.findUnique as jest.Mock).mockResolvedValue({
           ...mockPayment,
@@ -263,12 +263,10 @@ describe('PaymentsService', () => {
           },
         };
 
-        await service.handleWebhookEvent(
-          'stripe',
-          'payment_intent.payment_failed',
-          failureData,
-          { paymentId: mockPayment.id, checkoutSessionId: mockSession.id },
-        );
+        await service.handleWebhookEvent('stripe', 'payment_intent.payment_failed', failureData, {
+          paymentId: mockPayment.id,
+          checkoutSessionId: mockSession.id,
+        });
 
         expect(prisma.payment.update).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -416,9 +414,9 @@ describe('PaymentsService', () => {
     it('should throw NotFoundException for non-existent payment', async () => {
       (prisma.payment.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 

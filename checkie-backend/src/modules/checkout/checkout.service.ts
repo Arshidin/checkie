@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { CheckoutSessionService, CreateSessionParams } from './services/checkout-session.service';
@@ -168,13 +164,7 @@ export class CheckoutService {
     });
 
     if (page?.pricingType === PricingType.SUBSCRIPTION) {
-      return this.initiateSubscription(
-        dto,
-        session,
-        context,
-        page,
-        idempotencyKey,
-      );
+      return this.initiateSubscription(dto, session, context, page, idempotencyKey);
     }
 
     // Get or create customer
@@ -405,10 +395,10 @@ export class CheckoutService {
     let providerCustomerId = customer.providerCustomerId;
     if (!providerCustomerId) {
       const provider = this.providerFactory.getDefaultProvider();
-      providerCustomerId = await provider.createCustomer(
-        context.customerEmail,
-        { storeId: session.storeId, customerId },
-      );
+      providerCustomerId = await provider.createCustomer(context.customerEmail, {
+        storeId: session.storeId,
+        customerId,
+      });
 
       await this.prisma.customer.update({
         where: { id: customerId },
@@ -456,9 +446,10 @@ export class CheckoutService {
 
     const response: InitiatePaymentResponseDto = {
       sessionId,
-      status: subscription.status === 'ACTIVE' || subscription.status === 'TRIALING'
-        ? 'COMPLETED'
-        : 'PROCESSING',
+      status:
+        subscription.status === 'ACTIVE' || subscription.status === 'TRIALING'
+          ? 'COMPLETED'
+          : 'PROCESSING',
       subscriptionId: subscription.id,
       requiresAction: subscription.status === 'INCOMPLETE',
       clientSecret: providerData?.clientSecret,
@@ -475,11 +466,7 @@ export class CheckoutService {
     return response;
   }
 
-  private mapToResponse(
-    session: any,
-    state: string,
-    context: any,
-  ): CheckoutSessionResponseDto {
+  private mapToResponse(session: any, state: string, context: any): CheckoutSessionResponseDto {
     return {
       id: session.id,
       storeId: session.storeId,

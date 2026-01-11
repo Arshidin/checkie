@@ -1,12 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsString,
-  IsOptional,
-  MinLength,
-  MaxLength,
-  Matches,
-  IsUrl,
-} from 'class-validator';
+import { IsString, IsOptional, MinLength, MaxLength, Matches, IsUrl } from 'class-validator';
 
 export class CreateStoreDto {
   @ApiProperty({ example: 'My Awesome Store' })

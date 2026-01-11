@@ -52,9 +52,7 @@ export class PageStatsService {
       conversionCount: stats.conversionCount,
       totalRevenue: stats.totalRevenue.toNumber(),
       conversionRate:
-        stats.viewCount > 0
-          ? ((stats.conversionCount / stats.viewCount) * 100).toFixed(2)
-          : '0.00',
+        stats.viewCount > 0 ? ((stats.conversionCount / stats.viewCount) * 100).toFixed(2) : '0.00',
       lastViewAt: stats.lastViewAt,
       lastConversionAt: stats.lastConversionAt,
     };
@@ -80,11 +78,7 @@ export class PageStatsService {
       totalRevenue: page.stats?.totalRevenue?.toNumber() || 0,
       conversionRate:
         (page.stats?.viewCount || 0) > 0
-          ? (
-              ((page.stats?.conversionCount || 0) /
-                (page.stats?.viewCount || 1)) *
-              100
-            ).toFixed(2)
+          ? (((page.stats?.conversionCount || 0) / (page.stats?.viewCount || 1)) * 100).toFixed(2)
           : '0.00',
     }));
 
@@ -130,11 +124,7 @@ export class PageStatsService {
    * This would typically use a separate analytics table
    * For now, returns current totals
    */
-  async getPageAnalytics(
-    pageId: string,
-    _startDate: Date,
-    _endDate: Date,
-  ) {
+  async getPageAnalytics(pageId: string, _startDate: Date, _endDate: Date) {
     const stats = await this.getStats(pageId);
 
     return {

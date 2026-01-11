@@ -1,22 +1,11 @@
-import {
-  Injectable,
-  Logger,
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../../prisma/prisma.service';
 import { BalanceService } from '../balance/balance.service';
 import { encryptObject, decryptObject } from '../../common/utils/crypto.util';
-import {
-  Payout,
-  PayoutStatus,
-  PayoutMethod,
-  Currency,
-  Prisma,
-} from '@prisma/client';
+import { Payout, PayoutStatus, PayoutMethod, Currency, Prisma } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
-import { CreatePayoutDto, BankAccountDestination } from './dto';
+import { BankAccountDestination } from './dto';
 
 export interface CreatePayoutParams {
   storeId: string;
@@ -41,10 +30,7 @@ export class PayoutsService {
 
   async createPayout(params: CreatePayoutParams): Promise<Payout> {
     // Check available balance
-    const balance = await this.balanceService.getBalance(
-      params.storeId,
-      params.currency,
-    );
+    const balance = await this.balanceService.getBalance(params.storeId, params.currency);
     const availableBalance = Number(balance.balance);
 
     if (params.amount > availableBalance) {
@@ -76,10 +62,7 @@ export class PayoutsService {
     }
 
     // Encrypt destination data
-    const encryptedDestination = encryptObject(
-      params.destination,
-      this.encryptionKey,
-    );
+    const encryptedDestination = encryptObject(params.destination, this.encryptionKey);
 
     // Create payout record
     const payout = await this.prisma.payout.create({
@@ -105,9 +88,7 @@ export class PayoutsService {
       description: `Payout requested: ${params.amount} ${params.currency}`,
     });
 
-    this.logger.log(
-      `Payout created: ${payout.id}, amount: ${params.amount} ${params.currency}`,
-    );
+    this.logger.log(`Payout created: ${payout.id}, amount: ${params.amount} ${params.currency}`);
 
     return payout;
   }
@@ -141,10 +122,7 @@ export class PayoutsService {
     return updatedPayout;
   }
 
-  async completePayout(
-    payoutId: string,
-    providerPayoutId?: string,
-  ): Promise<Payout> {
+  async completePayout(payoutId: string, providerPayoutId?: string): Promise<Payout> {
     const payout = await this.prisma.payout.findUnique({
       where: { id: payoutId },
     });
@@ -154,9 +132,7 @@ export class PayoutsService {
     }
 
     if (!['PROCESSING', 'IN_TRANSIT'].includes(payout.status)) {
-      throw new BadRequestException(
-        `Cannot complete payout in ${payout.status} state`,
-      );
+      throw new BadRequestException(`Cannot complete payout in ${payout.status} state`);
     }
 
     // Update payout status
@@ -194,9 +170,7 @@ export class PayoutsService {
     }
 
     if (!['PENDING', 'PROCESSING', 'IN_TRANSIT'].includes(payout.status)) {
-      throw new BadRequestException(
-        `Cannot fail payout in ${payout.status} state`,
-      );
+      throw new BadRequestException(`Cannot fail payout in ${payout.status} state`);
     }
 
     // Update payout status
@@ -234,9 +208,7 @@ export class PayoutsService {
     }
 
     if (payout.status !== 'PENDING') {
-      throw new BadRequestException(
-        'Can only cancel payouts in PENDING state',
-      );
+      throw new BadRequestException('Can only cancel payouts in PENDING state');
     }
 
     // Update payout status
@@ -330,10 +302,7 @@ export class PayoutsService {
     return payout;
   }
 
-  async getPayoutDestination(
-    payoutId: string,
-    storeId: string,
-  ): Promise<BankAccountDestination> {
+  async getPayoutDestination(payoutId: string, storeId: string): Promise<BankAccountDestination> {
     const payout = await this.prisma.payout.findFirst({
       where: { id: payoutId, storeId },
     });

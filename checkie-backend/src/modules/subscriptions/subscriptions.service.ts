@@ -51,9 +51,7 @@ export class SubscriptionsService {
     this.platformFeePercent = config.get('platform.feePercent', 0.029);
   }
 
-  async createSubscription(
-    params: CreateSubscriptionParams,
-  ): Promise<Subscription> {
+  async createSubscription(params: CreateSubscriptionParams): Promise<Subscription> {
     const provider = this.providerFactory.getDefaultProvider();
 
     // Create subscription record first (INCOMPLETE status)
@@ -201,10 +199,7 @@ export class SubscriptionsService {
     const provider = this.providerFactory.getDefaultProvider();
 
     // Cancel in provider
-    const providerResult = await provider.cancelSubscription(
-      subscription.providerSubscriptionId,
-      cancelImmediately,
-    );
+    await provider.cancelSubscription(subscription.providerSubscriptionId, cancelImmediately);
 
     // Update in database
     const updatedSubscription = await this.prisma.subscription.update({
@@ -214,15 +209,13 @@ export class SubscriptionsService {
         cancelAtPeriodEnd: !cancelImmediately,
         cancelledAt: cancelImmediately ? new Date() : null,
         providerData: {
-          ...(subscription.providerData as object || {}),
+          ...((subscription.providerData as object) || {}),
           cancellationReason: reason,
         },
       },
     });
 
-    this.logger.log(
-      `Subscription ${subscriptionId} cancelled: immediately=${cancelImmediately}`,
-    );
+    this.logger.log(`Subscription ${subscriptionId} cancelled: immediately=${cancelImmediately}`);
 
     // Trigger webhook
     try {
@@ -246,10 +239,7 @@ export class SubscriptionsService {
     return updatedSubscription;
   }
 
-  async pauseSubscription(
-    subscriptionId: string,
-    storeId: string,
-  ): Promise<Subscription> {
+  async pauseSubscription(subscriptionId: string, storeId: string): Promise<Subscription> {
     const subscription = await this.findById(subscriptionId, storeId);
 
     if (subscription.status !== 'ACTIVE') {
@@ -274,10 +264,7 @@ export class SubscriptionsService {
     return updatedSubscription;
   }
 
-  async resumeSubscription(
-    subscriptionId: string,
-    storeId: string,
-  ): Promise<Subscription> {
+  async resumeSubscription(subscriptionId: string, storeId: string): Promise<Subscription> {
     const subscription = await this.findById(subscriptionId, storeId);
 
     if (subscription.status !== 'PAUSED') {
@@ -290,9 +277,7 @@ export class SubscriptionsService {
 
     const provider = this.providerFactory.getDefaultProvider();
 
-    const providerResult = await provider.resumeSubscription(
-      subscription.providerSubscriptionId,
-    );
+    const providerResult = await provider.resumeSubscription(subscription.providerSubscriptionId);
 
     const updatedSubscription = await this.prisma.subscription.update({
       where: { id: subscriptionId },
@@ -310,10 +295,7 @@ export class SubscriptionsService {
 
   // ==================== Webhook Handlers ====================
 
-  async handleSubscriptionCreated(
-    providerSubscriptionId: string,
-    data: any,
-  ): Promise<void> {
+  async handleSubscriptionCreated(providerSubscriptionId: string, data: any): Promise<void> {
     const subscriptionId = data.metadata?.subscriptionId;
 
     if (!subscriptionId) {
@@ -337,18 +319,13 @@ export class SubscriptionsService {
     this.logger.log(`Subscription ${subscriptionId} created via webhook`);
   }
 
-  async handleSubscriptionUpdated(
-    providerSubscriptionId: string,
-    data: any,
-  ): Promise<void> {
+  async handleSubscriptionUpdated(providerSubscriptionId: string, data: any): Promise<void> {
     const subscription = await this.prisma.subscription.findFirst({
       where: { providerSubscriptionId },
     });
 
     if (!subscription) {
-      this.logger.warn(
-        `Subscription not found for provider ID: ${providerSubscriptionId}`,
-      );
+      this.logger.warn(`Subscription not found for provider ID: ${providerSubscriptionId}`);
       return;
     }
 
@@ -359,9 +336,7 @@ export class SubscriptionsService {
         currentPeriodStart: new Date(data.current_period_start * 1000),
         currentPeriodEnd: new Date(data.current_period_end * 1000),
         cancelAtPeriodEnd: data.cancel_at_period_end || false,
-        cancelledAt: data.canceled_at
-          ? new Date(data.canceled_at * 1000)
-          : null,
+        cancelledAt: data.canceled_at ? new Date(data.canceled_at * 1000) : null,
         providerData: data,
       },
     });
@@ -369,18 +344,13 @@ export class SubscriptionsService {
     this.logger.log(`Subscription ${subscription.id} updated via webhook`);
   }
 
-  async handleSubscriptionDeleted(
-    providerSubscriptionId: string,
-    data: any,
-  ): Promise<void> {
+  async handleSubscriptionDeleted(providerSubscriptionId: string, data: any): Promise<void> {
     const subscription = await this.prisma.subscription.findFirst({
       where: { providerSubscriptionId },
     });
 
     if (!subscription) {
-      this.logger.warn(
-        `Subscription not found for provider ID: ${providerSubscriptionId}`,
-      );
+      this.logger.warn(`Subscription not found for provider ID: ${providerSubscriptionId}`);
       return;
     }
 
@@ -396,10 +366,7 @@ export class SubscriptionsService {
     this.logger.log(`Subscription ${subscription.id} deleted via webhook`);
   }
 
-  async handleInvoicePaymentSucceeded(
-    invoiceId: string,
-    data: any,
-  ): Promise<void> {
+  async handleInvoicePaymentSucceeded(invoiceId: string, data: any): Promise<void> {
     const providerSubscriptionId = data.subscription;
 
     if (!providerSubscriptionId) {
@@ -413,9 +380,7 @@ export class SubscriptionsService {
     });
 
     if (!subscription) {
-      this.logger.warn(
-        `Subscription not found for invoice: ${invoiceId}`,
-      );
+      this.logger.warn(`Subscription not found for invoice: ${invoiceId}`);
       return;
     }
 
@@ -460,9 +425,7 @@ export class SubscriptionsService {
       },
     });
 
-    this.logger.log(
-      `Invoice ${invoiceId} payment succeeded for subscription ${subscription.id}`,
-    );
+    this.logger.log(`Invoice ${invoiceId} payment succeeded for subscription ${subscription.id}`);
 
     // Trigger webhook for subscription renewed
     try {
@@ -484,10 +447,7 @@ export class SubscriptionsService {
     }
   }
 
-  async handleInvoicePaymentFailed(
-    invoiceId: string,
-    data: any,
-  ): Promise<void> {
+  async handleInvoicePaymentFailed(invoiceId: string, data: any): Promise<void> {
     const providerSubscriptionId = data.subscription;
 
     if (!providerSubscriptionId) {
@@ -499,9 +459,7 @@ export class SubscriptionsService {
     });
 
     if (!subscription) {
-      this.logger.warn(
-        `Subscription not found for failed invoice: ${invoiceId}`,
-      );
+      this.logger.warn(`Subscription not found for failed invoice: ${invoiceId}`);
       return;
     }
 
@@ -510,15 +468,13 @@ export class SubscriptionsService {
       data: {
         status: 'PAST_DUE',
         providerData: {
-          ...(subscription.providerData as object || {}),
+          ...((subscription.providerData as object) || {}),
           lastFailedInvoiceId: invoiceId,
         },
       },
     });
 
-    this.logger.warn(
-      `Invoice ${invoiceId} payment failed for subscription ${subscription.id}`,
-    );
+    this.logger.warn(`Invoice ${invoiceId} payment failed for subscription ${subscription.id}`);
 
     // Trigger webhook for payment failure
     try {
@@ -542,13 +498,8 @@ export class SubscriptionsService {
 
   // ==================== Helper Methods ====================
 
-  private mapInterval(
-    interval: SubscriptionInterval,
-  ): 'day' | 'week' | 'month' | 'year' {
-    const mapping: Record<
-      SubscriptionInterval,
-      'day' | 'week' | 'month' | 'year'
-    > = {
+  private mapInterval(interval: SubscriptionInterval): 'day' | 'week' | 'month' | 'year' {
+    const mapping: Record<SubscriptionInterval, 'day' | 'week' | 'month' | 'year'> = {
       DAILY: 'day',
       WEEKLY: 'week',
       MONTHLY: 'month',

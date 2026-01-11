@@ -9,13 +9,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { StoreUserRole } from '@prisma/client';
 import { PagesService } from './pages.service';
 import { CreatePageDto, UpdatePageDto } from './dto';
@@ -37,10 +31,7 @@ export class PagesController {
   @ApiOperation({ summary: 'Create a new checkout page' })
   @ApiResponse({ status: 201, description: 'Page created' })
   @ApiResponse({ status: 409, description: 'Slug already taken' })
-  async create(
-    @Param('storeId') storeId: string,
-    @Body() dto: CreatePageDto,
-  ) {
+  async create(@Param('storeId') storeId: string, @Body() dto: CreatePageDto) {
     return this.pagesService.create(storeId, dto);
   }
 
@@ -52,20 +43,14 @@ export class PagesController {
     @Param('storeId') storeId: string,
     @Query('includeArchived') includeArchived?: string,
   ) {
-    return this.pagesService.findAllByStore(
-      storeId,
-      includeArchived === 'true',
-    );
+    return this.pagesService.findAllByStore(storeId, includeArchived === 'true');
   }
 
   @Get(':pageId')
   @ApiOperation({ summary: 'Get page by ID' })
   @ApiResponse({ status: 200, description: 'Page details' })
   @ApiResponse({ status: 404, description: 'Page not found' })
-  async findById(
-    @Param('storeId') storeId: string,
-    @Param('pageId') pageId: string,
-  ) {
+  async findById(@Param('storeId') storeId: string, @Param('pageId') pageId: string) {
     return this.pagesService.findById(storeId, pageId);
   }
 
@@ -89,10 +74,7 @@ export class PagesController {
   @ApiOperation({ summary: 'Delete (archive) a page' })
   @ApiResponse({ status: 200, description: 'Page archived' })
   @ApiResponse({ status: 404, description: 'Page not found' })
-  async delete(
-    @Param('storeId') storeId: string,
-    @Param('pageId') pageId: string,
-  ) {
+  async delete(@Param('storeId') storeId: string, @Param('pageId') pageId: string) {
     return this.pagesService.delete(storeId, pageId);
   }
 
@@ -102,10 +84,7 @@ export class PagesController {
   @ApiOperation({ summary: 'Publish a page' })
   @ApiResponse({ status: 200, description: 'Page published' })
   @ApiResponse({ status: 400, description: 'Page not ready for publishing' })
-  async publish(
-    @Param('storeId') storeId: string,
-    @Param('pageId') pageId: string,
-  ) {
+  async publish(@Param('storeId') storeId: string, @Param('pageId') pageId: string) {
     return this.pagesService.publish(storeId, pageId);
   }
 
@@ -114,10 +93,7 @@ export class PagesController {
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER)
   @ApiOperation({ summary: 'Unpublish a page (set to draft)' })
   @ApiResponse({ status: 200, description: 'Page unpublished' })
-  async unpublish(
-    @Param('storeId') storeId: string,
-    @Param('pageId') pageId: string,
-  ) {
+  async unpublish(@Param('storeId') storeId: string, @Param('pageId') pageId: string) {
     return this.pagesService.unpublish(storeId, pageId);
   }
 
@@ -126,10 +102,7 @@ export class PagesController {
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
   @ApiOperation({ summary: 'Archive a page' })
   @ApiResponse({ status: 200, description: 'Page archived' })
-  async archive(
-    @Param('storeId') storeId: string,
-    @Param('pageId') pageId: string,
-  ) {
+  async archive(@Param('storeId') storeId: string, @Param('pageId') pageId: string) {
     return this.pagesService.archive(storeId, pageId);
   }
 

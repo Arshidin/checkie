@@ -1,13 +1,8 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateWebhookEndpointDto } from './dto/create-webhook-endpoint.dto';
 import { UpdateWebhookEndpointDto } from './dto/update-webhook-endpoint.dto';
-import { ALL_WEBHOOK_EVENT_TYPES } from './dto/webhook-event-types';
+import { ALL_WEBHOOK_EVENT_TYPES, WEBHOOK_EVENT_DESCRIPTIONS } from './dto/webhook-event-types';
 import * as crypto from 'crypto';
 
 @Injectable()
@@ -27,9 +22,7 @@ export class WebhookEndpointsService {
    * Validate that all events are valid
    */
   private validateEvents(events: string[]): void {
-    const invalidEvents = events.filter(
-      (event) => !ALL_WEBHOOK_EVENT_TYPES.includes(event as any),
-    );
+    const invalidEvents = events.filter((event) => !ALL_WEBHOOK_EVENT_TYPES.includes(event as any));
 
     if (invalidEvents.length > 0) {
       throw new BadRequestException(
@@ -57,9 +50,7 @@ export class WebhookEndpointsService {
       },
     });
 
-    this.logger.log(
-      `Created webhook endpoint ${endpoint.id} for store ${storeId}`,
-    );
+    this.logger.log(`Created webhook endpoint ${endpoint.id} for store ${storeId}`);
 
     return {
       ...endpoint,
@@ -119,11 +110,7 @@ export class WebhookEndpointsService {
   /**
    * Update a webhook endpoint
    */
-  async update(
-    storeId: string,
-    endpointId: string,
-    dto: UpdateWebhookEndpointDto,
-  ) {
+  async update(storeId: string, endpointId: string, dto: UpdateWebhookEndpointDto) {
     const existing = await this.prisma.webhookEndpoint.findFirst({
       where: { id: endpointId, storeId },
     });
@@ -284,8 +271,7 @@ export class WebhookEndpointsService {
   getAvailableEventTypes() {
     return ALL_WEBHOOK_EVENT_TYPES.map((type) => ({
       type,
-      description:
-        require('./dto/webhook-event-types').WEBHOOK_EVENT_DESCRIPTIONS[type],
+      description: WEBHOOK_EVENT_DESCRIPTIONS[type],
     }));
   }
 }

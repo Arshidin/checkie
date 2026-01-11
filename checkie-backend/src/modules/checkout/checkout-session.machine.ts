@@ -43,8 +43,9 @@ export type CheckoutSessionEvent =
 
 const MAX_ATTEMPTS = 3;
 const SESSION_TTL_MS = 60 * 60 * 1000; // 60 minutes
-const PROCESSING_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
-const ACTION_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes
+// Timeouts are exported for use in services that manage timeout jobs
+export const PROCESSING_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+export const ACTION_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes
 
 export const checkoutSessionMachine = createMachine(
   {
@@ -191,11 +192,7 @@ export const checkoutSessionMachine = createMachine(
         }
         const lastAttempt = context.attempts[context.attempts.length - 1];
         if (lastAttempt) {
-          const nonRetryableCodes = [
-            'card_declined_fraud',
-            'stolen_card',
-            'lost_card',
-          ];
+          const nonRetryableCodes = ['card_declined_fraud', 'stolen_card', 'lost_card'];
           if (nonRetryableCodes.includes(lastAttempt.failureCode || '')) {
             return false;
           }
@@ -265,4 +262,10 @@ export const checkoutSessionMachine = createMachine(
 );
 
 export type CheckoutSessionMachine = typeof checkoutSessionMachine;
-export type CheckoutSessionState = 'open' | 'processing' | 'awaiting_action' | 'completed' | 'expired' | 'abandoned';
+export type CheckoutSessionState =
+  | 'open'
+  | 'processing'
+  | 'awaiting_action'
+  | 'completed'
+  | 'expired'
+  | 'abandoned';

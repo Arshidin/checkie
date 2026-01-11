@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  Logger,
-  BadRequestException,
-  NotImplementedException,
-} from '@nestjs/common';
+import { Injectable, Logger, BadRequestException, NotImplementedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import {
   PaymentProvider,
@@ -39,18 +34,12 @@ export class StripeProvider implements PaymentProvider {
     this.isTestMode = !secretKey || secretKey.startsWith('sk_test_');
 
     if (!secretKey) {
-      this.logger.warn(
-        'Stripe secret key not configured. Running in STUB mode.',
-      );
+      this.logger.warn('Stripe secret key not configured. Running in STUB mode.');
     }
   }
 
-  async createPaymentIntent(
-    params: CreatePaymentIntentParams,
-  ): Promise<PaymentIntentResult> {
-    this.logger.log(
-      `[STUB] Creating PaymentIntent: ${params.amount} ${params.currency}`,
-    );
+  async createPaymentIntent(params: CreatePaymentIntentParams): Promise<PaymentIntentResult> {
+    this.logger.log(`[STUB] Creating PaymentIntent: ${params.amount} ${params.currency}`);
 
     // Simulate processing delay
     await this.simulateDelay();
@@ -69,9 +58,7 @@ export class StripeProvider implements PaymentProvider {
       currency: params.currency.toUpperCase(),
       requiresAction,
       nextActionType: requiresAction ? 'redirect_to_url' : undefined,
-      nextActionUrl: requiresAction
-        ? `https://stripe.com/3ds-stub?pi=${intentId}`
-        : undefined,
+      nextActionUrl: requiresAction ? `https://stripe.com/3ds-stub?pi=${intentId}` : undefined,
     };
   }
 
@@ -90,9 +77,7 @@ export class StripeProvider implements PaymentProvider {
     };
   }
 
-  async confirmPaymentIntent(
-    params: ConfirmPaymentParams,
-  ): Promise<PaymentIntentResult> {
+  async confirmPaymentIntent(params: ConfirmPaymentParams): Promise<PaymentIntentResult> {
     this.logger.log(`[STUB] Confirming PaymentIntent: ${params.paymentIntentId}`);
 
     await this.simulateDelay();
@@ -129,10 +114,7 @@ export class StripeProvider implements PaymentProvider {
     };
   }
 
-  async createCustomer(
-    email: string,
-    metadata?: Record<string, string>,
-  ): Promise<string> {
+  async createCustomer(email: string, _metadata?: Record<string, string>): Promise<string> {
     this.logger.log(`[STUB] Creating Customer: ${email}`);
 
     await this.simulateDelay();
@@ -166,9 +148,7 @@ export class StripeProvider implements PaymentProvider {
 
   // ==================== Subscription Methods ====================
 
-  async createSubscription(
-    params: CreateSubscriptionParams,
-  ): Promise<SubscriptionResult> {
+  async createSubscription(params: CreateSubscriptionParams): Promise<SubscriptionResult> {
     this.logger.log(
       `[STUB] Creating Subscription: ${params.amount} ${params.currency} / ${params.interval}`,
     );
@@ -177,11 +157,7 @@ export class StripeProvider implements PaymentProvider {
 
     const subscriptionId = `sub_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`;
     const now = new Date();
-    const periodEnd = this.calculatePeriodEnd(
-      now,
-      params.interval,
-      params.intervalCount || 1,
-    );
+    const periodEnd = this.calculatePeriodEnd(now, params.interval, params.intervalCount || 1);
 
     // Calculate trial end if applicable
     let trialEnd: Date | undefined;
@@ -202,9 +178,10 @@ export class StripeProvider implements PaymentProvider {
       cancelAtPeriodEnd: params.cancelAtPeriodEnd || false,
       latestInvoiceId: `in_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
       latestInvoiceStatus: status === 'trialing' ? 'paid' : 'open',
-      clientSecret: status === 'trialing'
-        ? undefined
-        : `seti_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}_secret`,
+      clientSecret:
+        status === 'trialing'
+          ? undefined
+          : `seti_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}_secret`,
     };
   }
 
@@ -226,9 +203,7 @@ export class StripeProvider implements PaymentProvider {
     };
   }
 
-  async updateSubscription(
-    params: UpdateSubscriptionParams,
-  ): Promise<SubscriptionResult> {
+  async updateSubscription(params: UpdateSubscriptionParams): Promise<SubscriptionResult> {
     this.logger.log(`[STUB] Updating Subscription: ${params.subscriptionId}`);
 
     await this.simulateDelay();
@@ -246,13 +221,8 @@ export class StripeProvider implements PaymentProvider {
     };
   }
 
-  async cancelSubscription(
-    id: string,
-    cancelImmediately = false,
-  ): Promise<SubscriptionResult> {
-    this.logger.log(
-      `[STUB] Cancelling Subscription: ${id}, immediately: ${cancelImmediately}`,
-    );
+  async cancelSubscription(id: string, cancelImmediately = false): Promise<SubscriptionResult> {
+    this.logger.log(`[STUB] Cancelling Subscription: ${id}, immediately: ${cancelImmediately}`);
 
     await this.simulateDelay();
 

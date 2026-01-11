@@ -54,9 +54,7 @@ export class CheckoutController {
   @ApiOperation({ summary: 'Get checkout session details' })
   @ApiResponse({ status: 200, description: 'Session details' })
   @ApiResponse({ status: 404, description: 'Session not found' })
-  async getSession(
-    @Param('sessionId') sessionId: string,
-  ): Promise<CheckoutSessionResponseDto> {
+  async getSession(@Param('sessionId') sessionId: string): Promise<CheckoutSessionResponseDto> {
     return this.checkoutService.getSession(sessionId);
   }
 
@@ -103,9 +101,7 @@ export class CheckoutController {
   @ApiOperation({ summary: 'Get checkout session status (for polling)' })
   @ApiResponse({ status: 200, description: 'Session status' })
   @ApiResponse({ status: 404, description: 'Session not found' })
-  async getSessionStatus(
-    @Param('sessionId') sessionId: string,
-  ): Promise<SessionStatusResponseDto> {
+  async getSessionStatus(@Param('sessionId') sessionId: string): Promise<SessionStatusResponseDto> {
     const status = await this.checkoutService.getSessionStatus(sessionId);
     return {
       sessionId: status.sessionId,
@@ -135,7 +131,7 @@ export class CheckoutController {
   @ApiOperation({ summary: 'List checkout sessions for a store' })
   @ApiResponse({ status: 200, description: 'List of sessions' })
   async listStoreSessions(
-    @Param('storeId') storeId: string,
+    @Param('storeId') _storeId: string,
   ): Promise<CheckoutSessionResponseDto[]> {
     // TODO: Implement with StoreAccessGuard and pagination
     return [];

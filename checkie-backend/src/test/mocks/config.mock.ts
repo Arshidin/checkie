@@ -1,6 +1,8 @@
 import { ConfigService } from '@nestjs/config';
 
-export function createMockConfigService(overrides: Record<string, any> = {}): Partial<ConfigService> {
+export function createMockConfigService(
+  overrides: Record<string, any> = {},
+): Partial<ConfigService> {
   const defaultConfig: Record<string, any> = {
     'jwt.expiration': '15m',
     'jwt.refreshTokenExpiration': '7d',

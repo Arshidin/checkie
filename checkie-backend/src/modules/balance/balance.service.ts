@@ -138,12 +138,7 @@ export class BalanceService {
     };
   }
 
-  async getSummary(
-    storeId: string,
-    startDate: Date,
-    endDate: Date,
-    currency?: Currency,
-  ) {
+  async getSummary(storeId: string, startDate: Date, endDate: Date, currency?: Currency) {
     const where: Prisma.BalanceTransactionWhereInput = {
       storeId,
       createdAt: { gte: startDate, lte: endDate },

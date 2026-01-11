@@ -127,9 +127,7 @@ export interface PaymentProvider {
   readonly code: string;
 
   // Payment Intents
-  createPaymentIntent(
-    params: CreatePaymentIntentParams,
-  ): Promise<PaymentIntentResult>;
+  createPaymentIntent(params: CreatePaymentIntentParams): Promise<PaymentIntentResult>;
   retrievePaymentIntent(id: string): Promise<PaymentIntentResult>;
   confirmPaymentIntent(params: ConfirmPaymentParams): Promise<PaymentIntentResult>;
   cancelPaymentIntent(id: string): Promise<void>;
@@ -138,10 +136,7 @@ export interface PaymentProvider {
   createRefund(params: RefundParams): Promise<RefundResult>;
 
   // Customers
-  createCustomer(
-    email: string,
-    metadata?: Record<string, string>,
-  ): Promise<string>;
+  createCustomer(email: string, metadata?: Record<string, string>): Promise<string>;
 
   // Subscriptions
   createSubscription(params: CreateSubscriptionParams): Promise<SubscriptionResult>;

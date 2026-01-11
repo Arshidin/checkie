@@ -12,19 +12,8 @@ import { PageStatsService } from './page-stats.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [
-    PagesController,
-    VariantsController,
-    CustomFieldsController,
-    EmbedsController,
-  ],
-  providers: [
-    PagesService,
-    VariantsService,
-    CustomFieldsService,
-    EmbedsService,
-    PageStatsService,
-  ],
+  controllers: [PagesController, VariantsController, CustomFieldsController, EmbedsController],
+  providers: [PagesService, VariantsService, CustomFieldsService, EmbedsService, PageStatsService],
   exports: [PagesService, PageStatsService],
 })
 export class PagesModule {}

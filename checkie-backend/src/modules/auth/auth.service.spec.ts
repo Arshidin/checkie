@@ -13,7 +13,7 @@ jest.mock('bcrypt');
 describe('AuthService', () => {
   let service: AuthService;
   let prismaService: jest.Mocked<PrismaService>;
-  let jwtService: jest.Mocked<JwtService>;
+  // jwtService mock is created by the module but not directly used in these tests
   let redisService: jest.Mocked<RedisService>;
 
   const mockUser = {
@@ -76,7 +76,7 @@ describe('AuthService', () => {
 
     service = module.get<AuthService>(AuthService);
     prismaService = module.get(PrismaService);
-    jwtService = module.get(JwtService);
+    module.get(JwtService);
     redisService = module.get(RedisService);
   });
 
@@ -112,9 +112,7 @@ describe('AuthService', () => {
     it('should throw ConflictException if email already exists', async () => {
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
 
-      await expect(service.register(registerDto)).rejects.toThrow(
-        ConflictException,
-      );
+      await expect(service.register(registerDto)).rejects.toThrow(ConflictException);
     });
 
     it('should lowercase email before registration', async () => {
@@ -156,29 +154,21 @@ describe('AuthService', () => {
     it('should throw UnauthorizedException if user not found', async () => {
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.login(loginDto)).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.login(loginDto)).rejects.toThrow(UnauthorizedException);
     });
 
     it('should throw UnauthorizedException if password is invalid', async () => {
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-      await expect(service.login(loginDto)).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.login(loginDto)).rejects.toThrow(UnauthorizedException);
     });
 
     it('should throw UnauthorizedException if user is not active', async () => {
       const inactiveUser = { ...mockUser, status: UserStatus.SUSPENDED };
-      (prismaService.user.findUnique as jest.Mock).mockResolvedValue(
-        inactiveUser,
-      );
+      (prismaService.user.findUnique as jest.Mock).mockResolvedValue(inactiveUser);
 
-      await expect(service.login(loginDto)).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.login(loginDto)).rejects.toThrow(UnauthorizedException);
     });
   });
 
@@ -197,18 +187,14 @@ describe('AuthService', () => {
     it('should throw UnauthorizedException if refresh token not found in Redis', async () => {
       (redisService.get as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.refreshTokens('invalid-token')).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.refreshTokens('invalid-token')).rejects.toThrow(UnauthorizedException);
     });
 
     it('should throw UnauthorizedException if user not found', async () => {
       (redisService.get as jest.Mock).mockResolvedValue('user-123');
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.refreshTokens('valid-token')).rejects.toThrow(
-        UnauthorizedException,
-      );
+      await expect(service.refreshTokens('valid-token')).rejects.toThrow(UnauthorizedException);
     });
   });
 
@@ -216,9 +202,7 @@ describe('AuthService', () => {
     it('should delete refresh token from Redis', async () => {
       await service.logout('refresh-token');
 
-      expect(redisService.del).toHaveBeenCalledWith(
-        'refresh_token:refresh-token',
-      );
+      expect(redisService.del).toHaveBeenCalledWith('refresh_token:refresh-token');
     });
   });
 

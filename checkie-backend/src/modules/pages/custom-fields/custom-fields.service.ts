@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { CustomFieldType } from '@prisma/client';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CreateCustomFieldDto, UpdateCustomFieldDto } from './dto';
@@ -198,9 +194,7 @@ export class CustomFieldsService {
 
     if (type && typesRequiringOptions.includes(type)) {
       if (!options || options.length === 0) {
-        throw new BadRequestException(
-          `Options are required for ${type} field type`,
-        );
+        throw new BadRequestException(`Options are required for ${type} field type`);
       }
     }
   }

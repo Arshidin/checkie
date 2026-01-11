@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Patch,
-  Delete,
-  Param,
-  Body,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Patch, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard, StoreAccessGuard, Roles } from '../../common';
 import { StoreUserRole } from '@prisma/client';
 import { CustomersService } from './customers.service';
@@ -24,10 +15,7 @@ export class CustomersController {
    */
   @Get()
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER)
-  async findAll(
-    @Param('storeId') storeId: string,
-    @Query() query: CustomerQueryDto,
-  ) {
+  async findAll(@Param('storeId') storeId: string, @Query() query: CustomerQueryDto) {
     const result = await this.customersService.findAll(storeId, query);
     return { data: result };
   }
@@ -49,10 +37,7 @@ export class CustomersController {
    */
   @Get(':customerId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER)
-  async findOne(
-    @Param('storeId') storeId: string,
-    @Param('customerId') customerId: string,
-  ) {
+  async findOne(@Param('storeId') storeId: string, @Param('customerId') customerId: string) {
     const customer = await this.customersService.findOne(storeId, customerId);
     return { data: customer };
   }
@@ -78,10 +63,7 @@ export class CustomersController {
    */
   @Delete(':customerId')
   @Roles(StoreUserRole.OWNER)
-  async delete(
-    @Param('storeId') storeId: string,
-    @Param('customerId') customerId: string,
-  ) {
+  async delete(@Param('storeId') storeId: string, @Param('customerId') customerId: string) {
     await this.customersService.delete(storeId, customerId);
     return { data: { success: true } };
   }

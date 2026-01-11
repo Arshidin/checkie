@@ -1,7 +1,10 @@
 import { Processor, WorkerHost, OnWorkerEvent } from '@nestjs/bullmq';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bullmq';
-import { WebhookDeliveryService, DeliveryJobData } from '../../modules/webhooks/webhook-delivery.service';
+import {
+  WebhookDeliveryService,
+  DeliveryJobData,
+} from '../../modules/webhooks/webhook-delivery.service';
 
 @Processor('webhooks')
 export class WebhookProcessor extends WorkerHost {
@@ -34,8 +37,6 @@ export class WebhookProcessor extends WorkerHost {
 
   @OnWorkerEvent('failed')
   onFailed(job: Job<DeliveryJobData>, error: Error) {
-    this.logger.error(
-      `Job ${job.id} failed for delivery ${job.data.deliveryId}: ${error.message}`,
-    );
+    this.logger.error(`Job ${job.id} failed for delivery ${job.data.deliveryId}: ${error.message}`);
   }
 }

@@ -1,9 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  ConflictException,
-  ForbiddenException,
-  NotFoundException,
-} from '@nestjs/common';
+import { ConflictException, ForbiddenException, NotFoundException } from '@nestjs/common';
 import { StoreUserRole } from '@prisma/client';
 import { StoresService } from './stores.service';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -111,13 +107,9 @@ describe('StoresService', () => {
     });
 
     it('should throw ConflictException if slug is taken', async () => {
-      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(
-        mockStore,
-      );
+      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(mockStore);
 
-      await expect(service.create('user-123', createDto)).rejects.toThrow(
-        ConflictException,
-      );
+      await expect(service.create('user-123', createDto)).rejects.toThrow(ConflictException);
     });
 
     it('should use provided slug if given', async () => {
@@ -139,9 +131,7 @@ describe('StoresService', () => {
 
   describe('findById', () => {
     it('should return store if found', async () => {
-      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(
-        mockStore,
-      );
+      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(mockStore);
 
       const result = await service.findById('store-123');
 
@@ -151,9 +141,7 @@ describe('StoresService', () => {
     it('should throw NotFoundException if store not found', async () => {
       (prismaService.store.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.findById('invalid-id')).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.findById('invalid-id')).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -161,9 +149,7 @@ describe('StoresService', () => {
     const updateDto = { name: 'Updated Store' };
 
     it('should update store successfully', async () => {
-      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(
-        mockStore,
-      );
+      (prismaService.store.findUnique as jest.Mock).mockResolvedValue(mockStore);
       (prismaService.store.update as jest.Mock).mockResolvedValue({
         ...mockStore,
         name: 'Updated Store',
@@ -177,9 +163,7 @@ describe('StoresService', () => {
     it('should throw NotFoundException if store not found', async () => {
       (prismaService.store.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.update('invalid-id', updateDto)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.update('invalid-id', updateDto)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -222,22 +206,16 @@ describe('StoresService', () => {
     it('should throw NotFoundException if user not found', async () => {
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.inviteMember('store-123', inviteDto),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.inviteMember('store-123', inviteDto)).rejects.toThrow(NotFoundException);
     });
 
     it('should throw ConflictException if user is already a member', async () => {
       (prismaService.user.findUnique as jest.Mock).mockResolvedValue({
         id: 'existing-user',
       });
-      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(
-        mockStoreUser,
-      );
+      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(mockStoreUser);
 
-      await expect(
-        service.inviteMember('store-123', inviteDto),
-      ).rejects.toThrow(ConflictException);
+      await expect(service.inviteMember('store-123', inviteDto)).rejects.toThrow(ConflictException);
     });
 
     it('should throw ForbiddenException if trying to invite as owner', async () => {
@@ -247,9 +225,9 @@ describe('StoresService', () => {
       });
       (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.inviteMember('store-123', ownerInvite),
-      ).rejects.toThrow(ForbiddenException);
+      await expect(service.inviteMember('store-123', ownerInvite)).rejects.toThrow(
+        ForbiddenException,
+      );
     });
   });
 
@@ -269,19 +247,17 @@ describe('StoresService', () => {
     it('should throw NotFoundException if member not found', async () => {
       (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.removeMember('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.removeMember('store-123', 'invalid-id')).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw ForbiddenException if trying to remove owner', async () => {
-      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(
-        mockStoreUser,
-      ); // OWNER role
+      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(mockStoreUser); // OWNER role
 
-      await expect(
-        service.removeMember('store-123', 'owner-id'),
-      ).rejects.toThrow(ForbiddenException);
+      await expect(service.removeMember('store-123', 'owner-id')).rejects.toThrow(
+        ForbiddenException,
+      );
     });
   });
 
@@ -306,25 +282,15 @@ describe('StoresService', () => {
       (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(null);
 
       await expect(
-        service.updateMemberRole(
-          'store-123',
-          'invalid-id',
-          StoreUserRole.ADMIN,
-        ),
+        service.updateMemberRole('store-123', 'invalid-id', StoreUserRole.ADMIN),
       ).rejects.toThrow(NotFoundException);
     });
 
     it('should throw ForbiddenException if trying to change owner role', async () => {
-      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(
-        mockStoreUser,
-      ); // OWNER role
+      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(mockStoreUser); // OWNER role
 
       await expect(
-        service.updateMemberRole(
-          'store-123',
-          'owner-id',
-          StoreUserRole.ADMIN,
-        ),
+        service.updateMemberRole('store-123', 'owner-id', StoreUserRole.ADMIN),
       ).rejects.toThrow(ForbiddenException);
     });
 
@@ -335,20 +301,14 @@ describe('StoresService', () => {
       });
 
       await expect(
-        service.updateMemberRole(
-          'store-123',
-          'admin-id',
-          StoreUserRole.OWNER,
-        ),
+        service.updateMemberRole('store-123', 'admin-id', StoreUserRole.OWNER),
       ).rejects.toThrow(ForbiddenException);
     });
   });
 
   describe('getUserRole', () => {
     it('should return user role if member', async () => {
-      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(
-        mockStoreUser,
-      );
+      (prismaService.storeUser.findUnique as jest.Mock).mockResolvedValue(mockStoreUser);
 
       const result = await service.getUserRole('store-123', 'user-123');
 

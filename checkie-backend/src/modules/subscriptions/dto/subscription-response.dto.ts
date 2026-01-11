@@ -1,8 +1,4 @@
-import {
-  SubscriptionStatus,
-  SubscriptionInterval,
-  Currency,
-} from '@prisma/client';
+import { SubscriptionStatus, SubscriptionInterval, Currency } from '@prisma/client';
 
 export class SubscriptionResponseDto {
   id!: string;

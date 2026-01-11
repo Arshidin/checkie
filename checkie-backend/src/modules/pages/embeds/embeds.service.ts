@@ -27,12 +27,7 @@ export class EmbedsService {
     }
 
     // Generate embed code
-    const embedCode = this.generateEmbedCode(
-      dto.type,
-      page.store.slug,
-      page.slug,
-      dto.settings,
-    );
+    const embedCode = this.generateEmbedCode(dto.type, page.store.slug, page.slug, dto.settings);
 
     return this.prisma.pageEmbed.create({
       data: {

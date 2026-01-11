@@ -1,5 +1,9 @@
 import { ProviderFactory } from '../../modules/providers/provider.factory';
-import { PaymentProvider, PaymentIntentResult, RefundResult } from '../../modules/providers/interfaces/payment-provider.interface';
+import {
+  PaymentProvider,
+  PaymentIntentResult,
+  RefundResult,
+} from '../../modules/providers/interfaces/payment-provider.interface';
 
 export function createMockPaymentProvider(): PaymentProvider {
   return {

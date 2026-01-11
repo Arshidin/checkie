@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CouponsService } from '../coupons/coupons.service';
 import { Decimal } from '@prisma/client/runtime/library';
@@ -26,10 +21,7 @@ export class WidgetService {
   /**
    * Get page by store and page slug for widget display
    */
-  async getPage(
-    storeSlug: string,
-    pageSlug: string,
-  ): Promise<WidgetPageResponseDto> {
+  async getPage(storeSlug: string, pageSlug: string): Promise<WidgetPageResponseDto> {
     const store = await this.prisma.store.findUnique({
       where: { slug: storeSlug },
     });
@@ -161,14 +153,10 @@ export class WidgetService {
     if (dto.amount !== undefined && page.pricingType === 'PAY_WHAT_YOU_WANT') {
       amount = dto.amount;
       if (page.minPrice && amount < Number(page.minPrice)) {
-        throw new BadRequestException(
-          `Amount must be at least ${Number(page.minPrice)}`,
-        );
+        throw new BadRequestException(`Amount must be at least ${Number(page.minPrice)}`);
       }
       if (page.maxPrice && amount > Number(page.maxPrice)) {
-        throw new BadRequestException(
-          `Amount cannot exceed ${Number(page.maxPrice)}`,
-        );
+        throw new BadRequestException(`Amount cannot exceed ${Number(page.maxPrice)}`);
       }
     }
 
@@ -275,15 +263,23 @@ export class WidgetService {
           firstName: dto.firstName,
           lastName: dto.lastName,
           phone: dto.phone,
-          billingAddress: dto.billingAddress ? JSON.parse(JSON.stringify(dto.billingAddress)) : undefined,
-          shippingAddress: dto.shippingAddress ? JSON.parse(JSON.stringify(dto.shippingAddress)) : undefined,
+          billingAddress: dto.billingAddress
+            ? JSON.parse(JSON.stringify(dto.billingAddress))
+            : undefined,
+          shippingAddress: dto.shippingAddress
+            ? JSON.parse(JSON.stringify(dto.shippingAddress))
+            : undefined,
         },
         update: {
           firstName: dto.firstName || undefined,
           lastName: dto.lastName || undefined,
           phone: dto.phone || undefined,
-          billingAddress: dto.billingAddress ? JSON.parse(JSON.stringify(dto.billingAddress)) : undefined,
-          shippingAddress: dto.shippingAddress ? JSON.parse(JSON.stringify(dto.shippingAddress)) : undefined,
+          billingAddress: dto.billingAddress
+            ? JSON.parse(JSON.stringify(dto.billingAddress))
+            : undefined,
+          shippingAddress: dto.shippingAddress
+            ? JSON.parse(JSON.stringify(dto.shippingAddress))
+            : undefined,
         },
       });
       customerId = customer.id;
@@ -311,28 +307,30 @@ export class WidgetService {
     // Save custom field values
     if (dto.customFields) {
       for (const [fieldId, value] of Object.entries(dto.customFields)) {
-        await this.prisma.customFieldValue.upsert({
-          where: {
-            id: `${sessionId}_${fieldId}`, // Pseudo unique
-          },
-          create: {
-            customFieldId: fieldId,
-            checkoutSessionId: sessionId,
-            value,
-          },
-          update: {
-            value,
-          },
-        }).catch(() => {
-          // Create with new ID if pseudo unique fails
-          return this.prisma.customFieldValue.create({
-            data: {
+        await this.prisma.customFieldValue
+          .upsert({
+            where: {
+              id: `${sessionId}_${fieldId}`, // Pseudo unique
+            },
+            create: {
               customFieldId: fieldId,
               checkoutSessionId: sessionId,
               value,
             },
+            update: {
+              value,
+            },
+          })
+          .catch(() => {
+            // Create with new ID if pseudo unique fails
+            return this.prisma.customFieldValue.create({
+              data: {
+                customFieldId: fieldId,
+                checkoutSessionId: sessionId,
+                value,
+              },
+            });
           });
-        });
       }
     }
 
@@ -344,7 +342,8 @@ export class WidgetService {
         amount: new Decimal(amount),
         discountAmount: new Decimal(discountAmount),
         couponId,
-        selectedVariants: dto.selectedVariants ?? (session.selectedVariants as Record<string, string> | undefined),
+        selectedVariants:
+          dto.selectedVariants ?? (session.selectedVariants as Record<string, string> | undefined),
       },
     });
 

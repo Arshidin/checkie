@@ -37,10 +37,7 @@ describe('BalanceService', () => {
     };
 
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        BalanceService,
-        { provide: PrismaService, useValue: prisma },
-      ],
+      providers: [BalanceService, { provide: PrismaService, useValue: prisma }],
     }).compile();
 
     service = module.get<BalanceService>(BalanceService);
@@ -148,9 +145,9 @@ describe('BalanceService', () => {
       prisma.$transaction.mockImplementation(async (callback) => {
         const tx = {
           balanceTransaction: {
-            findFirst: jest.fn().mockResolvedValue(
-              createMockBalanceTransaction({ balanceAfter: currentBalance }),
-            ),
+            findFirst: jest
+              .fn()
+              .mockResolvedValue(createMockBalanceTransaction({ balanceAfter: currentBalance })),
             create: jest.fn(),
           },
         };
@@ -336,7 +333,7 @@ describe('BalanceService', () => {
         { type: 'PAYMENT_RECEIVED', amount: new Decimal(100), currency: 'USD' },
         { type: 'PAYMENT_RECEIVED', amount: new Decimal(200), currency: 'USD' },
         { type: 'REFUND', amount: new Decimal(-50), currency: 'USD' },
-        { type: 'FEE', amount: new Decimal(-8.70), currency: 'USD' },
+        { type: 'FEE', amount: new Decimal(-8.7), currency: 'USD' },
         { type: 'PAYOUT_COMPLETED', amount: new Decimal(-100), currency: 'USD' },
       ];
       (prisma.balanceTransaction.findMany as jest.Mock).mockResolvedValue(transactions);
@@ -349,9 +346,9 @@ describe('BalanceService', () => {
 
       expect(result.totalReceived.toNumber()).toBe(300);
       expect(result.totalRefunds.toNumber()).toBe(50);
-      expect(result.totalFees.toNumber()).toBe(8.70);
+      expect(result.totalFees.toNumber()).toBe(8.7);
       expect(result.totalPayouts.toNumber()).toBe(100);
-      expect(result.netChange.toNumber()).toBeCloseTo(141.30, 2);
+      expect(result.netChange.toNumber()).toBeCloseTo(141.3, 2);
     });
 
     it('should return zeros for empty period', async () => {

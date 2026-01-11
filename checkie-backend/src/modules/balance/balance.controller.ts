@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { StoreAccessGuard } from '../../common/guards/store-access.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
@@ -20,19 +14,13 @@ export class BalanceController {
 
   @Get()
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async getBalance(
-    @Param('storeId') storeId: string,
-    @Query('currency') currency?: Currency,
-  ) {
+  async getBalance(@Param('storeId') storeId: string, @Query('currency') currency?: Currency) {
     return this.balanceService.getBalance(storeId, currency);
   }
 
   @Get('transactions')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async getTransactions(
-    @Param('storeId') storeId: string,
-    @Query() filters: BalanceFilterDto,
-  ) {
+  async getTransactions(@Param('storeId') storeId: string, @Query() filters: BalanceFilterDto) {
     return this.balanceService.getTransactions(storeId, {
       type: filters.type,
       currency: filters.currency,
@@ -51,9 +39,7 @@ export class BalanceController {
     @Query('endDate') endDate: string,
     @Query('currency') currency?: Currency,
   ) {
-    const start = startDate
-      ? new Date(startDate)
-      : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const start = startDate ? new Date(startDate) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const end = endDate ? new Date(endDate) : new Date();
 
     return this.balanceService.getSummary(storeId, start, end, currency);

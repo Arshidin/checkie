@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { StoreAccessGuard } from '../../common/guards/store-access.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
@@ -19,16 +13,8 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Get()
-  @Roles(
-    StoreUserRole.OWNER,
-    StoreUserRole.ADMIN,
-    StoreUserRole.MANAGER,
-    StoreUserRole.VIEWER,
-  )
-  async list(
-    @Param('storeId') storeId: string,
-    @Query() filters: PaymentFilterDto,
-  ) {
+  @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
+  async list(@Param('storeId') storeId: string, @Query() filters: PaymentFilterDto) {
     return this.paymentsService.findByStore(storeId, {
       status: filters.status,
       pageId: filters.pageId,
@@ -41,25 +27,14 @@ export class PaymentsController {
   }
 
   @Get(':paymentId')
-  @Roles(
-    StoreUserRole.OWNER,
-    StoreUserRole.ADMIN,
-    StoreUserRole.MANAGER,
-    StoreUserRole.VIEWER,
-  )
-  async get(
-    @Param('storeId') storeId: string,
-    @Param('paymentId') paymentId: string,
-  ) {
+  @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
+  async get(@Param('storeId') storeId: string, @Param('paymentId') paymentId: string) {
     return this.paymentsService.findById(paymentId, storeId);
   }
 
   @Get(':paymentId/attempts')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async getAttempts(
-    @Param('storeId') storeId: string,
-    @Param('paymentId') paymentId: string,
-  ) {
+  async getAttempts(@Param('storeId') storeId: string, @Param('paymentId') paymentId: string) {
     const payment = await this.paymentsService.findById(paymentId, storeId);
     return payment.attempts;
   }

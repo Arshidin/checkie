@@ -9,9 +9,8 @@ import {
 import { PrismaService } from '../../prisma/prisma.service';
 import { BalanceService } from '../balance/balance.service';
 import { ProviderFactory } from '../providers/provider.factory';
-import { Refund, RefundStatus, RefundReason, Prisma, Currency } from '@prisma/client';
+import { Refund, RefundStatus, RefundReason, Prisma } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
-import { CreateRefundDto } from './dto';
 import { WebhookEventsService } from '../webhooks/webhook-events.service';
 import { WebhookEventType } from '../webhooks/dto/webhook-event-types';
 

@@ -60,9 +60,7 @@ export class PaymentsService {
     this.platformFeePercent = config.get<number>('platform.feePercent', 0.029);
   }
 
-  async initiatePayment(
-    params: InitiatePaymentParams,
-  ): Promise<InitiatePaymentResult> {
+  async initiatePayment(params: InitiatePaymentParams): Promise<InitiatePaymentResult> {
     const session = await this.prisma.checkoutSession.findUnique({
       where: { id: params.checkoutSessionId },
       include: {
@@ -266,8 +264,7 @@ export class PaymentsService {
     providerData: any,
   ): Promise<void> {
     const failureCode = providerData.last_payment_error?.code || 'unknown';
-    const failureMessage =
-      providerData.last_payment_error?.message || 'Payment failed';
+    const failureMessage = providerData.last_payment_error?.message || 'Payment failed';
 
     await this.prisma.payment.update({
       where: { id: paymentId },
@@ -316,10 +313,7 @@ export class PaymentsService {
     this.logger.warn(`Payment ${paymentId} failed: ${failureMessage}`);
   }
 
-  private async handlePaymentCanceled(
-    paymentId: string,
-    checkoutSessionId: string,
-  ): Promise<void> {
+  private async handlePaymentCanceled(paymentId: string, checkoutSessionId: string): Promise<void> {
     await this.prisma.payment.update({
       where: { id: paymentId },
       data: { status: 'CANCELLED' },

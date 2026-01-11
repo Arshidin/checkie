@@ -12,7 +12,6 @@ import {
   createMockProviderFactory,
   createMockPaymentProvider,
   createMockSubscription,
-  createMockCustomer,
 } from '../../test/mocks';
 import { Decimal } from '@prisma/client/runtime/library';
 import { SubscriptionInterval, SubscriptionStatus, Currency } from '@prisma/client';
@@ -120,9 +119,7 @@ describe('SubscriptionsService', () => {
         ...mockSubscription,
         id: 'sub-to-delete',
       });
-      (mockProvider.createSubscription as jest.Mock).mockRejectedValue(
-        new Error('Provider error'),
-      );
+      (mockProvider.createSubscription as jest.Mock).mockRejectedValue(new Error('Provider error'));
 
       await expect(service.createSubscription(createParams)).rejects.toThrow();
 
@@ -172,9 +169,9 @@ describe('SubscriptionsService', () => {
     it('should throw NotFoundException for non-existent subscription', async () => {
       (prisma.subscription.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('non-existent', 'store-123'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('non-existent', 'store-123')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -189,7 +186,7 @@ describe('SubscriptionsService', () => {
     });
 
     it('should cancel subscription immediately', async () => {
-      const result = await service.cancelSubscription(
+      await service.cancelSubscription(
         mockSubscription.id,
         'store-123',
         true,
@@ -233,9 +230,9 @@ describe('SubscriptionsService', () => {
         status: 'CANCELLED',
       });
 
-      await expect(
-        service.cancelSubscription(mockSubscription.id, 'store-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.cancelSubscription(mockSubscription.id, 'store-123')).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should trigger webhook on cancellation', async () => {
@@ -265,9 +262,9 @@ describe('SubscriptionsService', () => {
         status: 'PAUSED',
       });
 
-      await expect(
-        service.pauseSubscription(mockSubscription.id, 'store-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.pauseSubscription(mockSubscription.id, 'store-123')).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 
@@ -295,9 +292,9 @@ describe('SubscriptionsService', () => {
     it('should throw error for non-paused subscription', async () => {
       (prisma.subscription.findFirst as jest.Mock).mockResolvedValue(mockSubscription);
 
-      await expect(
-        service.resumeSubscription(mockSubscription.id, 'store-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.resumeSubscription(mockSubscription.id, 'store-123')).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 

@@ -40,20 +40,14 @@ export class WebhooksController {
 
   @Post('endpoints')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async createEndpoint(
-    @Param('storeId') storeId: string,
-    @Body() dto: CreateWebhookEndpointDto,
-  ) {
+  async createEndpoint(@Param('storeId') storeId: string, @Body() dto: CreateWebhookEndpointDto) {
     const endpoint = await this.endpointsService.create(storeId, dto);
     return { data: endpoint };
   }
 
   @Get('endpoints/:endpointId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async getEndpoint(
-    @Param('storeId') storeId: string,
-    @Param('endpointId') endpointId: string,
-  ) {
+  async getEndpoint(@Param('storeId') storeId: string, @Param('endpointId') endpointId: string) {
     const endpoint = await this.endpointsService.findOne(storeId, endpointId);
     return { data: endpoint };
   }
@@ -65,30 +59,20 @@ export class WebhooksController {
     @Param('endpointId') endpointId: string,
     @Body() dto: UpdateWebhookEndpointDto,
   ) {
-    const endpoint = await this.endpointsService.update(
-      storeId,
-      endpointId,
-      dto,
-    );
+    const endpoint = await this.endpointsService.update(storeId, endpointId, dto);
     return { data: endpoint };
   }
 
   @Delete('endpoints/:endpointId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteEndpoint(
-    @Param('storeId') storeId: string,
-    @Param('endpointId') endpointId: string,
-  ) {
+  async deleteEndpoint(@Param('storeId') storeId: string, @Param('endpointId') endpointId: string) {
     await this.endpointsService.delete(storeId, endpointId);
   }
 
   @Post('endpoints/:endpointId/rotate-secret')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async rotateSecret(
-    @Param('storeId') storeId: string,
-    @Param('endpointId') endpointId: string,
-  ) {
+  async rotateSecret(@Param('storeId') storeId: string, @Param('endpointId') endpointId: string) {
     const result = await this.endpointsService.rotateSecret(storeId, endpointId);
     return { data: result };
   }
@@ -136,20 +120,14 @@ export class WebhooksController {
 
   @Get('events/:eventId')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async getEvent(
-    @Param('storeId') storeId: string,
-    @Param('eventId') eventId: string,
-  ) {
+  async getEvent(@Param('storeId') storeId: string, @Param('eventId') eventId: string) {
     const event = await this.eventsService.getEvent(storeId, eventId);
     return { data: event };
   }
 
   @Post('events/:eventId/resend')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
-  async resendEvent(
-    @Param('storeId') storeId: string,
-    @Param('eventId') eventId: string,
-  ) {
+  async resendEvent(@Param('storeId') storeId: string, @Param('eventId') eventId: string) {
     const result = await this.eventsService.resendEvent(storeId, eventId);
     return { data: result };
   }
@@ -165,10 +143,7 @@ export class WebhooksController {
 
   @Get('stats')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER)
-  async getStats(
-    @Param('storeId') storeId: string,
-    @Query('days') days?: string,
-  ) {
+  async getStats(@Param('storeId') storeId: string, @Query('days') days?: string) {
     const stats = await this.deliveryService.getDeliveryStats(
       storeId,
       days ? parseInt(days, 10) : 7,
@@ -179,12 +154,7 @@ export class WebhooksController {
   // === Event Types ===
 
   @Get('event-types')
-  @Roles(
-    StoreUserRole.OWNER,
-    StoreUserRole.ADMIN,
-    StoreUserRole.MANAGER,
-    StoreUserRole.VIEWER,
-  )
+  @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
   async getEventTypes() {
     const types = this.endpointsService.getAvailableEventTypes();
     return { data: types };

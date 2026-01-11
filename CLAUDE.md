@@ -335,6 +335,151 @@ npm run build               # Production build
 
 ---
 
+## 🚀 Infrastructure & Deployment
+
+### Architecture
+```
+┌─────────────┐     ┌─────────────────────────────────────┐
+│   GitHub    │────▶│            Railway                   │
+│ Arshidin/   │     │  ┌─────────────────────────────┐    │
+│  checkie    │     │  │  checkie (Backend)          │    │
+└─────────────┘     │  │  checkie-production.up.     │    │
+                    │  │  railway.app                │    │
+                    │  └──────────┬──────────────────┘    │
+                    │             │                        │
+                    │  ┌──────────┴──────────┐            │
+                    │  │                     │            │
+                    │  ▼                     ▼            │
+                    │ ┌──────────┐    ┌──────────┐       │
+                    │ │PostgreSQL│    │  Redis   │       │
+                    │ │ (Volume) │    │ (Volume) │       │
+                    │ └──────────┘    └──────────┘       │
+                    └─────────────────────────────────────┘
+```
+
+### Railway Setup (Production)
+
+| Service | Status | Details |
+|---------|--------|---------|
+| checkie (Backend) | ✅ Online | NestJS app via Nixpacks |
+| PostgreSQL | ✅ Online | With persistent volume |
+| Redis | ✅ Online | With persistent volume |
+
+**Backend URL:** `https://checkie-production.up.railway.app`
+
+### Railway Configuration
+
+**File:** `checkie-backend/railway.toml`
+```toml
+[build]
+builder = "nixpacks"
+buildCommand = "rm -rf dist && npm run build && npx prisma generate"
+
+[deploy]
+startCommand = "npx prisma migrate deploy && npm run start:prod"
+```
+
+### Environment Variables (Railway)
+
+```env
+# Required
+NODE_ENV=production
+PORT=3000
+JWT_SECRET=<generate-32+-char-secret>
+ENCRYPTION_KEY=<generate-exactly-32-char-key>
+
+# Auto-provided by Railway
+DATABASE_URL=<auto-from-postgresql>
+REDIS_URL=<auto-from-redis>
+
+# Stripe
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# URLs
+APP_URL=https://checkie-production.up.railway.app
+WIDGET_URL=https://your-frontend.netlify.app
+ALLOWED_ORIGINS=https://your-frontend.netlify.app
+
+# Platform
+PLATFORM_FEE_PERCENT=0.029
+```
+
+### GitHub Actions CI/CD
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `.github/workflows/ci.yml` | Push/PR to main, develop | Lint, Test, Build, Docker |
+| `.github/workflows/deploy.yml` | Push to main | Deploy to Railway |
+
+**Required Secrets:**
+- `RAILWAY_TOKEN` — Railway API token for deployment
+
+### Deployment Commands
+
+```bash
+# Manual deploy via Railway CLI
+cd checkie-backend
+railway up
+
+# Check status
+railway status
+
+# View logs
+railway logs
+
+# Run migrations manually
+railway run npx prisma migrate deploy
+
+# Open Prisma Studio
+railway run npx prisma studio
+```
+
+### Health Check Endpoints
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /api/health` | Full health check (DB, Redis) |
+| `GET /api/health/live` | Liveness probe |
+| `GET /api/health/ready` | Readiness probe |
+
+### Docker (Alternative)
+
+**File:** `checkie-backend/Dockerfile`
+- Multi-stage build (builder + runner)
+- Non-root user for security
+- Built-in health check
+- Runs migrations on startup
+
+```bash
+# Build image
+docker build -t checkie-backend .
+
+# Run container
+docker run -p 3000:3000 \
+  -e DATABASE_URL=... \
+  -e REDIS_URL=... \
+  -e JWT_SECRET=... \
+  -e ENCRYPTION_KEY=... \
+  checkie-backend
+```
+
+### Stripe Webhook Setup
+
+1. Go to [Stripe Dashboard](https://dashboard.stripe.com/webhooks)
+2. Add endpoint: `https://checkie-production.up.railway.app/api/webhooks/stripe`
+3. Select events:
+   - `payment_intent.succeeded`
+   - `payment_intent.payment_failed`
+   - `customer.subscription.created`
+   - `customer.subscription.updated`
+   - `customer.subscription.deleted`
+   - `invoice.payment_succeeded`
+   - `invoice.payment_failed`
+4. Copy webhook secret to Railway `STRIPE_WEBHOOK_SECRET`
+
+---
+
 ## 💳 Stripe STUB Provider
 
 Для разработки без реальных Stripe ключей реализован STUB провайдер:
@@ -368,7 +513,8 @@ curl -X POST http://localhost:3000/api/webhooks/stripe/test \
 
 | Document | Path |
 |----------|------|
-| Implementation Plan | `docs/IMPLEMENTATION_PLAN.md` |
+| Implementation Plan | `IMPLEMENTATION_PLAN.md` |
+| Deployment Guide | `DEPLOYMENT.md` |
 | Prisma Schema | `docs/specs/schema.prisma` |
 | State Machine | `docs/specs/checkout-state-machine.md` |
 | API Endpoints | `docs/specs/api-endpoints.md` |
@@ -376,4 +522,4 @@ curl -X POST http://localhost:3000/api/webhooks/stripe/test \
 
 ---
 
-*Last updated: January 11, 2026*
+*Last updated: January 12, 2026*

@@ -1,9 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  BadRequestException,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { CouponsService } from './coupons.service';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Decimal } from '@prisma/client/runtime/library';
@@ -102,30 +98,22 @@ describe('CouponsService', () => {
     });
 
     it('should throw ConflictException if code already exists', async () => {
-      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(mockCoupon);
 
-      await expect(service.create('store-123', createDto)).rejects.toThrow(
-        ConflictException,
-      );
+      await expect(service.create('store-123', createDto)).rejects.toThrow(ConflictException);
     });
 
     it('should throw BadRequestException if percent discount exceeds 100', async () => {
       const invalidDto = { ...createDto, discountValue: 150 };
       (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.create('store-123', invalidDto)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(service.create('store-123', invalidDto)).rejects.toThrow(BadRequestException);
     });
   });
 
   describe('findAllByStore', () => {
     it('should return only active coupons by default', async () => {
-      (prismaService.coupon.findMany as jest.Mock).mockResolvedValue([
-        mockCoupon,
-      ]);
+      (prismaService.coupon.findMany as jest.Mock).mockResolvedValue([mockCoupon]);
 
       const result = await service.findAllByStore('store-123');
 
@@ -152,9 +140,7 @@ describe('CouponsService', () => {
 
   describe('findById', () => {
     it('should return coupon if found', async () => {
-      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(mockCoupon);
 
       const result = await service.findById('store-123', 'coupon-123');
 
@@ -164,9 +150,7 @@ describe('CouponsService', () => {
     it('should throw NotFoundException if coupon not found', async () => {
       (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -174,9 +158,7 @@ describe('CouponsService', () => {
     const updateDto = { discountValue: 20 };
 
     it('should update coupon successfully', async () => {
-      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(mockCoupon);
       (prismaService.coupon.update as jest.Mock).mockResolvedValue({
         ...mockCoupon,
         discountValue: new Decimal(20),
@@ -190,15 +172,13 @@ describe('CouponsService', () => {
     it('should throw NotFoundException if coupon not found', async () => {
       (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.update('store-123', 'invalid-id', updateDto),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.update('store-123', 'invalid-id', updateDto)).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw BadRequestException if updating percent to exceed 100', async () => {
-      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(mockCoupon);
 
       await expect(
         service.update('store-123', 'coupon-123', { discountValue: 150 }),
@@ -208,9 +188,7 @@ describe('CouponsService', () => {
 
   describe('delete (deactivate)', () => {
     it('should deactivate coupon successfully', async () => {
-      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(mockCoupon);
       (prismaService.coupon.update as jest.Mock).mockResolvedValue({
         ...mockCoupon,
         isActive: false,
@@ -228,9 +206,7 @@ describe('CouponsService', () => {
     it('should throw NotFoundException if coupon not found', async () => {
       (prismaService.coupon.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.delete('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.delete('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -241,9 +217,7 @@ describe('CouponsService', () => {
     };
 
     it('should validate coupon successfully with percent discount', async () => {
-      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(mockCoupon);
 
       const result = await service.validateCoupon('store-123', validateDto);
 
@@ -258,9 +232,7 @@ describe('CouponsService', () => {
         discountType: 'fixed',
         discountValue: new Decimal(15),
       };
-      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(
-        fixedCoupon,
-      );
+      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(fixedCoupon);
 
       const result = await service.validateCoupon('store-123', validateDto);
 
@@ -269,9 +241,7 @@ describe('CouponsService', () => {
     });
 
     it('should return invalid if coupon not found', async () => {
-      (prismaService.coupon.findUnique as jest.Mock).mockRejectedValue(
-        new NotFoundException(),
-      );
+      (prismaService.coupon.findUnique as jest.Mock).mockRejectedValue(new NotFoundException());
 
       const result = await service.validateCoupon('store-123', {
         code: 'INVALID',
@@ -319,9 +289,7 @@ describe('CouponsService', () => {
     });
 
     it('should return invalid if below minimum purchase', async () => {
-      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(
-        mockCoupon,
-      );
+      (prismaService.coupon.findUnique as jest.Mock).mockResolvedValue(mockCoupon);
 
       const result = await service.validateCoupon('store-123', {
         code: 'SAVE10',

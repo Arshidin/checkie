@@ -1,17 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Param,
-  Body,
-  Query,
-  Req,
-  Headers,
-  Ip,
-} from '@nestjs/common';
+import { Controller, Get, Post, Patch, Param, Body, Headers, Ip } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
-import { Request } from 'express';
 import { Public } from '../../common/decorators';
 import { WidgetService } from './widget.service';
 import { PaymentsService } from '../payments/payments.service';
@@ -36,10 +24,7 @@ export class WidgetController {
    * GET /api/widget/pages/:storeSlug/:pageSlug
    */
   @Get('pages/:storeSlug/:pageSlug')
-  async getPage(
-    @Param('storeSlug') storeSlug: string,
-    @Param('pageSlug') pageSlug: string,
-  ) {
+  async getPage(@Param('storeSlug') storeSlug: string, @Param('pageSlug') pageSlug: string) {
     const page = await this.widgetService.getPage(storeSlug, pageSlug);
     return { data: page };
   }
@@ -68,10 +53,7 @@ export class WidgetController {
    * PATCH /api/widget/sessions/:sessionId
    */
   @Patch('sessions/:sessionId')
-  async updateSession(
-    @Param('sessionId') sessionId: string,
-    @Body() dto: UpdateSessionDto,
-  ) {
+  async updateSession(@Param('sessionId') sessionId: string, @Body() dto: UpdateSessionDto) {
     const session = await this.widgetService.updateSession(sessionId, dto);
     return { data: session };
   }

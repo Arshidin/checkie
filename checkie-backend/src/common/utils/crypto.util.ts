@@ -24,10 +24,7 @@ export function encrypt(text: string, encryptionKey: string): EncryptedData {
   };
 }
 
-export function decrypt(
-  encryptedData: EncryptedData,
-  encryptionKey: string,
-): string {
+export function decrypt(encryptedData: EncryptedData, encryptionKey: string): string {
   const key = Buffer.from(encryptionKey.padEnd(32, '0').slice(0, 32));
   const iv = Buffer.from(encryptedData.iv, 'hex');
   const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
@@ -38,10 +35,7 @@ export function decrypt(
   return decrypted;
 }
 
-export function encryptObject(
-  obj: Record<string, any>,
-  encryptionKey: string,
-): EncryptedData {
+export function encryptObject(obj: Record<string, any>, encryptionKey: string): EncryptedData {
   return encrypt(JSON.stringify(obj), encryptionKey);
 }
 

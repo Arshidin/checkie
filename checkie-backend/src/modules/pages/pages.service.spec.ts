@@ -1,9 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  BadRequestException,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { PageStatus, PricingType, Currency } from '@prisma/client';
 import { PagesService } from './pages.service';
 import { PrismaService } from '../../prisma/prisma.service';
@@ -119,9 +115,7 @@ describe('PagesService', () => {
     it('should throw ConflictException if slug is taken', async () => {
       (prismaService.page.findUnique as jest.Mock).mockResolvedValue(mockPage);
 
-      await expect(service.create('store-123', createDto)).rejects.toThrow(
-        ConflictException,
-      );
+      await expect(service.create('store-123', createDto)).rejects.toThrow(ConflictException);
     });
 
     it('should throw BadRequestException if fixed pricing without price', async () => {
@@ -131,9 +125,9 @@ describe('PagesService', () => {
       };
       (prismaService.page.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.create('store-123', dtoWithoutPrice),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.create('store-123', dtoWithoutPrice)).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw BadRequestException if subscription without interval', async () => {
@@ -144,9 +138,9 @@ describe('PagesService', () => {
       };
       (prismaService.page.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.create('store-123', subscriptionDto),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.create('store-123', subscriptionDto)).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('should throw BadRequestException if PWYW minPrice > maxPrice', async () => {
@@ -158,9 +152,7 @@ describe('PagesService', () => {
       };
       (prismaService.page.findUnique as jest.Mock).mockResolvedValue(null);
 
-      await expect(service.create('store-123', pwywDto)).rejects.toThrow(
-        BadRequestException,
-      );
+      await expect(service.create('store-123', pwywDto)).rejects.toThrow(BadRequestException);
     });
   });
 
@@ -181,9 +173,7 @@ describe('PagesService', () => {
     it('should throw NotFoundException if page not found', async () => {
       (prismaService.page.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.findById('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.findById('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -232,9 +222,9 @@ describe('PagesService', () => {
     it('should throw NotFoundException if page not found', async () => {
       (prismaService.page.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.update('store-123', 'invalid-id', updateDto),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.update('store-123', 'invalid-id', updateDto)).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('should throw ConflictException if new slug is taken', async () => {
@@ -244,9 +234,9 @@ describe('PagesService', () => {
         id: 'other-page',
       });
 
-      await expect(
-        service.update('store-123', 'page-123', { slug: 'taken-slug' }),
-      ).rejects.toThrow(ConflictException);
+      await expect(service.update('store-123', 'page-123', { slug: 'taken-slug' })).rejects.toThrow(
+        ConflictException,
+      );
     });
   });
 
@@ -273,9 +263,7 @@ describe('PagesService', () => {
     it('should throw NotFoundException if page not found', async () => {
       (prismaService.page.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.delete('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.delete('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -303,9 +291,7 @@ describe('PagesService', () => {
     it('should throw NotFoundException if page not found', async () => {
       (prismaService.page.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.publish('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.publish('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
 
     it('should throw BadRequestException if page is archived', async () => {
@@ -314,9 +300,7 @@ describe('PagesService', () => {
         status: PageStatus.ARCHIVED,
       });
 
-      await expect(
-        service.publish('store-123', 'page-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.publish('store-123', 'page-123')).rejects.toThrow(BadRequestException);
     });
 
     it('should throw BadRequestException if fixed pricing page has no price', async () => {
@@ -326,9 +310,7 @@ describe('PagesService', () => {
         price: null,
       });
 
-      await expect(
-        service.publish('store-123', 'page-123'),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.publish('store-123', 'page-123')).rejects.toThrow(BadRequestException);
     });
   });
 
@@ -372,9 +354,7 @@ describe('PagesService', () => {
     it('should throw NotFoundException if page not found', async () => {
       (prismaService.page.findFirst as jest.Mock).mockResolvedValue(null);
 
-      await expect(
-        service.duplicate('store-123', 'invalid-id'),
-      ).rejects.toThrow(NotFoundException);
+      await expect(service.duplicate('store-123', 'invalid-id')).rejects.toThrow(NotFoundException);
     });
 
     it('should handle slug collision by adding counter', async () => {

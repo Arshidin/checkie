@@ -39,15 +39,10 @@ export class WebhookEventsService {
       },
     });
 
-    this.logger.log(
-      `Created webhook event ${event.id}: ${type} for ${resourceType}/${resourceId}`,
-    );
+    this.logger.log(`Created webhook event ${event.id}: ${type} for ${resourceType}/${resourceId}`);
 
     // Get all active endpoints subscribed to this event type
-    const endpoints = await this.endpointsService.getEndpointsForEvent(
-      storeId,
-      type,
-    );
+    const endpoints = await this.endpointsService.getEndpointsForEvent(storeId, type);
 
     if (endpoints.length === 0) {
       this.logger.debug(`No endpoints subscribed to ${type} for store ${storeId}`);
@@ -59,9 +54,7 @@ export class WebhookEventsService {
       await this.deliveryService.scheduleDelivery(event.id, endpoint.id);
     }
 
-    this.logger.log(
-      `Scheduled ${endpoints.length} deliveries for event ${event.id}`,
-    );
+    this.logger.log(`Scheduled ${endpoints.length} deliveries for event ${event.id}`);
 
     return event;
   }
@@ -185,18 +178,13 @@ export class WebhookEventsService {
       return null;
     }
 
-    const endpoints = await this.endpointsService.getEndpointsForEvent(
-      storeId,
-      event.type,
-    );
+    const endpoints = await this.endpointsService.getEndpointsForEvent(storeId, event.type);
 
     for (const endpoint of endpoints) {
       await this.deliveryService.scheduleDelivery(event.id, endpoint.id);
     }
 
-    this.logger.log(
-      `Resent event ${eventId} to ${endpoints.length} endpoints`,
-    );
+    this.logger.log(`Resent event ${eventId} to ${endpoints.length} endpoints`);
 
     return { scheduledDeliveries: endpoints.length };
   }

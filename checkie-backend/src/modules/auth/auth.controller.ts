@@ -1,25 +1,7 @@
-import {
-  Controller,
-  Post,
-  Body,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { Controller, Post, Body, HttpCode, HttpStatus, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import {
-  RegisterDto,
-  LoginDto,
-  RefreshTokenDto,
-  AuthResponseDto,
-  TokenResponseDto,
-} from './dto';
+import { RegisterDto, LoginDto, RefreshTokenDto, AuthResponseDto, TokenResponseDto } from './dto';
 import { Public } from '../../common/decorators/public.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -75,9 +57,7 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Logout all sessions' })
   @ApiResponse({ status: 200, description: 'All sessions terminated' })
-  async logoutAll(
-    @CurrentUser() user: { id: string },
-  ): Promise<{ message: string }> {
+  async logoutAll(@CurrentUser() user: { id: string }): Promise<{ message: string }> {
     await this.authService.logoutAll(user.id);
     return { message: 'All sessions terminated' };
   }

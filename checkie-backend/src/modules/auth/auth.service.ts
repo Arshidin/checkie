@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  ConflictException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -109,9 +104,7 @@ export class AuthService {
 
   async refreshTokens(refreshToken: string): Promise<TokenResponseDto> {
     // Verify refresh token exists in Redis
-    const userId = await this.redisService.get(
-      `${this.REFRESH_TOKEN_PREFIX}${refreshToken}`,
-    );
+    const userId = await this.redisService.get(`${this.REFRESH_TOKEN_PREFIX}${refreshToken}`);
 
     if (!userId) {
       throw new UnauthorizedException('Invalid refresh token');
@@ -150,10 +143,7 @@ export class AuthService {
     }
   }
 
-  private async generateTokens(
-    userId: string,
-    email: string,
-  ): Promise<TokenResponseDto> {
+  private async generateTokens(userId: string, email: string): Promise<TokenResponseDto> {
     const payload: JwtPayload = { sub: userId, email };
 
     const accessToken = this.jwtService.sign(payload, {

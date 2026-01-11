@@ -23,30 +23,14 @@ export class SubscriptionsController {
   constructor(private readonly subscriptionsService: SubscriptionsService) {}
 
   @Get()
-  @Roles(
-    StoreUserRole.OWNER,
-    StoreUserRole.ADMIN,
-    StoreUserRole.MANAGER,
-    StoreUserRole.VIEWER,
-  )
-  async list(
-    @Param('storeId') storeId: string,
-    @Query() filters: SubscriptionFilterDto,
-  ) {
+  @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
+  async list(@Param('storeId') storeId: string, @Query() filters: SubscriptionFilterDto) {
     return this.subscriptionsService.findByStore(storeId, filters);
   }
 
   @Get(':subscriptionId')
-  @Roles(
-    StoreUserRole.OWNER,
-    StoreUserRole.ADMIN,
-    StoreUserRole.MANAGER,
-    StoreUserRole.VIEWER,
-  )
-  async get(
-    @Param('storeId') storeId: string,
-    @Param('subscriptionId') subscriptionId: string,
-  ) {
+  @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN, StoreUserRole.MANAGER, StoreUserRole.VIEWER)
+  async get(@Param('storeId') storeId: string, @Param('subscriptionId') subscriptionId: string) {
     return this.subscriptionsService.findById(subscriptionId, storeId);
   }
 
@@ -69,23 +53,14 @@ export class SubscriptionsController {
   @Post(':subscriptionId/pause')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
   @HttpCode(HttpStatus.OK)
-  async pause(
-    @Param('storeId') storeId: string,
-    @Param('subscriptionId') subscriptionId: string,
-  ) {
+  async pause(@Param('storeId') storeId: string, @Param('subscriptionId') subscriptionId: string) {
     return this.subscriptionsService.pauseSubscription(subscriptionId, storeId);
   }
 
   @Post(':subscriptionId/resume')
   @Roles(StoreUserRole.OWNER, StoreUserRole.ADMIN)
   @HttpCode(HttpStatus.OK)
-  async resume(
-    @Param('storeId') storeId: string,
-    @Param('subscriptionId') subscriptionId: string,
-  ) {
-    return this.subscriptionsService.resumeSubscription(
-      subscriptionId,
-      storeId,
-    );
+  async resume(@Param('storeId') storeId: string, @Param('subscriptionId') subscriptionId: string) {
+    return this.subscriptionsService.resumeSubscription(subscriptionId, storeId);
   }
 }

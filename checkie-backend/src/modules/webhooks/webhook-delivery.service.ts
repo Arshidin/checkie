@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
-import { WebhookDeliveryStatus } from '@prisma/client';
+// WebhookDeliveryStatus is used via prisma enum, not directly imported
 import * as crypto from 'crypto';
 
 export interface DeliveryJobData {
@@ -25,10 +25,7 @@ export class WebhookDeliveryService {
    */
   generateSignature(payload: string, secret: string, timestamp: number): string {
     const signaturePayload = `${timestamp}.${payload}`;
-    const signature = crypto
-      .createHmac('sha256', secret)
-      .update(signaturePayload)
-      .digest('hex');
+    const signature = crypto.createHmac('sha256', secret).update(signaturePayload).digest('hex');
     return `t=${timestamp},v1=${signature}`;
   }
 
@@ -82,9 +79,7 @@ export class WebhookDeliveryService {
     }
 
     if (!delivery.endpoint.isActive) {
-      this.logger.warn(
-        `Endpoint ${delivery.endpoint.id} is inactive, marking delivery as failed`,
-      );
+      this.logger.warn(`Endpoint ${delivery.endpoint.id} is inactive, marking delivery as failed`);
       await this.markFailed(deliveryId, 'Endpoint is inactive');
       return;
     }
@@ -97,11 +92,7 @@ export class WebhookDeliveryService {
     });
 
     const timestamp = Date.now();
-    const signature = this.generateSignature(
-      payload,
-      delivery.endpoint.secret,
-      timestamp,
-    );
+    const signature = this.generateSignature(payload, delivery.endpoint.secret, timestamp);
 
     try {
       const controller = new AbortController();
@@ -126,9 +117,7 @@ export class WebhookDeliveryService {
 
       if (response.ok) {
         await this.markDelivered(deliveryId, response.status, responseBody);
-        this.logger.log(
-          `Delivery ${deliveryId} succeeded with status ${response.status}`,
-        );
+        this.logger.log(`Delivery ${deliveryId} succeeded with status ${response.status}`);
       } else {
         await this.handleFailure(
           delivery,
@@ -139,9 +128,7 @@ export class WebhookDeliveryService {
       }
     } catch (error: any) {
       const message =
-        error.name === 'AbortError'
-          ? 'Request timeout'
-          : error.message || 'Unknown error';
+        error.name === 'AbortError' ? 'Request timeout' : error.message || 'Unknown error';
 
       await this.handleFailure(delivery, message);
     }
@@ -150,11 +137,7 @@ export class WebhookDeliveryService {
   /**
    * Mark delivery as successfully delivered
    */
-  private async markDelivered(
-    deliveryId: string,
-    httpStatus: number,
-    responseBody?: string,
-  ) {
+  private async markDelivered(deliveryId: string, httpStatus: number, responseBody?: string) {
     await this.prisma.webhookDelivery.update({
       where: { id: deliveryId },
       data: {
@@ -180,9 +163,7 @@ export class WebhookDeliveryService {
 
     if (attempt >= this.maxRetries) {
       await this.markFailed(delivery.id, errorMessage, httpStatus, responseBody);
-      this.logger.warn(
-        `Delivery ${delivery.id} failed after ${attempt} attempts: ${errorMessage}`,
-      );
+      this.logger.warn(`Delivery ${delivery.id} failed after ${attempt} attempts: ${errorMessage}`);
       return;
     }
 

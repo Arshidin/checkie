@@ -1,11 +1,4 @@
-import {
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  IsPositive,
-  MaxLength,
-} from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, IsPositive, MaxLength } from 'class-validator';
 import { RefundReason } from '@prisma/client';
 
 export class CreateRefundDto {

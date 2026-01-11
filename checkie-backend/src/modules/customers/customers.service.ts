@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  Logger,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { PaymentStatus } from '@prisma/client';
 import {
@@ -23,10 +18,7 @@ export class CustomersService {
   /**
    * List customers for a store (dashboard)
    */
-  async findAll(
-    storeId: string,
-    query: CustomerQueryDto,
-  ): Promise<CustomerListResponseDto> {
+  async findAll(storeId: string, query: CustomerQueryDto): Promise<CustomerListResponseDto> {
     const { search, page = 1, limit = 20, sortBy = 'createdAt', sortOrder = 'desc' } = query;
     const skip = (page - 1) * limit;
 
@@ -289,10 +281,8 @@ export class CustomersService {
   }
 
   private mapToResponse(customer: any): CustomerResponseDto {
-    const totalSpent = customer.payments?.reduce(
-      (sum: number, p: any) => sum + Number(p.amount),
-      0,
-    ) || 0;
+    const totalSpent =
+      customer.payments?.reduce((sum: number, p: any) => sum + Number(p.amount), 0) || 0;
 
     return {
       id: customer.id,
