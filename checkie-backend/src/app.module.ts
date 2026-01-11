@@ -7,6 +7,8 @@ import { RedisModule } from './modules/redis/redis.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { StoresModule } from './modules/stores/stores.module';
+import { PagesModule } from './modules/pages/pages.module';
+import { CouponsModule } from './modules/coupons/coupons.module';
 import { configuration } from './config';
 
 @Module({
@@ -76,9 +78,10 @@ import { configuration } from './config';
     AuthModule,
     UsersModule,
     StoresModule,
+    PagesModule,
+    CouponsModule,
 
     // Modules to be added:
-    // PagesModule,
     // CheckoutModule,
     // PaymentsModule,
     // SubscriptionsModule,
@@ -86,7 +89,6 @@ import { configuration } from './config';
     // BalanceModule,
     // PayoutsModule,
     // RefundsModule,
-    // CouponsModule,
     // WebhooksModule,
     // ProvidersModule,
     // NotificationsModule,
