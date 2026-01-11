@@ -581,18 +581,20 @@ model PageEmbed {
 // ============================================================================
 
 model Customer {
-  id              String   @id @default(cuid())
-  storeId         String
-  email           String
-  firstName       String?
-  lastName        String?
-  phone           String?
-  billingAddress  Json?
-  shippingAddress Json?
-  
-  // Portal access - support multiple sessions
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  storeId             String
+  email               String
+  firstName           String?
+  lastName            String?
+  phone               String?
+  billingAddress      Json?
+  shippingAddress     Json?
+
+  // Provider integration
+  providerCustomerId  String?  // Stripe customer ID (cus_xxx)
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   store           Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   payments        Payment[]
@@ -656,9 +658,10 @@ model CheckoutSession {
   
   // Completion
   paymentId           String?              @unique
+  subscriptionId      String?              @unique
   completedAt         DateTime?
   abandonedAt         DateTime?
-  
+
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
 
@@ -667,6 +670,7 @@ model CheckoutSession {
   customer            Customer?            @relation(fields: [customerId], references: [id])
   coupon              Coupon?              @relation(fields: [couponId], references: [id])
   payment             Payment?             @relation(fields: [paymentId], references: [id])
+  subscription        Subscription?        @relation(fields: [subscriptionId], references: [id])
   paymentAttempts     PaymentAttempt[]
   customFieldValues   CustomFieldValue[]
 
@@ -850,6 +854,7 @@ model Subscription {
   store                 Store              @relation(fields: [storeId], references: [id], onDelete: Cascade)
   page                  Page               @relation(fields: [pageId], references: [id])
   customer              Customer           @relation(fields: [customerId], references: [id])
+  checkoutSession       CheckoutSession?
   customFieldValues     CustomFieldValue[]
 
   @@index([storeId])

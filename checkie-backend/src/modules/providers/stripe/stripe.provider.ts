@@ -13,6 +13,9 @@ import {
   RefundParams,
   RefundResult,
   WebhookEventResult,
+  CreateSubscriptionParams,
+  SubscriptionResult,
+  UpdateSubscriptionParams,
 } from '../interfaces/payment-provider.interface';
 import { randomUUID } from 'crypto';
 
@@ -159,6 +162,233 @@ export class StripeProvider implements PaymentProvider {
     throw new NotImplementedException(
       'Real Stripe webhook verification not implemented. Use stub mode or implement full Stripe integration.',
     );
+  }
+
+  // ==================== Subscription Methods ====================
+
+  async createSubscription(
+    params: CreateSubscriptionParams,
+  ): Promise<SubscriptionResult> {
+    this.logger.log(
+      `[STUB] Creating Subscription: ${params.amount} ${params.currency} / ${params.interval}`,
+    );
+
+    await this.simulateDelay();
+
+    const subscriptionId = `sub_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`;
+    const now = new Date();
+    const periodEnd = this.calculatePeriodEnd(
+      now,
+      params.interval,
+      params.intervalCount || 1,
+    );
+
+    // Calculate trial end if applicable
+    let trialEnd: Date | undefined;
+    let status: SubscriptionResult['status'] = 'active';
+
+    if (params.trialPeriodDays && params.trialPeriodDays > 0) {
+      trialEnd = new Date(now.getTime() + params.trialPeriodDays * 24 * 60 * 60 * 1000);
+      status = 'trialing';
+    }
+
+    return {
+      id: subscriptionId,
+      status,
+      customerId: params.customerId,
+      currentPeriodStart: now,
+      currentPeriodEnd: trialEnd || periodEnd,
+      trialEnd,
+      cancelAtPeriodEnd: params.cancelAtPeriodEnd || false,
+      latestInvoiceId: `in_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      latestInvoiceStatus: status === 'trialing' ? 'paid' : 'open',
+      clientSecret: status === 'trialing'
+        ? undefined
+        : `seti_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}_secret`,
+    };
+  }
+
+  async retrieveSubscription(id: string): Promise<SubscriptionResult> {
+    this.logger.log(`[STUB] Retrieving Subscription: ${id}`);
+
+    await this.simulateDelay();
+
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      id,
+      status: 'active',
+      customerId: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    };
+  }
+
+  async updateSubscription(
+    params: UpdateSubscriptionParams,
+  ): Promise<SubscriptionResult> {
+    this.logger.log(`[STUB] Updating Subscription: ${params.subscriptionId}`);
+
+    await this.simulateDelay();
+
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      id: params.subscriptionId,
+      status: 'active',
+      customerId: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: params.cancelAtPeriodEnd || false,
+    };
+  }
+
+  async cancelSubscription(
+    id: string,
+    cancelImmediately = false,
+  ): Promise<SubscriptionResult> {
+    this.logger.log(
+      `[STUB] Cancelling Subscription: ${id}, immediately: ${cancelImmediately}`,
+    );
+
+    await this.simulateDelay();
+
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      id,
+      status: cancelImmediately ? 'canceled' : 'active',
+      customerId: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: !cancelImmediately,
+      canceledAt: cancelImmediately ? now : undefined,
+    };
+  }
+
+  async pauseSubscription(id: string): Promise<SubscriptionResult> {
+    this.logger.log(`[STUB] Pausing Subscription: ${id}`);
+
+    await this.simulateDelay();
+
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      id,
+      status: 'paused',
+      customerId: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    };
+  }
+
+  async resumeSubscription(id: string): Promise<SubscriptionResult> {
+    this.logger.log(`[STUB] Resuming Subscription: ${id}`);
+
+    await this.simulateDelay();
+
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      id,
+      status: 'active',
+      customerId: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      currentPeriodStart: now,
+      currentPeriodEnd: periodEnd,
+      cancelAtPeriodEnd: false,
+    };
+  }
+
+  /**
+   * Simulate a subscription webhook event for testing
+   */
+  createStubSubscriptionWebhookEvent(
+    type: string,
+    subscriptionId: string,
+    metadata: Record<string, string>,
+    status: SubscriptionResult['status'] = 'active',
+  ): WebhookEventResult {
+    const now = new Date();
+    const periodEnd = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+    return {
+      type,
+      id: `evt_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}`,
+      data: {
+        id: subscriptionId,
+        object: 'subscription',
+        status,
+        metadata,
+        current_period_start: Math.floor(now.getTime() / 1000),
+        current_period_end: Math.floor(periodEnd.getTime() / 1000),
+        cancel_at_period_end: false,
+        customer: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+      },
+      metadata,
+    };
+  }
+
+  /**
+   * Simulate an invoice webhook event for testing
+   */
+  createStubInvoiceWebhookEvent(
+    type: string,
+    subscriptionId: string,
+    metadata: Record<string, string>,
+    status: 'paid' | 'payment_failed' = 'paid',
+  ): WebhookEventResult {
+    const invoiceId = `in_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`;
+    const now = new Date();
+
+    return {
+      type,
+      id: `evt_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}`,
+      data: {
+        id: invoiceId,
+        object: 'invoice',
+        status,
+        subscription: subscriptionId,
+        amount_due: 1000,
+        amount_paid: status === 'paid' ? 1000 : 0,
+        currency: 'usd',
+        customer: `cus_stub_${randomUUID().replace(/-/g, '').substring(0, 14)}`,
+        period_start: Math.floor(now.getTime() / 1000),
+        period_end: Math.floor((now.getTime() + 30 * 24 * 60 * 60 * 1000) / 1000),
+        payment_intent: `pi_stub_${randomUUID().replace(/-/g, '').substring(0, 24)}`,
+        metadata,
+      },
+      metadata,
+    };
+  }
+
+  private calculatePeriodEnd(
+    start: Date,
+    interval: 'day' | 'week' | 'month' | 'year',
+    count: number,
+  ): Date {
+    const result = new Date(start);
+    switch (interval) {
+      case 'day':
+        result.setDate(result.getDate() + count);
+        break;
+      case 'week':
+        result.setDate(result.getDate() + count * 7);
+        break;
+      case 'month':
+        result.setMonth(result.getMonth() + count);
+        break;
+      case 'year':
+        result.setFullYear(result.getFullYear() + count);
+        break;
+    }
+    return result;
   }
 
   /**

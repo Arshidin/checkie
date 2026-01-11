@@ -14,11 +14,11 @@
 | Phase 2 | Pages & Coupons | ✅ Done |
 | Phase 3 | Checkout & State Machine | ✅ Done |
 | Phase 4 | Payments & PSP (Stripe STUB) | ✅ Done |
-| Phase 5 | Subscriptions | ⬜ Not started |
-| Phase 6 | Refunds & Payouts | ⬜ Not started |
-| Phase 7 | Webhooks System | ⬜ Not started |
-| Phase 8 | Widget & Customer Portal | ⬜ Not started |
-| Phase 9 | Testing & Polish | ⬜ Not started |
+| Phase 5 | Subscriptions | ✅ Done |
+| Phase 6 | Refunds & Payouts | ✅ Done |
+| Phase 7 | Webhooks System | ✅ Done |
+| Phase 8 | Widget & Customer Portal | ✅ Done |
+| Phase 9 | Testing & Polish | ✅ Done |
 
 ---
 
@@ -146,15 +146,32 @@ checkie-backend/
 | Payments | `src/modules/payments/` | Payment processing, webhook handling |
 | Balance | `src/modules/balance/` | Append-only ledger, balance transactions |
 
+### ✅ Phase 5: Subscriptions
+| Module | Path | Description |
+|--------|------|-------------|
+| Subscriptions | `src/modules/subscriptions/` | Recurring billing, cancel/pause/resume |
+
+### ✅ Phase 6: Refunds & Payouts
+| Module | Path | Description |
+|--------|------|-------------|
+| Refunds | `src/modules/refunds/` | Refund processing, partial refunds, balance updates |
+| Payouts | `src/modules/payouts/` | Withdrawal requests, balance validation, payout lifecycle |
+
+### ✅ Phase 7: Webhooks
+| Module | Path | Description |
+|--------|------|-------------|
+| Webhooks | `src/modules/webhooks/` | Merchant webhooks, event creation, delivery with retry |
+
+### ✅ Phase 8: Widget & Customer Portal
+| Module | Path | Description |
+|--------|------|-------------|
+| Widget | `src/modules/widget/` | Public checkout API for embeds |
+| Customers | `src/modules/customers/` | Customer CRUD, portal with magic link auth |
+
 ### ⬜ Planned Modules
 | Module | Path | Phase |
 |--------|------|-------|
-| Subscriptions | `src/modules/subscriptions/` | Phase 5 |
-| Refunds | `src/modules/refunds/` | Phase 6 |
-| Payouts | `src/modules/payouts/` | Phase 6 |
-| Webhooks | `src/modules/webhooks/` | Phase 7 |
-| Widget | `src/modules/widget/` | Phase 8 |
-| Customers | `src/modules/customers/` | Phase 8 |
+| Notifications | `src/modules/notifications/` | Phase 9 |
 
 ---
 

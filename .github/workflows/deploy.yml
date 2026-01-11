@@ -1,0 +1,71 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  deploy-railway:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.inputs.environment == 'production'
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        id: deploy
+        run: |
+          cd checkie-backend
+          railway up --detach
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Verify deployment
+        run: |
+          echo "Deployment triggered successfully"
+          echo "Check Railway dashboard for status"
+
+  # Alternative: Deploy to Docker Registry + Cloud Provider
+  # Uncomment and configure for Docker-based deployments
+
+  # deploy-docker:
+  #   name: Deploy Docker Image
+  #   runs-on: ubuntu-latest
+  #   needs: [deploy-railway]
+  #   if: false  # Enable when ready
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #
+  #     - name: Login to Docker Hub
+  #       uses: docker/login-action@v3
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #
+  #     - name: Build and push
+  #       uses: docker/build-push-action@v5
+  #       with:
+  #         context: ./checkie-backend
+  #         push: true
+  #         tags: |
+  #           ${{ secrets.DOCKERHUB_USERNAME }}/checkie-backend:latest
+  #           ${{ secrets.DOCKERHUB_USERNAME }}/checkie-backend:${{ github.sha }}

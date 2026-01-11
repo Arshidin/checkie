@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { CheckoutController } from './checkout.controller';
 import { CheckoutService } from './checkout.service';
 import { CheckoutSessionService } from './services/checkout-session.service';
@@ -6,9 +6,15 @@ import { IdempotencyService } from './services/idempotency.service';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { RedisModule } from '../redis/redis.module';
 import { ProvidersModule } from '../providers/providers.module';
+import { SubscriptionsModule } from '../subscriptions/subscriptions.module';
 
 @Module({
-  imports: [PrismaModule, RedisModule, ProvidersModule],
+  imports: [
+    PrismaModule,
+    RedisModule,
+    ProvidersModule,
+    forwardRef(() => SubscriptionsModule),
+  ],
   controllers: [CheckoutController],
   providers: [CheckoutService, CheckoutSessionService, IdempotencyService],
   exports: [CheckoutService, CheckoutSessionService, IdempotencyService],

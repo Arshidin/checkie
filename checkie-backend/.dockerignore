@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
+dist
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Environment files (use build args or runtime env)
+.env
+.env.*
+!.env.example
+
+# Git
+.git
+.gitignore
+
+# Testing
+coverage
+test
+*.spec.ts
+*.e2e-spec.ts
+jest.config.js
+jest-e2e.json
+
+# Documentation
+*.md
+!README.md
+docs
+
+# Docker files (don't include in image)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI/CD
+.github
+
+# Development
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Prisma migrations (only schema needed for generate)
+# prisma/migrations - keep migrations for deploy
+
+# Misc
+*.tsbuildinfo

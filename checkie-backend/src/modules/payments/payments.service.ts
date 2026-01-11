@@ -3,12 +3,15 @@ import {
   Logger,
   BadRequestException,
   NotFoundException,
+  Inject,
+  forwardRef,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { ProviderFactory } from '../providers/provider.factory';
 import { ConfigService } from '@nestjs/config';
 import { Payment, PaymentStatus, Prisma, Currency } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime/library';
+import { WebhookEventsService } from '../webhooks/webhook-events.service';
 
 export interface InitiatePaymentParams {
   checkoutSessionId: string;
@@ -51,6 +54,8 @@ export class PaymentsService {
     private readonly prisma: PrismaService,
     private readonly providerFactory: ProviderFactory,
     private readonly config: ConfigService,
+    @Inject(forwardRef(() => WebhookEventsService))
+    private readonly webhookEventsService: WebhookEventsService,
   ) {
     this.platformFeePercent = config.get<number>('platform.feePercent', 0.029);
   }
@@ -237,6 +242,21 @@ export class PaymentsService {
       });
     }
 
+    // Trigger webhook event
+    try {
+      await this.webhookEventsService.triggerPaymentCompleted({
+        id: payment.id,
+        storeId: payment.storeId,
+        amount: payment.amount,
+        currency: payment.currency,
+        customerId: payment.customerId,
+        pageId: payment.pageId,
+        status: 'COMPLETED',
+      });
+    } catch (error: any) {
+      this.logger.error(`Failed to trigger webhook: ${error.message}`);
+    }
+
     this.logger.log(`Payment ${paymentId} completed successfully`);
   }
 
@@ -272,6 +292,25 @@ export class PaymentsService {
         where: { id: checkoutSessionId },
         data: { status: 'OPEN' },
       });
+    }
+
+    // Trigger webhook event for payment failure
+    try {
+      const payment = await this.prisma.payment.findUnique({
+        where: { id: paymentId },
+      });
+      if (payment) {
+        await this.webhookEventsService.triggerPaymentFailed({
+          id: payment.id,
+          storeId: payment.storeId,
+          amount: payment.amount,
+          currency: payment.currency,
+          failureCode,
+          failureMessage,
+        });
+      }
+    } catch (error: any) {
+      this.logger.error(`Failed to trigger webhook: ${error.message}`);
     }
 
     this.logger.warn(`Payment ${paymentId} failed: ${failureMessage}`);

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { BullModule } from '@nestjs/bullmq';
 import * as Joi from 'joi';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './modules/redis/redis.module';
@@ -13,6 +14,13 @@ import { CheckoutModule } from './modules/checkout/checkout.module';
 import { ProvidersModule } from './modules/providers/providers.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { BalanceModule } from './modules/balance/balance.module';
+import { SubscriptionsModule } from './modules/subscriptions/subscriptions.module';
+import { RefundsModule } from './modules/refunds/refunds.module';
+import { PayoutsModule } from './modules/payouts/payouts.module';
+import { WebhooksModule } from './modules/webhooks/webhooks.module';
+import { WidgetModule } from './modules/widget/widget.module';
+import { CustomersModule } from './modules/customers/customers.module';
+import { HealthModule } from './health/health.module';
 import { configuration } from './config';
 
 @Module({
@@ -78,6 +86,18 @@ import { configuration } from './config';
     // Cache
     RedisModule,
 
+    // BullMQ for background jobs
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        connection: {
+          host: configService.get('redis.host', 'localhost'),
+          port: configService.get('redis.port', 6379),
+        },
+      }),
+    }),
+
     // Feature Modules
     AuthModule,
     UsersModule,
@@ -91,14 +111,22 @@ import { configuration } from './config';
     PaymentsModule,
     BalanceModule,
 
-    // Modules to be added:
-    // SubscriptionsModule,
-    // CustomersModule,
-    // PayoutsModule,
-    // RefundsModule,
-    // WebhooksModule,
-    // NotificationsModule,
-    // WidgetModule,
+    // Phase 5: Subscriptions
+    SubscriptionsModule,
+
+    // Phase 6: Refunds & Payouts
+    RefundsModule,
+    PayoutsModule,
+
+    // Phase 7: Webhooks
+    WebhooksModule,
+
+    // Phase 8: Widget & Customer Portal
+    WidgetModule,
+    CustomersModule,
+
+    // Phase 9: Health & Monitoring
+    HealthModule,
   ],
   controllers: [],
   providers: [],

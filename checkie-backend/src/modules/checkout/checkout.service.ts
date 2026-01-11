@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { CheckoutSessionService, CreateSessionParams } from './services/checkout-session.service';
 import { IdempotencyService } from './services/idempotency.service';
 import { ProviderFactory } from '../providers/provider.factory';
+import { SubscriptionsService } from '../subscriptions/subscriptions.service';
 import {
   CreateCheckoutSessionDto,
   UpdateCheckoutSessionDto,
@@ -16,6 +17,7 @@ import {
   InitiatePaymentResponseDto,
 } from './dto';
 import { Decimal } from '@prisma/client/runtime/library';
+import { PricingType } from '@prisma/client';
 
 @Injectable()
 export class CheckoutService {
@@ -28,6 +30,7 @@ export class CheckoutService {
     private readonly sessionService: CheckoutSessionService,
     private readonly idempotencyService: IdempotencyService,
     private readonly providerFactory: ProviderFactory,
+    private readonly subscriptionsService: SubscriptionsService,
   ) {
     this.platformFeePercent = this.config.get<number>('PLATFORM_FEE_PERCENT', 0.029);
   }
@@ -152,6 +155,27 @@ export class CheckoutService {
 
     // Create Payment and PaymentAttempt in database
     const session = await this.sessionService.getSession(sessionId);
+
+    // Check if this is a subscription page
+    const page = await this.prisma.page.findUnique({
+      where: { id: session.pageId },
+      select: {
+        pricingType: true,
+        subscriptionInterval: true,
+        subscriptionIntervalCount: true,
+        trialDays: true,
+      },
+    });
+
+    if (page?.pricingType === PricingType.SUBSCRIPTION) {
+      return this.initiateSubscription(
+        dto,
+        session,
+        context,
+        page,
+        idempotencyKey,
+      );
+    }
 
     // Get or create customer
     let customerId = session.customerId;
@@ -320,6 +344,135 @@ export class CheckoutService {
 
   async handleWebhook(provider: string, eventType: string, payload: any): Promise<void> {
     await this.sessionService.handleWebhookEvent(provider, eventType, payload);
+  }
+
+  private async initiateSubscription(
+    dto: InitiatePaymentDto,
+    session: any,
+    context: any,
+    page: {
+      pricingType: PricingType;
+      subscriptionInterval: any;
+      subscriptionIntervalCount: number | null;
+      trialDays: number | null;
+    },
+    idempotencyKey?: string,
+  ): Promise<InitiatePaymentResponseDto> {
+    const { sessionId } = dto;
+
+    if (!page.subscriptionInterval) {
+      throw new BadRequestException('Subscription interval not configured for this page');
+    }
+
+    // Get or create customer
+    let customerId = session.customerId;
+    if (!customerId && context.customerEmail) {
+      const customer = await this.prisma.customer.upsert({
+        where: {
+          storeId_email: {
+            storeId: session.storeId,
+            email: context.customerEmail,
+          },
+        },
+        create: {
+          storeId: session.storeId,
+          email: context.customerEmail,
+        },
+        update: {},
+      });
+      customerId = customer.id;
+
+      await this.prisma.checkoutSession.update({
+        where: { id: sessionId },
+        data: { customerId },
+      });
+    }
+
+    if (!customerId) {
+      throw new BadRequestException('Customer email is required');
+    }
+
+    // Get customer for provider customer ID
+    const customer = await this.prisma.customer.findUnique({
+      where: { id: customerId },
+    });
+
+    if (!customer) {
+      throw new BadRequestException('Customer not found');
+    }
+
+    // Get or create provider customer ID
+    let providerCustomerId = customer.providerCustomerId;
+    if (!providerCustomerId) {
+      const provider = this.providerFactory.getDefaultProvider();
+      providerCustomerId = await provider.createCustomer(
+        context.customerEmail,
+        { storeId: session.storeId, customerId },
+      );
+
+      await this.prisma.customer.update({
+        where: { id: customerId },
+        data: { providerCustomerId },
+      });
+    }
+
+    // Calculate final amount
+    const finalAmount = Number(session.amount) - Number(session.discountAmount || 0);
+
+    // Create subscription through the service
+    const subscription = await this.subscriptionsService.createSubscription({
+      storeId: session.storeId,
+      pageId: session.pageId,
+      customerId,
+      customerEmail: context.customerEmail,
+      providerCustomerId,
+      amount: finalAmount,
+      currency: session.currency,
+      interval: page.subscriptionInterval,
+      intervalCount: page.subscriptionIntervalCount || 1,
+      trialPeriodDays: page.trialDays || undefined,
+    });
+
+    // Update session with subscription ID
+    await this.prisma.checkoutSession.update({
+      where: { id: sessionId },
+      data: {
+        subscriptionId: subscription.id,
+      },
+    });
+
+    // Get provider data for client secret
+    const providerData = subscription.providerData as { clientSecret?: string } | null;
+
+    // If subscription is active/trialing immediately (no payment required), complete the session
+    if (subscription.status === 'ACTIVE' || subscription.status === 'TRIALING') {
+      await this.sessionService.sendEvent(sessionId, {
+        type: 'PAYMENT_SUCCEEDED',
+        providerPaymentId: subscription.providerSubscriptionId || '',
+        amount: finalAmount,
+        providerData: subscription.providerData,
+      });
+    }
+
+    const response: InitiatePaymentResponseDto = {
+      sessionId,
+      status: subscription.status === 'ACTIVE' || subscription.status === 'TRIALING'
+        ? 'COMPLETED'
+        : 'PROCESSING',
+      subscriptionId: subscription.id,
+      requiresAction: subscription.status === 'INCOMPLETE',
+      clientSecret: providerData?.clientSecret,
+    };
+
+    if (idempotencyKey) {
+      await this.idempotencyService.setResponse(idempotencyKey, 200, response);
+    }
+
+    this.logger.log(
+      `Subscription initiated for session ${sessionId}, subscription ${subscription.id}`,
+    );
+
+    return response;
   }
 
   private mapToResponse(

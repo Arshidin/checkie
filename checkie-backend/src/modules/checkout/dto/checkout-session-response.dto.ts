@@ -23,11 +23,12 @@ export class CheckoutSessionResponseDto {
 
 export class InitiatePaymentResponseDto {
   sessionId!: string;
-  status!: CheckoutSessionStatus;
+  status!: string;
   clientSecret?: string;
   redirectUrl?: string;
   requiresAction!: boolean;
   paymentId?: string;
+  subscriptionId?: string;
   error?: string;
 }
 
