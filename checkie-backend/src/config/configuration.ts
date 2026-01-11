@@ -1,3 +1,20 @@
+// Parse Redis URL to extract host, port, password
+function parseRedisUrl(url: string): { host: string; port: number; password?: string } {
+  try {
+    const parsed = new URL(url);
+    return {
+      host: parsed.hostname || 'localhost',
+      port: parseInt(parsed.port || '6379', 10),
+      password: parsed.password || undefined,
+    };
+  } catch {
+    return { host: 'localhost', port: 6379 };
+  }
+}
+
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
+const redisParsed = parseRedisUrl(redisUrl);
+
 export default () => ({
   app: {
     nodeEnv: process.env.NODE_ENV || 'development',
@@ -11,9 +28,10 @@ export default () => ({
     url: process.env.DATABASE_URL,
   },
   redis: {
-    url: process.env.REDIS_URL || 'redis://localhost:6379',
-    host: process.env.REDIS_HOST || 'localhost',
-    port: parseInt(process.env.REDIS_PORT || '6379', 10),
+    url: redisUrl,
+    host: process.env.REDIS_HOST || redisParsed.host,
+    port: parseInt(process.env.REDIS_PORT || String(redisParsed.port), 10),
+    password: process.env.REDIS_PASSWORD || redisParsed.password,
   },
   jwt: {
     secret: process.env.JWT_SECRET,

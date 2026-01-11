@@ -90,12 +90,16 @@ import { configuration } from './config';
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        connection: {
-          host: configService.get('redis.host', 'localhost'),
-          port: configService.get('redis.port', 6379),
-        },
-      }),
+      useFactory: (configService: ConfigService) => {
+        const password = configService.get<string>('redis.password');
+        return {
+          connection: {
+            host: configService.get('redis.host', 'localhost'),
+            port: configService.get('redis.port', 6379),
+            ...(password && { password }),
+          },
+        };
+      },
     }),
 
     // Feature Modules
