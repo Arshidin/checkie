@@ -7,6 +7,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { CheckoutSessionService, CreateSessionParams } from './services/checkout-session.service';
 import { IdempotencyService } from './services/idempotency.service';
+import { ProviderFactory } from '../providers/provider.factory';
 import {
   CreateCheckoutSessionDto,
   UpdateCheckoutSessionDto,
@@ -26,6 +27,7 @@ export class CheckoutService {
     private readonly config: ConfigService,
     private readonly sessionService: CheckoutSessionService,
     private readonly idempotencyService: IdempotencyService,
+    private readonly providerFactory: ProviderFactory,
   ) {
     this.platformFeePercent = this.config.get<number>('PLATFORM_FEE_PERCENT', 0.029);
   }
@@ -225,22 +227,67 @@ export class CheckoutService {
       data: { paymentId: payment.id },
     });
 
-    // TODO: Call PSP to create PaymentIntent
-    // For now, return mock response
+    // Call PSP to create PaymentIntent
+    const provider = this.providerFactory.getDefaultProvider();
+    const finalAmount = Number(session.amount) - Number(session.discountAmount || 0);
+
+    const intentResult = await provider.createPaymentIntent({
+      amount: finalAmount,
+      currency: session.currency,
+      customerEmail: context.customerEmail || undefined,
+      metadata: {
+        storeId: session.storeId,
+        pageId: session.pageId,
+        checkoutSessionId: sessionId,
+        paymentId: payment.id,
+      },
+    });
+
+    // Update PaymentAttempt with provider data
+    await this.prisma.paymentAttempt.update({
+      where: { id: attempt.id },
+      data: {
+        providerAttemptId: intentResult.id,
+        status: intentResult.requiresAction ? 'REQUIRES_ACTION' : 'PROCESSING',
+        requires3DS: intentResult.requiresAction,
+        redirectUrl: intentResult.nextActionUrl,
+      },
+    });
+
+    // Update Payment with provider ID
+    await this.prisma.payment.update({
+      where: { id: payment.id },
+      data: {
+        providerPaymentId: intentResult.id,
+        status: 'PROCESSING',
+      },
+    });
+
+    // If requires 3DS, send event to state machine
+    if (intentResult.requiresAction) {
+      await this.sessionService.sendEvent(sessionId, {
+        type: 'REQUIRES_ACTION',
+        actionType: intentResult.nextActionType || '3ds',
+        redirectUrl: intentResult.nextActionUrl || '',
+      });
+    }
+
     const response: InitiatePaymentResponseDto = {
       sessionId,
-      status: 'PROCESSING',
+      status: intentResult.requiresAction ? 'AWAITING_ACTION' : 'PROCESSING',
       paymentId: payment.id,
-      requiresAction: false,
-      // clientSecret would come from Stripe
-      clientSecret: `pi_mock_${payment.id}_secret`,
+      requiresAction: intentResult.requiresAction,
+      clientSecret: intentResult.clientSecret,
+      redirectUrl: intentResult.nextActionUrl,
     };
 
     if (idempotencyKey) {
       await this.idempotencyService.setResponse(idempotencyKey, 200, response);
     }
 
-    this.logger.log(`Payment initiated for session ${sessionId}, payment ${payment.id}`);
+    this.logger.log(
+      `Payment initiated for session ${sessionId}, payment ${payment.id}, provider intent: ${intentResult.id}`,
+    );
 
     return response;
   }

@@ -5,9 +5,10 @@ import { CheckoutSessionService } from './services/checkout-session.service';
 import { IdempotencyService } from './services/idempotency.service';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { RedisModule } from '../redis/redis.module';
+import { ProvidersModule } from '../providers/providers.module';
 
 @Module({
-  imports: [PrismaModule, RedisModule],
+  imports: [PrismaModule, RedisModule, ProvidersModule],
   controllers: [CheckoutController],
   providers: [CheckoutService, CheckoutSessionService, IdempotencyService],
   exports: [CheckoutService, CheckoutSessionService, IdempotencyService],

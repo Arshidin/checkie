@@ -13,7 +13,7 @@
 | 1 | Foundation (Auth + Users + Stores) | 3 дня | ✅ Done |
 | 2 | Pages & Configuration | 3 дня | ✅ Done |
 | 3 | Checkout Session & State Machine | 3 дня | ✅ Done |
-| 4 | Payments & PSP Integration | 3 дня | ⬜ Not Started |
+| 4 | Payments & PSP Integration | 3 дня | ✅ Done |
 | 5 | Subscriptions | 2 дня | ⬜ Not Started |
 | 6 | Refunds & Payouts | 2 дня | ⬜ Not Started |
 | 7 | Webhooks System | 2 дня | ⬜ Not Started |
@@ -1619,33 +1619,33 @@ export default () => ({
 ### Чеклист Phase 4
 
 **Providers Module:**
-- [ ] `PaymentProviderInterface` создан
-- [ ] `StripeProvider` реализован
-- [ ] `ProviderFactory` создан
-- [ ] Currency conversion (to/from smallest unit)
-- [ ] Webhook signature verification
+- [x] `PaymentProviderInterface` создан
+- [x] `StripeProvider` реализован (STUB mode)
+- [x] `ProviderFactory` создан
+- [x] Currency conversion (to/from smallest unit)
+- [x] Webhook signature verification (stub mode)
 
 **Payments Module:**
-- [ ] `PaymentsService` с `initiatePayment`
-- [ ] `PaymentAttemptService` для логирования
-- [ ] `PspWebhookController` с raw body parsing
-- [ ] Обработка `payment_intent.succeeded`
-- [ ] Обработка `payment_intent.payment_failed`
-- [ ] Обработка 3DS (`requires_action`)
-- [ ] Платежи endpoint: list, get, attempts
+- [x] `PaymentsService` с `initiatePayment`
+- [x] `PaymentAttempt` tracking для логирования
+- [x] `PspWebhookController` с raw body parsing
+- [x] Обработка `payment_intent.succeeded`
+- [x] Обработка `payment_intent.payment_failed`
+- [x] Обработка 3DS (`requires_action`)
+- [x] Платежи endpoint: list, get, attempts
 
 **Balance Module:**
-- [ ] `BalanceService.addTransaction` (append-only)
-- [ ] `getBalance` с группировкой по валюте
-- [ ] `getTransactions` с фильтрацией
-- [ ] `getSummary` для отчётов
-- [ ] Проверка на отрицательный баланс
+- [x] `BalanceService.addTransaction` (append-only)
+- [x] `getBalance` с группировкой по валюте
+- [x] `getTransactions` с фильтрацией
+- [x] `getSummary` для отчётов
+- [x] Проверка на отрицательный баланс
 
 **Integration:**
-- [ ] Raw body parsing в main.ts
-- [ ] Checkout → Payment flow работает
-- [ ] State machine получает события от webhook
-- [ ] Platform fee вычитается автоматически
+- [x] Raw body parsing в main.ts
+- [x] Checkout → Payment flow работает
+- [x] State machine получает события от webhook
+- [x] Platform fee вычитается автоматически
 
 **Testing:**
 - [ ] Unit tests для PaymentsService
@@ -2107,11 +2107,11 @@ npm install @nestjs/swagger swagger-ui-express
 - [x] Stores CRUD
 - [x] Pages CRUD with variants & fields
 - [x] CheckoutSession state machine
-- [ ] Stripe payment processing
-- [ ] PaymentAttempt tracking
-- [ ] Balance ledger
+- [x] Stripe payment processing (STUB mode)
+- [x] PaymentAttempt tracking
+- [x] Balance ledger
 - [ ] Widget API
-- [ ] PSP webhooks
+- [x] PSP webhooks
 
 ### P1 (Should Have)
 - [ ] Subscriptions
