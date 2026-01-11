@@ -72,7 +72,8 @@
       const nameValue = form.querySelector('[name="name"]')?.value || '';
       const nameParts = nameValue.trim().split(' ');
       const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
+      // If no last name provided, use a dash as placeholder (API requires at least 1 char)
+      const lastName = nameParts.slice(1).join(' ') || '-';
 
       const email = form.querySelector('[name="email"]')?.value;
       const password = form.querySelector('[name="Password"]')?.value;
