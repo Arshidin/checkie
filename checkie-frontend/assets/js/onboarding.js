@@ -10,6 +10,7 @@
     updateWelcomeName();
     initWelcomeButton();
     initStoreForm();
+    initBrandingPage();
   });
 
   // ============================================
@@ -153,6 +154,56 @@
         submitBtn.value = originalText;
         submitBtn.disabled = false;
       }
+    });
+  }
+
+  // ============================================
+  // Branding Page
+  // ============================================
+
+  function initBrandingPage() {
+    // Check if we're on branding page
+    if (!window.location.pathname.includes('add-your-brand')) return;
+
+    const form = document.getElementById('wf-form-branding');
+    if (!form) return;
+
+    // Remove required from file input (make logo optional)
+    const fileInput = form.querySelector('input[type="file"]');
+    if (fileInput) {
+      fileInput.removeAttribute('required');
+    }
+
+    // Enable submit button by default (since logo is now optional)
+    const submitBtn = form.querySelector('.submit-button');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('disable');
+    }
+
+    // Add Skip button after submit button
+    const skipBtn = document.createElement('a');
+    skipBtn.href = '#';
+    skipBtn.className = 'text-link-button';
+    skipBtn.style.cssText = 'display: block; text-align: center; margin-top: 16px; color: #666; text-decoration: underline; cursor: pointer;';
+    skipBtn.textContent = 'Skip for now';
+    skipBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Go to next step (invite team or dashboard)
+      window.location.href = '/pages/onboarding/invite-team-member.html';
+    });
+
+    // Insert skip button after submit
+    if (submitBtn && submitBtn.parentNode) {
+      submitBtn.parentNode.insertBefore(skipBtn, submitBtn.nextSibling);
+    }
+
+    // Handle form submit - just go to next step for now
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // For now just redirect to next step
+      // TODO: Implement actual branding update with file upload
+      window.location.href = '/pages/onboarding/invite-team-member.html';
     });
   }
 
