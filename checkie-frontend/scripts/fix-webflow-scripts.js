@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Fix script - removes defer/async from Webflow-critical scripts
+ * Fix script - removes defer/async from ALL Webflow-critical scripts
  * Run: node scripts/fix-webflow-scripts.js
  */
 
@@ -30,14 +30,21 @@ function fixHtml(filePath) {
   let html = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
-  // Remove defer from memberstack.js - it's critical for auth
+  // Remove defer from jQuery - Webflow needs it synchronously
+  const jqueryRegex = /(<script[^>]*src="[^"]*jquery[^"]*"[^>]*)\s+defer>/gi;
+  if (jqueryRegex.test(html)) {
+    html = html.replace(jqueryRegex, '$1>');
+    modified = true;
+  }
+
+  // Remove defer from memberstack.js
   const memberstackRegex = /(<script[^>]*src="[^"]*memberstack\.js"[^>]*)\s+defer>/gi;
   if (memberstackRegex.test(html)) {
     html = html.replace(memberstackRegex, '$1>');
     modified = true;
   }
 
-  // Remove async from webfont.js - it needs to run before WebFont.load() call
+  // Remove async from webfont.js
   const webfontRegex = /(<script[^>]*src="[^"]*webfont\.js"[^>]*)\s+async>/gi;
   if (webfontRegex.test(html)) {
     html = html.replace(webfontRegex, '$1>');
@@ -53,7 +60,7 @@ function fixHtml(filePath) {
 }
 
 function main() {
-  console.log('Fixing Webflow-critical scripts...\n');
+  console.log('Fixing ALL Webflow-critical scripts (jQuery, Memberstack, WebFont)...\n');
 
   const htmlFiles = getAllHtmlFiles(PAGES_DIR);
   let fixedCount = 0;

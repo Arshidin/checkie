@@ -3,13 +3,13 @@
  * HTML Optimization Script for Checkie Frontend
  *
  * This script optimizes HTML files exported from Webflow:
- * 1. Adds defer to jQuery (safe - loaded before webflow.js)
- * 2. Adds loading="lazy" to images
- * 3. Adds preload="none" to videos
- * 4. Adds preconnect hints for external resources
+ * 1. Adds loading="lazy" to images
+ * 2. Adds preload="none" to videos
+ * 3. Adds preconnect hints for external resources
  *
- * IMPORTANT: Does NOT modify memberstack.js or webfont.js
- * as they are critical for Webflow functionality.
+ * IMPORTANT: Does NOT modify ANY scripts - Webflow requires
+ * jQuery, Memberstack, WebFont to load synchronously for
+ * animations, sliders, and interactions to work.
  *
  * Run: node scripts/optimize-html.js
  */
@@ -18,16 +18,6 @@ const fs = require('fs');
 const path = require('path');
 
 const PAGES_DIR = path.join(__dirname, '..', 'pages');
-
-// Only jQuery is safe to defer - it's loaded before webflow.js at the end of body
-const DEFER_SCRIPTS = [
-  'jquery-3.6.0.min.js',
-];
-
-// DO NOT add defer/async to these - they break Webflow functionality:
-// - memberstack.js (auth critical)
-// - webfont.js (needs sync call to WebFont.load())
-// - jetboost.js (already loads async via inline script)
 
 function getAllHtmlFiles(dir, files = []) {
   const items = fs.readdirSync(dir);
@@ -50,20 +40,7 @@ function optimizeHtml(filePath) {
   let html = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
-  // 1. Add defer to jQuery only
-  for (const script of DEFER_SCRIPTS) {
-    const regex = new RegExp(`<script([^>]*src="[^"]*${script}"[^>]*)>`, 'gi');
-    const newHtml = html.replace(regex, (match, attrs) => {
-      if (!attrs.includes('defer') && !attrs.includes('async')) {
-        modified = true;
-        return `<script${attrs} defer>`;
-      }
-      return match;
-    });
-    html = newHtml;
-  }
-
-  // 2. Add loading="lazy" to images that don't have it
+  // 1. Add loading="lazy" to images that don't have it
   const imgRegex = /<img([^>]*)>/gi;
   html = html.replace(imgRegex, (match, attrs) => {
     if (!attrs.includes('loading=') && !attrs.includes('data-src')) {
@@ -73,7 +50,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 3. Add decoding="async" to images
+  // 2. Add decoding="async" to images
   html = html.replace(/<img([^>]*)>/gi, (match, attrs) => {
     if (!attrs.includes('decoding=')) {
       modified = true;
@@ -82,7 +59,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 4. Add preload="none" to background videos
+  // 3. Add preload="none" to background videos
   const videoRegex = /<video([^>]*)>/gi;
   html = html.replace(videoRegex, (match, attrs) => {
     if (!attrs.includes('preload=')) {
@@ -92,7 +69,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 5. Add preconnect hints if not present
+  // 4. Add preconnect hints if not present
   if (!html.includes('dns-prefetch')) {
     const preconnectHints = `
   <!-- Performance: DNS Prefetch & Preconnect -->
@@ -119,7 +96,7 @@ function optimizeHtml(filePath) {
 }
 
 function main() {
-  console.log('Starting HTML optimization...\n');
+  console.log('Starting HTML optimization (images, videos, DNS prefetch only)...\n');
 
   const htmlFiles = getAllHtmlFiles(PAGES_DIR);
   let optimizedCount = 0;
