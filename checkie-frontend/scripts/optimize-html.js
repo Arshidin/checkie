@@ -3,13 +3,14 @@
  * HTML Optimization Script for Checkie Frontend
  *
  * This script optimizes HTML files exported from Webflow:
- * 1. Adds loading="lazy" to images
+ * 1. Adds loading="lazy" to non-critical images
  * 2. Adds preload="none" to videos
  * 3. Adds preconnect hints for external resources
  *
- * IMPORTANT: Does NOT modify ANY scripts - Webflow requires
- * jQuery, Memberstack, WebFont to load synchronously for
- * animations, sliders, and interactions to work.
+ * IMPORTANT:
+ * - Does NOT modify ANY scripts
+ * - Does NOT add decoding="async" (can break Webflow sliders)
+ * - Skips images that already have loading attribute
  *
  * Run: node scripts/optimize-html.js
  */
@@ -40,7 +41,8 @@ function optimizeHtml(filePath) {
   let html = fs.readFileSync(filePath, 'utf8');
   let modified = false;
 
-  // 1. Add loading="lazy" to images that don't have it
+  // 1. Add loading="lazy" ONLY to images that don't have loading attribute
+  // This preserves loading="eager" for critical images
   const imgRegex = /<img([^>]*)>/gi;
   html = html.replace(imgRegex, (match, attrs) => {
     if (!attrs.includes('loading=') && !attrs.includes('data-src')) {
@@ -50,16 +52,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 2. Add decoding="async" to images
-  html = html.replace(/<img([^>]*)>/gi, (match, attrs) => {
-    if (!attrs.includes('decoding=')) {
-      modified = true;
-      return `<img${attrs} decoding="async">`;
-    }
-    return match;
-  });
-
-  // 3. Add preload="none" to background videos
+  // 2. Add preload="none" to background videos
   const videoRegex = /<video([^>]*)>/gi;
   html = html.replace(videoRegex, (match, attrs) => {
     if (!attrs.includes('preload=')) {
@@ -69,7 +62,7 @@ function optimizeHtml(filePath) {
     return match;
   });
 
-  // 4. Add preconnect hints if not present
+  // 3. Add preconnect hints if not present
   if (!html.includes('dns-prefetch')) {
     const preconnectHints = `
   <!-- Performance: DNS Prefetch & Preconnect -->
@@ -96,7 +89,7 @@ function optimizeHtml(filePath) {
 }
 
 function main() {
-  console.log('Starting HTML optimization (images, videos, DNS prefetch only)...\n');
+  console.log('Starting HTML optimization (images lazy load, videos, DNS prefetch)...\n');
 
   const htmlFiles = getAllHtmlFiles(PAGES_DIR);
   let optimizedCount = 0;
