@@ -19,6 +19,7 @@
   <link href="/assets/css/design-system/base.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/utilities.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/components.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/design-system/dashboard.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/legacy-compat.css" rel="stylesheet" type="text/css">
   <!-- Legacy styles (will be gradually removed) -->
   <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
@@ -257,16 +258,14 @@ input:focus-visible {
 </style>
     </div>
     <section>
-      <div class="navbar-v-grid">
-        <div id="w-node-f282e25a-4a9d-24c8-af1f-a5df30b34817-a1f023f7">
-          <div class="padding-bottom padding-medium-x"></div>
+      <div class="dashboard-nav">
+        <div id="w-node-f282e25a-4a9d-24c8-af1f-a5df30b34817-a1f023f7" class="dashboard-nav-logo">
           <a href="/pages/dashboard/home.html" class="logo-wrapper w-inline-block"><img src="/assets/images/logo.svg" loading="lazy" alt=""></a>
-          <div class="padding-bottom padding-medium-x"></div>
         </div>
-        <div id="w-node-_674ebbf4-ebf9-8f32-0c03-4d7da1f023fb-a1f023f7" class="navbar-menu-wrapper">
-          <ul role="list" class="navlink-list-wrapper--js w-list-unstyled">
-            <li class="navlink-item-wrapper">
-              <a href="/pages/dashboard/home.html" class="navbar-link w-inline-block">
+        <div id="w-node-_674ebbf4-ebf9-8f32-0c03-4d7da1f023fb-a1f023f7" class="dashboard-nav-menu">
+          <ul role="list" class="dashboard-nav-list w-list-unstyled">
+            <li class="dashboard-nav-item">
+              <a href="/pages/dashboard/home.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M8.13797 19.7714L8.15722 16.7047C8.1572 15.9246 8.79312 15.2908 9.58101 15.2856H12.4671C13.2587 15.2856 13.9005 15.9209 13.9005 16.7047V19.7809C13.9003 20.4432 14.4343 20.9845 15.103 21H17.0271C18.9451 21 20.5 19.4607 20.5 17.5618V8.83784C20.4898 8.09083 20.1355 7.38935 19.538 6.93303L12.9577 1.6853C11.8049 0.771566 10.1662 0.771566 9.01342 1.6853L2.46203 6.94256C1.86226 7.39702 1.50739 8.09967 1.5 8.84736V17.5618C1.5 19.4607 3.05488 21 4.97291 21H6.89696C7.58235 21 8.13797 20.4499 8.13797 19.7714Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -278,8 +277,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Home</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/dashboard/payments.html" aria-current="page" class="navbar-link w-inline-block w--current">
+            <li class="dashboard-nav-item">
+              <a href="/pages/dashboard/payments.html" aria-current="page" class="dashboard-nav-link w-inline-block w--current">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
                       <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round"></path>
@@ -291,8 +290,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Payments</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/dashboard/balance.html" class="navbar-link w-inline-block">
+            <li class="dashboard-nav-item">
+              <a href="/pages/dashboard/balance.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewbox="0 0 22 20" fill="none">
                       <path d="M20.6389 12.3957H16.5906C15.1042 12.3948 13.8994 11.1909 13.8985 9.70446C13.8985 8.21801 15.1042 7.01409 16.5906 7.01318H20.6389" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -310,8 +309,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Balance</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/public/coming-soon.html" class="navbar-link w-inline-block">
+            <li class="dashboard-nav-item">
+              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
                       <path d="M17.5948 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5948 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -333,8 +332,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Customers</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/public/coming-soon.html" class="navbar-link w-inline-block">
+            <li class="dashboard-nav-item">
+              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 1H18.5521C19.9036 1 21 2.1059 21 3.47018V6.7641C21 8.12735 19.9036 9.23429 18.5521 9.23429H15.2855C13.933 9.23429 12.8366 8.12735 12.8366 6.7641V3.47018C12.8366 2.1059 13.933 1 15.2855 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -352,8 +351,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Pages</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/public/coming-soon.html" class="navbar-link w-inline-block">
+            <li class="dashboard-nav-item">
+              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 14.2065C5.0334 14.2065 1.7504 14.7875 1.7504 17.1155C1.7504 19.4425 5.0124 20.0455 8.8774 20.0455C12.7214 20.0455 16.0044 19.4635 16.0044 17.1365C16.0044 14.8095 12.7424 14.2065 8.8774 14.2065Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -371,8 +370,8 @@ input:focus-visible {
                 <div class="text-size-medium text-weight-semibold">Subscriptions</div>
               </a>
             </li>
-            <li>
-              <a href="/pages/public/coming-soon.html" class="navbar-link w-inline-block">
+            <li class="dashboard-nav-item">
+              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
                       <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

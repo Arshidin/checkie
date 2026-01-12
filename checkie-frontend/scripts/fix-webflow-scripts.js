@@ -37,13 +37,6 @@ function fixHtml(filePath) {
     modified = true;
   }
 
-  // Remove defer from memberstack.js
-  const memberstackRegex = /(<script[^>]*src="[^"]*memberstack\.js"[^>]*)\s+defer>/gi;
-  if (memberstackRegex.test(html)) {
-    html = html.replace(memberstackRegex, '$1>');
-    modified = true;
-  }
-
   // Remove async from webfont.js
   const webfontRegex = /(<script[^>]*src="[^"]*webfont\.js"[^>]*)\s+async>/gi;
   if (webfontRegex.test(html)) {
@@ -60,7 +53,7 @@ function fixHtml(filePath) {
 }
 
 function main() {
-  console.log('Fixing ALL Webflow-critical scripts (jQuery, Memberstack, WebFont)...\n');
+  console.log('Fixing ALL Webflow-critical scripts (jQuery, WebFont)...\n');
 
   const htmlFiles = getAllHtmlFiles(PAGES_DIR);
   let fixedCount = 0;

@@ -68,9 +68,9 @@ function optimizeHtml(filePath) {
   <!-- Performance: DNS Prefetch & Preconnect -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://code.jquery.com">
-  <link rel="dns-prefetch" href="https://static.memberstack.com">
   <link rel="dns-prefetch" href="https://cdn.jetboost.io">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">`;
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://checkie-production.up.railway.app">`;
 
     const insertPoint = html.indexOf('<meta charset="utf-8">');
     if (insertPoint !== -1) {

@@ -22,13 +22,13 @@
     if (!user) return;
 
     // Update name in welcome heading
-    const nameElements = document.querySelectorAll('[data-ms-member="first-name"]');
+    const nameElements = document.querySelectorAll('[data-user="first-name"]');
     nameElements.forEach(el => {
       el.textContent = user.firstName || 'there';
     });
 
     // Update any user ID elements (for Webflow CMS compatibility)
-    const uidElements = document.querySelectorAll('[data-ms-member="id"]');
+    const uidElements = document.querySelectorAll('[data-user="id"]');
     uidElements.forEach(el => {
       el.textContent = user.id;
     });
