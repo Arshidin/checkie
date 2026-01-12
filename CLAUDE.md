@@ -515,10 +515,20 @@ curl -X POST http://localhost:3000/api/webhooks/stripe/test \
 |----------|------|
 | Implementation Plan | `IMPLEMENTATION_PLAN.md` |
 | Deployment Guide | `DEPLOYMENT.md` |
+| **Railway Troubleshooting** | `checkie-backend/RAILWAY_DEPLOYMENT_HISTORY.md` |
 | Prisma Schema | `docs/specs/schema.prisma` |
 | State Machine | `docs/specs/checkout-state-machine.md` |
 | API Endpoints | `docs/specs/api-endpoints.md` |
 | Architecture Review | `docs/specs/architecture-review.md` |
+
+---
+
+## ⚠️ ВАЖНО: Railway Deployment
+
+**При проблемах с Railway деплоем ОБЯЗАТЕЛЬНО прочитай:**
+`checkie-backend/RAILWAY_DEPLOYMENT_HISTORY.md`
+
+Этот файл содержит историю всех проблем и решений. НЕ пробуй те же решения повторно!
 
 ---
 

@@ -30,12 +30,13 @@ const logger = new Logger('RedisModule');
           logger.log(`Connecting to Redis with URL: ${url.substring(0, 20)}...`);
         }
 
-        const isProduction = process.env.NODE_ENV === 'production';
+        // Only use TLS for rediss:// protocol URLs
+        // Railway public TCP proxy does NOT support TLS on redis:// URLs
+        const useTls = url.startsWith('rediss://');
         return new Redis(url, {
           maxRetriesPerRequest: 3,
           lazyConnect: true,
-          // Railway public Redis requires TLS in production
-          ...(isProduction && { tls: {} }),
+          ...(useTls && { tls: {} }),
         });
       },
     },

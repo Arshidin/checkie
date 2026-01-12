@@ -92,21 +92,20 @@ import { configuration } from './config';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         const redisUrl = configService.get<string>('redis.url');
-        const isProduction = process.env.NODE_ENV === 'production';
 
         if (redisUrl && redisUrl !== 'redis://localhost:6379') {
           // Parse URL for BullMQ - it needs explicit host/port/password
           try {
             const parsed = new URL(redisUrl);
-            const useTls = parsed.protocol === 'rediss:' || isProduction;
+            // Only use TLS for rediss:// protocol, NOT for Railway public TCP proxy
+            const useTls = parsed.protocol === 'rediss:';
             return {
               connection: {
                 host: parsed.hostname,
                 port: parseInt(parsed.port || '6379', 10),
                 password: parsed.password || undefined,
-                maxRetriesPerRequest: 3,
-                connectTimeout: 10000,
-                // Railway public Redis requires TLS
+                maxRetriesPerRequest: null, // Required by BullMQ
+                connectTimeout: 30000,
                 ...(useTls && { tls: {} }),
               },
             };
