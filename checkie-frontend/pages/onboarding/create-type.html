@@ -462,7 +462,20 @@ form.addEventListener('submit', (event) => {
   const formData = new FormData(form); // Собираем данные
   const data = Object.fromEntries(formData.entries()); // Преобразуем в объект
   console.log('Form Data:', data);
-  // Дополнительные действия с данными, например, отправка на сервер
+
+  // Сохраняем данные в localStorage
+  localStorage.setItem('checkoutPageType', JSON.stringify(data));
+
+  // Показываем успех и переходим в dashboard/pages
+  const successDiv = form.closest('.w-form')?.querySelector('.w-form-done');
+  if (successDiv) {
+    successDiv.style.display = 'block';
+    form.style.display = 'none';
+  }
+
+  setTimeout(() => {
+    window.location.href = '/pages/dashboard/pages.html';
+  }, 1500);
 });
 </script>
     </div>
