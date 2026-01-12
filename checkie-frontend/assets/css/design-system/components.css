@@ -1,0 +1,406 @@
+/*
+===============================================================================
+STRIPE DESIGN SYSTEM - COMPONENTS
+===============================================================================
+
+Компоненты дизайн-системы: Buttons, Forms, Cards, Alerts, Tables, Badges
+
+===============================================================================
+*/
+
+/*
+===============================================================================
+BUTTON SYSTEM - Система кнопок Stripe
+===============================================================================
+*/
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  text-decoration: none;
+  border: var(--border-1) solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+  user-select: none;
+  white-space: nowrap;
+  
+  /* Default size */
+  padding: var(--space-2_5) var(--space-4);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-base);
+  min-height: 40px;
+}
+
+/* Button Variants */
+.btn-primary {
+  background-color: var(--stripe-primary-500);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-primary);
+  border-color: var(--stripe-primary-500);
+}
+
+.btn-primary:hover {
+  background-color: var(--stripe-primary-600);
+  border-color: var(--stripe-primary-600);
+  box-shadow: var(--shadow-primary-hovered);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.btn-primary:active {
+  background-color: var(--stripe-primary-700);
+  border-color: var(--stripe-primary-700);
+}
+
+.btn-primary:disabled {
+  background-color: var(--gray-300);
+  border-color: var(--gray-300);
+  color: var(--gray-500);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.btn-destructive {
+  background-color: var(--error-500);
+  color: var(--text-inverse);
+  border-color: var(--error-500);
+  box-shadow: var(--shadow-destructive);
+}
+
+.btn-destructive:hover {
+  background-color: var(--error-600);
+  border-color: var(--error-600);
+  box-shadow: var(--shadow-destructive-hovered);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: var(--space-1_5) var(--space-3);
+  font-size: var(--text-xs);
+  min-height: 32px;
+}
+
+.btn-lg {
+  padding: var(--space-3_5) var(--space-6);
+  font-size: var(--text-base);
+  min-height: 48px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/*
+===============================================================================
+FORM SYSTEM - Система форм Stripe
+===============================================================================
+*/
+
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: var(--space-3) var(--space-3);
+  font-size: var(--text-base);
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: var(--border-1) solid var(--border-primary);
+  border-radius: var(--radius-base);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-form-accent);
+}
+
+.form-input:disabled {
+  background-color: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
+.form-input.error {
+  border-color: var(--border-error);
+}
+
+.form-input.error:focus {
+  box-shadow: var(--shadow-form-error);
+}
+
+.form-error {
+  font-size: var(--text-xs);
+  color: var(--text-error);
+  margin-top: var(--space-1);
+}
+
+.form-help {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-top: var(--space-1);
+}
+
+/* Textarea */
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Select */
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23525F7F' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right var(--space-3) center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding-right: var(--space-10);
+  appearance: none;
+}
+
+/* Checkbox */
+.form-checkbox {
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-xs);
+}
+
+/*
+===============================================================================
+CARD SYSTEM - Система карточек
+===============================================================================
+*/
+
+.card {
+  background-color: var(--bg-card);
+  border: var(--border-1) solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  padding: var(--space-6);
+  border-bottom: var(--border-1) solid var(--border-primary);
+}
+
+.card-body {
+  padding: var(--space-6);
+}
+
+.card-footer {
+  padding: var(--space-6);
+  border-top: var(--border-1) solid var(--border-primary);
+  background-color: var(--bg-secondary);
+}
+
+.card-title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.card-description {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/*
+===============================================================================
+ALERT SYSTEM - Система уведомлений
+===============================================================================
+*/
+
+.alert {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: var(--border-1) solid;
+  margin-bottom: var(--space-4);
+}
+
+.alert-success {
+  background-color: var(--bg-success);
+  border-color: var(--border-success);
+  color: var(--text-success);
+}
+
+.alert-error {
+  background-color: var(--bg-error);
+  border-color: var(--border-error);
+  color: var(--text-error);
+}
+
+.alert-warning {
+  background-color: var(--bg-warning);
+  border-color: var(--border-warning);
+  color: var(--text-warning);
+}
+
+.alert-info {
+  background-color: var(--bg-info);
+  border-color: var(--border-info);
+  color: var(--text-info);
+}
+
+.alert-title {
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-1);
+}
+
+/*
+===============================================================================
+STRIPE-SPECIFIC COMPONENTS - Специфичные компоненты Stripe
+===============================================================================
+*/
+
+/* Navigation Header */
+.stripe-header {
+  background-color: var(--keel-slate);
+  color: var(--text-inverse);
+  padding: var(--space-4) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.stripe-logo {
+  color: var(--text-inverse);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: linear-gradient(135deg, var(--stripe-primary-500) 0%, var(--stripe-primary-600) 100%);
+  color: var(--text-inverse);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+}
+
+.dashboard-card-title {
+  font-size: var(--text-sm);
+  opacity: 0.8;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-card-value {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+}
+
+/* Payment Method Icons */
+.payment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-10);
+  height: var(--space-6);
+  background-color: var(--bg-primary);
+  border: var(--border-1) solid var(--border-primary);
+  border-radius: var(--radius-sm);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.status-succeeded {
+  background-color: var(--success-100);
+  color: var(--success-700);
+}
+
+.status-pending {
+  background-color: var(--warning-100);
+  color: var(--warning-700);
+}
+
+.status-failed {
+  background-color: var(--error-100);
+  color: var(--error-700);
+}
+
+/* Table Styles */
+.stripe-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.stripe-table th {
+  background-color: var(--bg-secondary);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  border-bottom: var(--border-1) solid var(--border-primary);
+}
+
+.stripe-table td {
+  padding: var(--space-4);
+  border-bottom: var(--border-1) solid var(--border-primary);
+  color: var(--text-primary);
+}
+
+.stripe-table tbody tr:hover {
+  background-color: var(--bg-secondary);
+}

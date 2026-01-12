@@ -179,9 +179,10 @@ checkie-stage.webflow/
 
 | Параметр | Значение |
 |----------|----------|
-| Memberstack ID | `app_cm5wj3syy002o0souepm8fb2y` |
+| Auth System | Checkie API (api.js + auth.js) |
 | Jetboost ID | `cm7m23x7h00gx0kq63i2lgub2` |
 | Netlify Site | `checkiepay` |
+| Backend API | `https://checkie-production.up.railway.app/api` |
 | jQuery | 3.6.0 |
 | OwlCarousel | 2.3.4 |
 
@@ -217,11 +218,11 @@ assets/animations/*.json
 Локальные шрифты: `assets/fonts/`
 Google Fonts: изменить в `<head>` каждой страницы
 
-### Проверить Memberstack атрибуты
+### Проверить auth атрибуты
 ```bash
-grep -r "data-ms-" pages/
-grep -r "ms-hide" pages/
-grep -r "ms-show" pages/
+grep -r "data-auth=" pages/
+grep -r "data-user=" pages/
+grep -r "data-action=" pages/
 ```
 
 ### Деплой на Netlify
@@ -234,7 +235,6 @@ netlify deploy --prod
 
 ## Полезные ссылки
 
-- [Memberstack Docs](https://docs.memberstack.com/)
 - [Jetboost Docs](https://www.jetboost.io/docs)
 - [Lottie Files](https://lottiefiles.com/)
 - [Netlify Docs](https://docs.netlify.com/)

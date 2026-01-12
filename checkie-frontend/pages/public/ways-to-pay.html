@@ -5,7 +5,6 @@
   <!-- Performance: DNS Prefetch & Preconnect -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://code.jquery.com">
-  <link rel="dns-prefetch" href="https://static.memberstack.com">
   <link rel="dns-prefetch" href="https://cdn.jetboost.io">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <title>Payment Methods | Checkie</title>
@@ -14,9 +13,9 @@
   <meta content="Payment Methods | Checkie" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
-  <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -26,8 +25,6 @@
   <link href="/assets/images/webclip.jpg" rel="apple-touch-icon">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!--  Memberstack webflow package  -->
-  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript"></script>
-  <script id="jetboost-script" type="text/javascript"> window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2"; (function(d) { var s = d.createElement("script"); s.src = "https://cdn.jetboost.io/jetboost.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })(document); </script><!--  [Attributes by Finsweet] CMS Filter  -->
   <script async="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js"></script>
   <!--  [Attributes by Finsweet] CMS Nest  -->
   <script async="" src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsnest@1/cmsnest.js"></script>
@@ -905,7 +902,7 @@ input:focus-visible {
                 <div class="hide-mobile-portrait">
                   <div class="padding-left padding-medium-x"></div>
                 </div>
-                <div data-ms-content="!members" class="auth-menu">
+                <div data-auth="guest" class="auth-menu">
                   <a href="/pages/public/login.html" class="nav-link-btn w-inline-block">
                     <div class="nowrapp">
                       <div class="text-color-primary text-size-regular">Log in</div>
@@ -917,13 +914,13 @@ input:focus-visible {
                     </div>
                   </a>
                 </div>
-                <div data-hover="false" data-delay="0" data-ms-content="members" class="dropdown-6 w-dropdown">
-                  <div class="ms-profile-dropdown w-dropdown-toggle"><img src="/assets/images/transparent-white-profile-image.svg" alt="" data-ms-member="profile-image" class="ms-dropdown-image" loading="lazy">
+                <div data-hover="false" data-delay="0" data-auth="member" class="dropdown-6 w-dropdown">
+                  <div class="ms-profile-dropdown w-dropdown-toggle"><img src="/assets/images/transparent-white-profile-image.svg" alt="" data-user="avatar" class="ms-dropdown-image" loading="lazy">
                     <div class="ms-dropdown-text">
                       <div class="ms-dropdown-name">
-                        <div data-ms-member="first-name">First</div>
+                        <div data-user="first-name">First</div>
                       </div>
-                      <div data-ms-member="email" class="ms-dropdown-email">email@email.com</div>
+                      <div data-user="email" class="ms-dropdown-email">email@email.com</div>
                     </div>
                     <div class="ms-profile-svg-wrap">
                       <div class="ms-profile-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="100%" height="100%" preserveaspectratio="xMidYMid meet" viewbox="0 0 24 24">
@@ -932,7 +929,7 @@ input:focus-visible {
                     </div>
                   </div>
                   <nav class="ms-dropdown-menu w-dropdown-list">
-                    <a data-ms-action="logout" href="#" class="ms-dropdown-link w-dropdown-link">Logout</a>
+                    <a data-action="logout" href="#" class="ms-dropdown-link w-dropdown-link">Logout</a>
                   </nav>
                 </div>
               </div>
@@ -1820,5 +1817,7 @@ if (!checkLinkContainsDashboard(link)) {
 }
 });
 </script>
+<script src="/assets/js/api.js" type="text/javascript"></script>
+<script src="/assets/js/auth.js" type="text/javascript"></script>
 </body>
 </html>

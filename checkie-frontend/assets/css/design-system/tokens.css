@@ -1,0 +1,369 @@
+/*
+===============================================================================
+STRIPE DESIGN SYSTEM - DESIGN TOKENS
+===============================================================================
+
+Все CSS переменные (токены) дизайн-системы Stripe
+Включает: цвета, типографику, spacing, shadows, animations, breakpoints
+
+===============================================================================
+*/
+
+/* Базовые настройки */
+html {
+  font-size: 100%; /* 16px base */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* ===== ФИРМЕННЫЕ ЦВЕТА STRIPE (KEEL PALETTE) ===== */
+  --keel-slate: #0a2540;      /* Основной темно-синий Stripe */
+  --keel-white: #ffffff;      /* Белый */
+  --keel-lemon: #ffd848;      /* Желтый акцент */
+  --keel-raspberry: #ff5191;  /* Малиновый */
+  --keel-cyan: #80e9ff;       /* Голубой */
+  --keel-magenta: #ff80ff;    /* Пурпурный */
+  
+  /* ===== ОСНОВНАЯ ЦВЕТОВАЯ СИСТЕМА ===== */
+  
+  /* Primary (Blue) - Основной синий Stripe */
+  --stripe-primary: #533afd;
+  --stripe-primary-50: #f9f7ff;
+  --stripe-primary-100: #efecfc;
+  --stripe-primary-200: #c3b6fb;
+  --stripe-primary-300: #b49cfe;
+  --stripe-primary-400: #857afe;
+  --stripe-primary-500: #533afd;
+  --stripe-primary-600: #4e11e2;
+  --stripe-primary-700: #44139f;
+  --stripe-primary-800: #2f0e63;
+  --stripe-primary-900: #14134e;
+  
+  /* Blue Scale - Дополнительные оттенки синего */
+  --blue-25: #e2fbfe;
+  --blue-50: #cbf5fd;
+  --blue-100: #a7e7fc;
+  --blue-200: #6dc9fc;
+  --blue-300: #3ba7fc;
+  --blue-400: #0096eb; /* cyan400 */
+  --blue-500: #0072e9;
+  --blue-600: #045ad0;
+  --blue-700: #0d3485;
+  --blue-800: #0a2156;
+  --blue-900: #14134e;
+  
+  /* Green Scale - Зеленые цвета */
+  --green-0: #ffffff;
+  --green-50: #ecfed7;
+  --green-100: #d1fab3;
+  --green-200: #76df47; /* green--7 */
+  --green-300: #58ba27;
+  --green-400: #3da00b;
+  --green-500: #228403; /* green500 */
+  --green-600: #006908;
+  --green-700: #1c5a0d;
+  --green-800: #043b15;
+  --green-900: #02220d;
+  
+  /* Red Scale - Красные цвета */
+  --red-50: #ffe7f2;
+  --red-100: #fbd3dc;
+  --red-200: #ffb1cd;
+  --red-300: #fa7e91;
+  --red-400: #fc526a;
+  --red-500: #df1b41; /* red500 */
+  --red-600: #e61947;
+  --red-700: #c0123c;
+  --red-800: #9b0c36;
+  --red-900: #3e021a;
+  
+  /* Orange Scale - Оранжевые цвета */
+  --orange-50: #fef9da;
+  --orange-100: #fbd992;
+  --orange-200: #fcbd3a;
+  --orange-300: #ff8f0e;
+  --orange-400: #ed6704; /* orange400 */
+  --orange-500: #c84801;
+  --orange-600: #a82c00;
+  --orange-700: #842106;
+  --orange-800: #5f1a05;
+  --orange-900: #331302;
+  
+  /* Purple Scale - Фиолетовые цвета */
+  --purple-50: #f7f5ff;
+  --purple-100: #f2ebff;
+  --purple-200: #d1befe;
+  --purple-300: #b49cfc;
+  --purple-400: #8d7ffa;
+  --purple-500: #625afa; /* violet500 */
+  --purple-600: #513dd9;
+  --purple-700: #3f32a1;
+  --purple-800: #302476;
+  --purple-900: #14134e;
+  
+  /* Yellow Scale - Желтые цвета */
+  --yellow-50: #fefadb;
+  --yellow-100: #fceeb5;
+  --yellow-200: #fcbd3a;
+  --yellow-300: #ff8f0e;
+  --yellow-400: #ed6704;
+  --yellow-500: #c84801;
+  --yellow-600: #a82c00;
+  --yellow-700: #842106;
+  --yellow-800: #5f1a05;
+  --yellow-900: #331302;
+  
+  /* Cyan Scale - Голубые цвета */
+  --cyan-50: #e8fcfe;
+  --cyan-100: #cbf5fd;
+  --cyan-200: #75d5e8;
+  --cyan-300: #06b9ef;
+  --cyan-400: #0096eb;
+  --cyan-500: #0072e9;
+  --cyan-600: #045ad0;
+  --cyan-700: #04438c;
+  --cyan-800: #003262;
+  --cyan-900: #011c3a;
+  
+  /* Gray Scale - Серые цвета */
+  --gray-0: #ffffff;
+  --gray-50: #f5f6f8;
+  --gray-100: #ebeef1;
+  --gray-200: #d8dee4;
+  --gray-300: #b6c0cd;
+  --gray-400: #99a5b8;
+  --gray-500: #818da0;
+  --gray-600: #6c7688;
+  --gray-700: #596171;
+  --gray-800: #474e5a;
+  --gray-900: #353a44;
+  --gray-950: #21252c;
+  
+  /* ===== SEMANTIC COLORS ===== */
+  --success-50: var(--green-50);
+  --success-100: var(--green-100);
+  --success-200: var(--green-200);
+  --success-300: var(--green-300);
+  --success-400: var(--green-400);
+  --success-500: var(--green-500);
+  --success-600: var(--green-600);
+  --success-700: var(--green-700);
+  --success-800: var(--green-800);
+  --success-900: var(--green-900);
+  
+  --error-50: var(--red-50);
+  --error-100: var(--red-100);
+  --error-200: var(--red-200);
+  --error-300: var(--red-300);
+  --error-400: var(--red-400);
+  --error-500: var(--red-500);
+  --error-600: var(--red-600);
+  --error-700: var(--red-700);
+  --error-800: var(--red-800);
+  --error-900: var(--red-900);
+  
+  --warning-50: var(--orange-50);
+  --warning-100: var(--orange-100);
+  --warning-200: var(--orange-200);
+  --warning-300: var(--orange-300);
+  --warning-400: var(--orange-400);
+  --warning-500: var(--orange-500);
+  --warning-600: var(--orange-600);
+  --warning-700: var(--orange-700);
+  --warning-800: var(--orange-800);
+  --warning-900: var(--orange-900);
+  
+  --info-50: var(--blue-50);
+  --info-100: var(--blue-100);
+  --info-200: var(--blue-200);
+  --info-300: var(--blue-300);
+  --info-400: var(--blue-400);
+  --info-500: var(--blue-500);
+  --info-600: var(--blue-600);
+  --info-700: var(--blue-700);
+  --info-800: var(--blue-800);
+  --info-900: var(--blue-900);
+  
+  /* ===== TEXT COLORS ===== */
+  --text-primary: var(--gray-950);
+  --text-secondary: var(--gray-700);
+  --text-tertiary: var(--gray-500);
+  --text-inverse: var(--gray-0);
+  --text-success: var(--success-700);
+  --text-error: var(--error-600);
+  --text-warning: var(--warning-700);
+  --text-info: var(--info-600);
+  
+  /* ===== BACKGROUND COLORS ===== */
+  --bg-primary: var(--gray-0);
+  --bg-secondary: var(--gray-50);
+  --bg-tertiary: var(--gray-100);
+  --bg-card: var(--gray-0);
+  --bg-overlay: rgba(16, 17, 26, 0.4);
+  --bg-success: var(--success-50);
+  --bg-error: var(--error-50);
+  --bg-warning: var(--warning-50);
+  --bg-info: var(--info-50);
+  
+  /* ===== BORDER COLORS ===== */
+  --border-primary: var(--gray-200);
+  --border-secondary: var(--gray-300);
+  --border-focus: var(--stripe-primary-500);
+  --border-success: var(--success-300);
+  --border-error: var(--error-400);
+  --border-warning: var(--warning-300);
+  --border-info: var(--info-300);
+  
+  /* ===== TYPOGRAPHY SYSTEM ===== */
+  
+  /* Font Families - Система шрифтов Stripe */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Menlo', 'Consolas', monospace;
+  --font-ja: 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo UI', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-zh-hans: 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'Microsoft JhengHei', sans-serif;
+  --font-zh-hant: 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei', sans-serif;
+  
+  /* Font Sizes - Реальные размеры из Stripe */
+  --text-2xs: 0.75rem;   /* 12px */
+  --text-xs: 0.8125rem;  /* 13px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.75rem;   /* 28px */
+  --text-4xl: 2rem;      /* 32px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.5rem;    /* 56px */
+  --text-7xl: 4rem;      /* 64px */
+  
+  /* Font Weights */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+  
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  
+  /* ===== SPACING SYSTEM ===== */
+  /* Основан на 4px grid системе Stripe */
+  --space-0: 0;
+  --space-0_5: 0.125rem;   /* 2px */
+  --space-1: 0.25rem;      /* 4px */
+  --space-1_5: 0.375rem;   /* 6px */
+  --space-2: 0.5rem;       /* 8px */
+  --space-2_5: 0.625rem;   /* 10px */
+  --space-3: 0.75rem;      /* 12px */
+  --space-3_5: 0.875rem;   /* 14px */
+  --space-4: 1rem;         /* 16px */
+  --space-5: 1.25rem;      /* 20px */
+  --space-6: 1.5rem;       /* 24px */
+  --space-7: 1.75rem;      /* 28px */
+  --space-8: 2rem;         /* 32px */
+  --space-10: 2.5rem;      /* 40px */
+  --space-12: 3rem;        /* 48px */
+  --space-16: 4rem;        /* 64px */
+  --space-20: 5rem;        /* 80px */
+  --space-24: 6rem;        /* 96px */
+  --space-32: 8rem;        /* 128px */
+  
+  /* Border Radius - Радиусы скругления Stripe */
+  --radius-none: 0;
+  --radius-xs: 0.125rem;    /* 2px */
+  --radius-sm: 0.25rem;     /* 4px */
+  --radius-base: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;      /* 8px */
+  --radius-lg: 0.75rem;     /* 12px */
+  --radius-xl: 1rem;        /* 16px */
+  --radius-2xl: 1.5rem;     /* 24px */
+  --radius-full: 9999px;
+  
+  /* Border Widths */
+  --border-0: 0px;
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-4: 4px;
+  --border-8: 8px;
+  
+  /* ===== SHADOWS SYSTEM ===== */
+  /* Тени основаны на реальных значениях из Stripe Dashboard */
+  
+  /* Basic Shadows */
+  --shadow-xs: 0px 1px 1px 0px rgba(16, 17, 26, 0.16);
+  --shadow-sm: 0px 1px 1px 0px rgba(16, 17, 26, 0.16), 0px 2px 5px 0px rgba(48, 49, 61, 0.08);
+  --shadow-base: 0px 3px 6px 0px rgba(0, 0, 0, 0.12), 0px 7px 14px 0px rgba(48, 49, 61, 0.08);
+  --shadow-md: 0px 4px 8px 0px rgba(0, 0, 0, 0.12), 0px 8px 20px 0px rgba(48, 49, 61, 0.12);
+  --shadow-lg: 0px 8px 16px 0px rgba(0, 0, 0, 0.12), 0px 16px 32px 0px rgba(48, 49, 61, 0.12);
+  --shadow-xl: 0px 16px 32px 0px rgba(0, 0, 0, 0.16), 0px 24px 48px 0px rgba(48, 49, 61, 0.16);
+  
+  /* Action Shadows - Для интерактивных элементов */
+  --shadow-primary: 0px 1px 1px 0px rgba(20, 19, 78, 0.32);
+  --shadow-primary-hovered: 0px 1px 1px 0px rgba(20, 19, 78, 0.32);
+  --shadow-primary-focused: 0px 1px 1px 0px rgba(20, 19, 78, 0.32);
+  --shadow-destructive: 0px 1px 1px 0px rgba(62, 2, 26, 0.32);
+  --shadow-destructive-hovered: 0px 1px 1px 0px rgba(62, 2, 26, 0.32);
+  
+  /* Form Shadows */
+  --shadow-form-accent: 0px 1px 1px 0px rgba(1, 28, 58, 0.16);
+  --shadow-form-error: 0px 1px 1px 0px rgba(62, 2, 26, 0.16);
+  --shadow-form-error-pressed: 0px -1px 1px 0px rgba(62, 2, 26, 0.16);
+  
+  /* Focus Ring - Кольцо фокуса */
+  --shadow-focus-ring: 0 0 0 4px rgba(0, 150, 235, 0.28), 0 0 1px 1px rgba(0, 85, 188, 0.36);
+  --shadow-focus-keyline: 0 0 1px 1px rgba(0, 85, 188, 0.36);
+  
+  /* Z-Index Scale */
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-modal: 200;
+  --z-contextual: 400;
+  --z-toast: 500;
+  
+  /* ===== ANIMATION & TRANSITIONS ===== */
+  
+  /* Duration - Длительности анимаций */
+  --duration-fast: 50ms;
+  --duration-base: 150ms;
+  --duration-slow: 300ms;
+  --duration-slower: 400ms;
+  
+  /* Timing Functions - Функции времени */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
+  
+  /* Breakpoints */
+  --screen-sm: 640px;
+  --screen-md: 768px;
+  --screen-lg: 1024px;
+  --screen-xl: 1280px;
+  --screen-2xl: 1536px;
+  
+  /* Content Width */
+  --content-width: 1040px;
+  --print-content-width: 760px;
+}

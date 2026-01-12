@@ -155,17 +155,33 @@
       return;
     }
 
-    // Update UI with user info if authenticated
-    if (isAuthenticated) {
-      updateUserUI();
-    }
+    // Always update UI to handle visibility and user info
+    updateUserUI();
   }
 
   function updateUserUI() {
     const user = CheckieAPI.getUser();
+    const isAuthenticated = CheckieAPI.isAuthenticated();
+
+    // Handle visibility based on auth state
+    // data-auth="guest" - show only when NOT authenticated
+    // data-auth="member" - show only when authenticated
+    document.querySelectorAll('[data-auth="guest"]').forEach(el => {
+      el.style.display = isAuthenticated ? 'none' : '';
+    });
+    document.querySelectorAll('[data-auth="member"]').forEach(el => {
+      el.style.display = isAuthenticated ? '' : 'none';
+    });
+
     if (!user) return;
 
-    // Update user name displays
+    // Update first name displays (data-user="first-name")
+    const firstNameElements = document.querySelectorAll('[data-user="first-name"]');
+    firstNameElements.forEach(el => {
+      el.textContent = user.firstName || 'User';
+    });
+
+    // Update user name displays (full name)
     const nameElements = document.querySelectorAll('[data-user="name"], .user-name');
     nameElements.forEach(el => {
       el.textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email;

@@ -43,9 +43,10 @@ netlify logs
 ## ID интеграций
 
 ```
-Memberstack: app_cm5wj3syy002o0souepm8fb2y
 Jetboost:    cm7m23x7h00gx0kq63i2lgub2
 ```
+
+> **Note:** Memberstack has been replaced with Checkie API auth (api.js + auth.js)
 
 ---
 
@@ -115,10 +116,6 @@ Jetboost:    cm7m23x7h00gx0kq63i2lgub2
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Memberstack -->
-  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y"
-          src="https://static.memberstack.com/scripts/v1/memberstack.js"></script>
-
   <!-- Jetboost -->
   <script>
     window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2";
@@ -150,28 +147,28 @@ Jetboost:    cm7m23x7h00gx0kq63i2lgub2
 
 ---
 
-## Memberstack атрибуты
+## Checkie Auth атрибуты
 
 ```html
 <!-- Скрыть для гостей, показать членам -->
-<div data-ms-content="members">Только для авторизованных</div>
+<div data-auth="member">Только для авторизованных</div>
 
 <!-- Скрыть для членов, показать гостям -->
-<div data-ms-content="!members">Только для гостей</div>
+<div data-auth="guest">Только для гостей</div>
 
 <!-- Показать имя пользователя -->
-<span data-ms-member="name"></span>
+<span data-user="first-name"></span>
+<span data-user="email"></span>
 
 <!-- Кнопка выхода -->
-<a data-ms-action="logout">Выйти</a>
-
-<!-- Кнопка входа -->
-<a data-ms-action="login">Войти</a>
+<a data-action="logout">Выйти</a>
 
 <!-- Формы -->
-<form data-ms-form="signup">...</form>
-<form data-ms-form="login">...</form>
+<form id="wf-form-sign-up">...</form>
+<form id="wf-form-login">...</form>
 ```
+
+> **Note:** Auth is handled by `/assets/js/api.js` and `/assets/js/auth.js`
 
 ---
 
@@ -193,8 +190,11 @@ Jetboost:    cm7m23x7h00gx0kq63i2lgub2
 ## Полезные grep команды
 
 ```bash
-# Найти все Memberstack атрибуты
-grep -r "data-ms-" pages/
+# Найти все auth атрибуты
+grep -r "data-auth=" pages/
+
+# Найти все user data атрибуты
+grep -r "data-user=" pages/
 
 # Найти все Lottie анимации
 grep -r "data-animation-type" pages/

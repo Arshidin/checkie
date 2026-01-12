@@ -1,0 +1,62 @@
+/*
+===============================================================================
+STRIPE DESIGN SYSTEM - BASE STYLES
+===============================================================================
+
+Базовые стили для HTML элементов: body, headings, links, paragraphs
+
+===============================================================================
+*/
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  margin: 0 0 var(--space-4) 0;
+  color: var(--text-primary);
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  margin: 0 0 var(--space-4) 0;
+  line-height: var(--leading-normal);
+}
+
+a {
+  color: var(--stripe-primary-500);
+  text-decoration: none;
+  font-weight: var(--font-medium);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+a:hover {
+  color: var(--stripe-primary-600);
+}
+
+a:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Responsive Typography */
+@media (max-width: 639px) {
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+}

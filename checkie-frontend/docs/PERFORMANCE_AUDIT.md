@@ -56,16 +56,16 @@ All 64 HTML pages optimized:
 **Before:**
 ```html
 <script src="jquery-3.6.0.min.js"></script>           <!-- Blocking -->
-<script src="memberstack.js"></script>                 <!-- Blocking -->
 <script src="webfont.js"></script>                     <!-- Blocking -->
 ```
 
 **After:**
 ```html
 <script src="jquery-3.6.0.min.js" defer></script>      <!-- Non-blocking -->
-<script src="memberstack.js" defer></script>           <!-- Non-blocking -->
 <script src="webfont.js" async></script>               <!-- Async -->
 ```
+
+> **Note:** Memberstack was replaced with Checkie API auth (api.js + auth.js)
 
 ### 4. DNS Prefetch
 
@@ -74,9 +74,9 @@ Added preconnect hints to all pages:
 ```html
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="dns-prefetch" href="https://code.jquery.com">
-<link rel="dns-prefetch" href="https://static.memberstack.com">
 <link rel="dns-prefetch" href="https://cdn.jetboost.io">
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://checkie-production.up.railway.app">
 ```
 
 ### 5. Image Lazy Loading

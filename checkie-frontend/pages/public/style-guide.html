@@ -5,7 +5,6 @@
   <!-- Performance: DNS Prefetch & Preconnect -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://code.jquery.com">
-  <link rel="dns-prefetch" href="https://static.memberstack.com">
   <link rel="dns-prefetch" href="https://cdn.jetboost.io">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <title>Style Guide | Checkie</title>
@@ -13,9 +12,9 @@
   <meta content="Style Guide" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
-  <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -25,8 +24,6 @@
   <link href="/assets/images/webclip.jpg" rel="apple-touch-icon">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!--  Memberstack webflow package  -->
-  <script data-memberstack-app="app_cm5wj3syy002o0souepm8fb2y" src="https://static.memberstack.com/scripts/v1/memberstack.js" type="text/javascript"></script>
-  <script id="jetboost-script" type="text/javascript"> window.JETBOOST_SITE_ID = "cm7m23x7h00gx0kq63i2lgub2"; (function(d) { var s = d.createElement("script"); s.src = "https://cdn.jetboost.io/jetboost.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })(document); </script>
 </head>
 <body class="body">
   <div class="global-styles w-embed">
@@ -1670,6 +1667,166 @@ input:focus-visible {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Stripe Design System Section -->
+        <section class="fs-styleguide_stripe-design-system">
+          <div class="padding-global padding-section-large">
+            <div class="container-large">
+              <div class="fs-styleguide_section">
+                <div class="fs-styleguide_section-header">
+                  <h2 class="fs-styleguide_heading-medium">Stripe Design System</h2>
+                  <p class="text-size-medium">Новая дизайн-система Checkie на основе Stripe Design System<br></p>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Buttons (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_3-col">
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-primary</div>
+                      <button class="btn btn-primary">Primary Button</button>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-secondary</div>
+                      <button class="btn btn-secondary">Secondary Button</button>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-destructive</div>
+                      <button class="btn btn-destructive">Delete</button>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-ghost</div>
+                      <button class="btn btn-ghost">Ghost Button</button>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-primary btn-sm</div>
+                      <button class="btn btn-primary btn-sm">Small</button>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">btn btn-primary btn-lg</div>
+                      <button class="btn btn-primary btn-lg">Large</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Forms -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Forms (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_item" style="max-width: 400px;">
+                    <div class="fs-styleguide_label">form-group</div>
+                    <div class="form-group">
+                      <label class="form-label">Email Address</label>
+                      <input type="email" class="form-input" placeholder="example@email.com">
+                      <div class="form-help">We'll never share your email</div>
+                    </div>
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                      <label class="form-label">Email (with error)</label>
+                      <input type="email" class="form-input error" value="invalid-email">
+                      <div class="form-error">Please enter a valid email address</div>
+                    </div>
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                      <label class="form-label">Select Option</label>
+                      <select class="form-input form-select">
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Cards (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_item" style="max-width: 400px;">
+                    <div class="fs-styleguide_label">card</div>
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Card Title</h3>
+                        <p class="card-description">Card description text</p>
+                      </div>
+                      <div class="card-body">
+                        <p>Card body content goes here. This is where the main content of the card is displayed.</p>
+                      </div>
+                      <div class="card-footer">
+                        <button class="btn btn-primary">Action</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Alerts -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Alerts (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_item" style="max-width: 500px;">
+                    <div class="alert alert-success">
+                      <div class="alert-title">Success!</div>
+                      <p>Operation completed successfully</p>
+                    </div>
+                    <div class="alert alert-error">
+                      <div class="alert-title">Error</div>
+                      <p>Something went wrong. Please try again.</p>
+                    </div>
+                    <div class="alert alert-warning">
+                      <div class="alert-title">Warning</div>
+                      <p>Please review your input before proceeding.</p>
+                    </div>
+                    <div class="alert alert-info">
+                      <div class="alert-title">Info</div>
+                      <p>Here's some helpful information for you.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Status Badges -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Status Badges (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_3-col">
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">status-badge status-succeeded</div>
+                      <span class="status-badge status-succeeded">Succeeded</span>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">status-badge status-pending</div>
+                      <span class="status-badge status-pending">Pending</span>
+                    </div>
+                    <div class="fs-styleguide_item">
+                      <div class="fs-styleguide_label">status-badge status-failed</div>
+                      <span class="status-badge status-failed">Failed</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Utility Classes -->
+                <div class="fs-styleguide_item-wrapper" style="margin-top: 3rem;">
+                  <div class="fs-styleguide_item-header">
+                    <h3 class="text-weight-semibold">Utility Classes (Stripe)</h3>
+                  </div>
+                  <div class="fs-styleguide_item">
+                    <div class="fs-styleguide_label">Spacing & Layout</div>
+                    <div class="p-4 bg-secondary rounded-lg" style="margin-top: 1rem;">
+                      <p class="text-sm text-secondary">Padding 16px, Secondary background, Rounded corners</p>
+                      <div class="flex items-center justify-between gap-4" style="margin-top: 1rem;">
+                        <span class="text-primary">Flex container</span>
+                        <button class="btn btn-primary btn-sm">Action</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

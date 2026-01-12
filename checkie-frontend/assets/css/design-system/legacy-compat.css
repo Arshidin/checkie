@@ -1,0 +1,89 @@
+/*
+===============================================================================
+STRIPE DESIGN SYSTEM - LEGACY COMPATIBILITY
+===============================================================================
+
+Маппинг старых CSS переменных Checkie на новые Stripe Design System переменные
+Обеспечивает обратную совместимость со старыми стилями
+
+===============================================================================
+*/
+
+:root {
+  /* ===== LINK COLORS ===== */
+  --link-color--link-primary: var(--stripe-primary-500);
+  --link-color--link-secondary: var(--gray-950);
+  --link-color--link-alternate: var(--gray-0);
+  
+  /* ===== BACKGROUND COLORS ===== */
+  --background-color--background-primary: var(--gray-950);
+  --background-color--background-secondary: var(--stripe-primary-500);
+  --background-color--background-alternate: var(--gray-0);
+  --background-color--background-error: var(--error-50);
+  --background-color--background-warning: var(--warning-50);
+  --background-color--background-success: var(--success-50);
+  --background-color--background-light-orange: #ffe6c9;
+  --background-color--background-light-green: #e1f0da;
+  --background-color--background-light-blue: #deedf8;
+  --background-color--background-light-yellow: #fff7d4;
+  --background-color--background-light-pink: #ffe6e6;
+  --background-color--background-super-light-orange: #fef7f4;
+  --background-color--color: rgba(51, 51, 51, 0.1);
+  
+  /* ===== TEXT COLORS ===== */
+  --text-color-fonts-variants--text-primary: var(--text-primary);
+  --text-color-fonts-variants--text-secondary: var(--text-secondary);
+  --text-color-fonts-variants--text-alternate: #f7f5f3;
+  --text-color-fonts-variants--text-success: var(--text-success);
+  --text-color-fonts-variants--text-error: var(--text-error);
+  --text-color-fonts-variants--text-warning: var(--text-warning);
+  --text-color-fonts-variants--text-primary-pacity-65: rgba(51, 51, 51, 0.65);
+  --text-color-fonts-variants--text-color-gray: var(--gray-600);
+  --text-color-fonts-variants--text-grace: rgba(51, 51, 51, 0.6);
+  --text-color-fonts-variants--text-pink: #e6a4b4;
+  --text-color-fonts-variants--text-blue: #1572a1;
+  --text-color-fonts-variants--text-light-green: #99bc85;
+  --text-color-fonts-variants--text-yellow: #eec759;
+  --text-color-fonts-variants--text-green: #248567;
+  
+  /* ===== BASE COLORS ===== */
+  --base-color-neutral--white: var(--gray-0);
+  --base-color-neutral--black: var(--gray-950);
+  --base-color-neutral--neutral: var(--gray-600);
+  --base-color-neutral--neutral-light: var(--gray-400);
+  --base-color-neutral--neutral-lighter: var(--gray-300);
+  --base-color-neutral--neutral-lightest: var(--gray-200);
+  --base-color-neutral--neutral-dark: var(--gray-800);
+  --base-color-neutral--neutral-darker: var(--gray-900);
+  --base-color-neutral--neutral-darkest: var(--gray-950);
+  
+  /* Brand Colors */
+  --base-color-brand--blue: var(--stripe-primary-500);
+  --base-color-brand--blue-light: var(--stripe-primary-100);
+  --base-color-brand--blue-dark: var(--stripe-primary-900);
+  --base-color-brand--pink: #dd23bb;
+  --base-color-brand--pink-light: #ffaefe;
+  --base-color-brand--pink-dark: #3c043b;
+  
+  /* Neutral Color Variants */
+  --base-color-neutral--color-orange: #ee5a29;
+  --base-color-neutral--color-blue: #1572a1;
+  --base-color-neutral--color-green: #85a389;
+  --base-color-neutral--color-yellow: #eec759;
+  --base-color-neutral--color-pink: #e6a4b4;
+  
+  /* ===== SYSTEM COLORS ===== */
+  --base-color-system--success-green: var(--success-50);
+  --base-color-system--success-green-dark: var(--success-700);
+  --base-color-system--warning-yellow: var(--warning-50);
+  --base-color-system--warning-yellow-dark: var(--warning-700);
+  --base-color-system--error-red: var(--error-50);
+  --base-color-system--error-red-dark: var(--error-700);
+  --base-color-system--focus-state: var(--stripe-primary-500);
+  
+  /* ===== BORDER COLORS ===== */
+  --border-color--border-primary: var(--border-primary);
+  --border-color--border-secondary: var(--stripe-primary-500);
+  --border-color--border-alternate: var(--gray-950);
+  --border-color--border-gray: var(--border-primary);
+}
