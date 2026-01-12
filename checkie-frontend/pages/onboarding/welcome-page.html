@@ -262,21 +262,21 @@ input:focus-visible {
               </div>
               <div class="spacer-large"></div>
               <div class="state-wrapper">
-                <a href="/pages/onboarding/set-up-store.html" class="state-item done w-inline-block">
+                <div class="state-item done">
                   <div class="state-icon-block w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewbox="0 0 21 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5136 20.5H6.16579C3.09943 20.5 0.74703 19.3924 1.41522 14.9348L2.19325 8.89357C2.60515 6.66931 4.02392 5.81805 5.26877 5.81805H15.4473C16.7104 5.81805 18.0468 6.73339 18.5228 8.89357L19.3008 14.9348C19.8683 18.889 17.58 20.5 14.5136 20.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M14.651 5.59839C14.651 3.21232 12.7167 1.27802 10.3306 1.27802V1.27802C9.18162 1.27315 8.078 1.72618 7.26381 2.53694C6.44963 3.34769 5.99193 4.44938 5.99194 5.59839H5.99194" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M13.2962 10.1018H13.2505" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M7.46566 10.1018H7.41989" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
-                </a>
-                <a href="/pages/onboarding/add-your-brand.html" class="state-item done w-inline-block">
+                </div>
+                <div class="state-item done">
                   <div class="state-icon-block w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 21 21" fill="none">
                       <path d="M9.49224 0.789001H5.75324C2.67824 0.789001 0.750244 2.966 0.750244 6.048V14.362C0.750244 17.444 2.66924 19.621 5.75324 19.621H14.5772C17.6622 19.621 19.5812 17.444 19.5812 14.362V10.334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M6.82763 8.9209L14.3006 1.4479C15.2316 0.517897 16.7406 0.517897 17.6716 1.4479L18.8886 2.6649C19.8196 3.5959 19.8196 5.1059 18.8886 6.0359L11.3796 13.5449C10.9726 13.9519 10.4206 14.1809 9.84463 14.1809H6.09863L6.19263 10.4009C6.20663 9.8449 6.43363 9.3149 6.82763 8.9209Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M13.165 2.60251L17.731 7.16851" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
-                </a>
+                </div>
                 <div class="state-item done">
                   <div class="state-icon-block w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewbox="0 0 23 18" fill="none">
                       <path d="M17.5947 7.93186C19.1971 7.93186 20.4969 6.63295 20.4969 5.03061C20.4969 3.42828 19.1971 2.12936 17.5947 2.12936" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -332,21 +332,9 @@ input:focus-visible {
               <div class="spacer-large"></div>
               <div class="h-flex center">
                 <div class="max-width-large">
-                  <div class="wrapper--js">
-                    <div data-ms-member="id" class="uid"></div>
-                    <div class="w-dyn-list">
-                      <div role="list" class="w-dyn-items">
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="#" class="submit-button w-inline-block">
-                            <div class="text-size-regular">Get started</div>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="w-dyn-empty">
-                        <div>No items found.</div>
-                      </div>
-                    </div>
-                  </div>
+                  <a href="/pages/dashboard/home.html" class="submit-button w-inline-block">
+                    <div class="text-size-regular">Go to Dashboard</div>
+                  </a>
                 </div>
               </div>
               <div class="spacer-large"></div>
@@ -440,17 +428,6 @@ if (!checkLinkContainsDashboard(link)) {
 }
 });
 </script>
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-	const uidElement = document.querySelector(".uid");
-  // Считываем текстовое содержимое (ID)
-  const uid = uidElement ? uidElement.textContent.trim() : "";
-  const btnUid = document.querySelectorAll(`.submit-button`);
-  btnUid.forEach(item => {
-    if (item.id != uid)
-    item.remove()
-  })
-})
-</script>
+  <!-- Removed Memberstack UID-based button filter - using Checkie API instead -->
 </body>
 </html>

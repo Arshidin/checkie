@@ -110,7 +110,33 @@ return new Redis(url, {
 });
 ```
 
-**Статус:** Применено 12 января 2026, попытка #2 без TLS.
+**Статус:** ❌ Не решило проблему. ETIMEDOUT сохранялся.
+
+---
+
+#### Проблема 3.1: ETIMEDOUT сохраняется без TLS
+**Симптомы:**
+- После удаления TLS ошибка ETIMEDOUT всё ещё появляется
+- Public Redis URL (`redis-production-c4b9.up.railway.app`) недоступен из backend
+
+**Корневая причина:**
+- Railway сервисы в одном проекте должны общаться через **internal networking**
+- Public URL работает только для внешнего доступа, не для inter-service communication
+
+**Решение (ФИНАЛЬНОЕ ✅):**
+```
+# Вместо public URL:
+redis://default:password@redis-production-c4b9.up.railway.app:6379
+
+# Использовать internal URL:
+redis://default:password@redis.railway.internal:6379
+```
+
+**Как найти internal hostname:**
+1. Railway Dashboard → Redis service → Settings → Networking
+2. Найти `RAILWAY_PRIVATE_DOMAIN` = `redis.railway.internal`
+
+**Статус:** ✅ РЕШЕНО 12 января 2026. Приложение успешно стартует.
 
 ---
 
@@ -120,7 +146,7 @@ return new Redis(url, {
 | Variable | Описание | Статус |
 |----------|----------|--------|
 | DATABASE_URL | PostgreSQL connection string | ✅ Из Railway PostgreSQL |
-| REDIS_URL | Redis connection string | ✅ Из Railway Redis |
+| REDIS_URL | Redis connection string | ✅ Internal URL (`redis.railway.internal`) |
 | JWT_SECRET | JWT signing key | ✅ Установлен |
 | ENCRYPTION_KEY | 32+ символов для AES-256 | ✅ Установлен |
 | NODE_ENV | production | ✅ Установлен |
@@ -139,7 +165,7 @@ return new Redis(url, {
 
 1. [ ] Проверить `railway.toml` - не переопределяет ли нужные настройки
 2. [ ] Проверить все imports в NestJS модулях
-3. [ ] Убедиться что TLS включен для Redis в production
+3. [ ] REDIS_URL использует internal hostname (`redis.railway.internal`), НЕ public URL
 4. [ ] Проверить что все env variables установлены в Railway
 
 ---
@@ -147,10 +173,11 @@ return new Redis(url, {
 ## Известные особенности Railway
 
 1. **railway.toml переопределяет UI** - всегда проверять этот файл первым
-2. **Redis public TCP proxy НЕ поддерживает TLS** - использовать plain TCP для `redis://` URLs
+2. **Internal networking для inter-service** - сервисы должны общаться через `*.railway.internal`
 3. **TLS только для rediss:// URLs** - проверять протокол, НЕ environment
 4. **PORT устанавливается Railway** - не хардкодить
 5. **Build logs доступны только во время билда** - после завершения показываются только Deploy logs
+6. **Public URLs для внешнего доступа** - НЕ для communication между сервисами в одном проекте
 
 ---
 

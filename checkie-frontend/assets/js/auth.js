@@ -100,8 +100,8 @@
       try {
         await CheckieAPI.register(email, password, firstName, lastName);
 
-        // Redirect to onboarding
-        window.location.href = '/pages/onboarding/welcome-page.html';
+        // Redirect to onboarding - first step is store setup
+        window.location.href = '/pages/onboarding/set-up-store.html';
       } catch (error) {
         console.error('Register error:', error);
         showError(errorDiv, error.message || 'Registration failed. Please try again.');

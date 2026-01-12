@@ -8,13 +8,13 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     updateWelcomeName();
-    initWelcomeButton();
     initStoreForm();
     initBrandingPage();
+    initInviteTeamPage();
   });
 
   // ============================================
-  // Welcome Page
+  // Welcome Page (Final Step)
   // ============================================
 
   function updateWelcomeName() {
@@ -31,40 +31,6 @@
     const uidElements = document.querySelectorAll('[data-ms-member="id"]');
     uidElements.forEach(el => {
       el.textContent = user.id;
-    });
-  }
-
-  function initWelcomeButton() {
-    // Check if we're on welcome page
-    if (!window.location.pathname.includes('welcome')) return;
-
-    // Find or create the "Get started" button
-    let getStartedBtn = document.querySelector('.submit-button');
-
-    // If button doesn't exist (Webflow CMS empty state), create one
-    if (!getStartedBtn) {
-      const wrapper = document.querySelector('.wrapper--js') || document.querySelector('.max-width-large');
-      if (wrapper) {
-        // Hide the "No items found" message
-        const emptyState = wrapper.querySelector('.w-dyn-empty');
-        if (emptyState) {
-          emptyState.style.display = 'none';
-        }
-
-        // Create new button
-        getStartedBtn = document.createElement('a');
-        getStartedBtn.href = '/pages/onboarding/set-up-store.html';
-        getStartedBtn.className = 'submit-button w-inline-block';
-        getStartedBtn.innerHTML = '<div class="text-size-regular">Get started</div>';
-        wrapper.appendChild(getStartedBtn);
-      }
-    }
-
-    if (!getStartedBtn) return;
-
-    getStartedBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      window.location.href = '/pages/onboarding/set-up-store.html';
     });
   }
 
@@ -205,6 +171,45 @@
       // TODO: Implement actual branding update with file upload
       window.location.href = '/pages/onboarding/invite-team-member.html';
     });
+  }
+
+  // ============================================
+  // Invite Team Page
+  // ============================================
+
+  function initInviteTeamPage() {
+    // Check if we're on invite team page
+    if (!window.location.pathname.includes('invite-team-member')) return;
+
+    const form = document.getElementById('wf-form-invite-team');
+    const skipBtn = document.querySelector('.text-link-button, [data-action="skip"]');
+    const submitBtn = document.querySelector('.submit-button');
+
+    // Handle skip button - go to welcome page (final step)
+    if (skipBtn) {
+      skipBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/pages/onboarding/welcome-page.html';
+      });
+    }
+
+    // Handle form submit
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // TODO: Implement team invite API call
+        // For now, just go to welcome page
+        window.location.href = '/pages/onboarding/welcome-page.html';
+      });
+    }
+
+    // If there's a submit button without form, handle click
+    if (submitBtn && !form) {
+      submitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/pages/onboarding/welcome-page.html';
+      });
+    }
   }
 
   // ============================================
