@@ -1,6 +1,5 @@
 [build]
-builder = "nixpacks"
-buildCommand = "rm -rf dist && npm run build && npx prisma generate"
+builder = "dockerfile"
 
 [deploy]
-startCommand = "npx prisma migrate deploy && npm run start:prod"
+startCommand = "node dist/main"
