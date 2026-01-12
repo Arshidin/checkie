@@ -67,5 +67,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Use dumb-init to handle PID 1 properly
 ENTRYPOINT ["dumb-init", "--"]
 
-# Start application
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main"]
+# Start application (migrations run via pre-deploy or manually)
+CMD ["node", "dist/main"]
