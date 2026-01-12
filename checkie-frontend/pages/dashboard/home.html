@@ -12,7 +12,7 @@
   <meta content="home" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
-    <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/webflow.css" rel="stylesheet" type="text/css">
   <!-- Stripe Design System -->
   <link href="/assets/css/design-system/tokens.css" rel="stylesheet" type="text/css">
@@ -21,6 +21,7 @@
   <link href="/assets/css/design-system/components.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/dashboard.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/legacy-compat.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/design-system/toggle.css" rel="stylesheet" type="text/css">
   <!-- Legacy styles (will be gradually removed) -->
   <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -274,7 +275,7 @@ input:focus-visible {
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M8.13797 19.7714L8.15722 16.7047C8.1572 15.9246 8.79312 15.2908 9.58101 15.2856H12.4671C13.2587 15.2856 13.9005 15.9209 13.9005 16.7047V19.7809C13.9003 20.4432 14.4343 20.9845 15.103 21H17.0271C18.9451 21 20.5 19.4607 20.5 17.5618V8.83784C20.4898 8.09083 20.1355 7.38935 19.538 6.93303L12.9577 1.6853C11.8049 0.771566 10.1662 0.771566 9.01342 1.6853L2.46203 6.94256C1.86226 7.39702 1.50739 8.09967 1.5 8.84736V17.5618C1.5 19.4607 3.05488 21 4.97291 21H6.89696C7.58235 21 8.13797 20.4499 8.13797 19.7714Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Home</div>
+                <div class="text-base font-semibold">Home</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
@@ -287,7 +288,7 @@ input:focus-visible {
                       <path d="M2.58579 16.3971C2.94772 16.7591 3.44772 16.9829 4 16.9829H20C20.5523 16.9829 21.0523 16.7591 21.4142 16.3971M2.58579 16.3971C2.22386 16.0352 2 15.5352 2 14.9829V4.98291C2 4.43063 2.22386 3.93063 2.58579 3.5687M2.58579 16.3971L3.29289 15.69M2.58579 3.5687C2.94772 3.20677 3.44772 2.98291 4 2.98291H20C20.5523 2.98291 21.0523 3.20677 21.4142 3.5687M2.58579 3.5687L3.29289 4.2758M21.4142 3.5687C21.7761 3.93063 22 4.43063 22 4.98291V14.9829C22 15.5352 21.7761 16.0352 21.4142 16.3971M21.4142 3.5687L20.7071 4.2758M21.4142 16.3971L20.7071 15.69M2.5 19.4829C8.49193 19.5341 12.6969 19.6574 18.0654 20.9716C19.0399 21.2101 20 20.4862 20 19.4829M5.995 9.98291H6.005M17.995 9.98291H18.005M14.5 9.98291C14.5 11.3636 13.3807 12.4829 12 12.4829C10.6193 12.4829 9.5 11.3636 9.5 9.98291C9.5 8.6022 10.6193 7.48291 12 7.48291C13.3807 7.48291 14.5 8.6022 14.5 9.98291Z" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Payments</div>
+                <div class="text-base font-semibold">Payments</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
@@ -306,11 +307,11 @@ input:focus-visible {
                       <path d="M6.03561 5.5382H11.4346" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Balance</div>
+                <div class="text-base font-semibold">Balance</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/customers.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
                       <path d="M17.5948 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5948 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -329,11 +330,11 @@ input:focus-visible {
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9378 8.90492C9.79643 8.90492 8.07951 7.188 8.07951 5.04575C8.07951 2.90442 9.79643 1.1875 11.9378 1.1875C14.0791 1.1875 15.796 2.90442 15.796 5.04575C15.796 7.188 14.0791 8.90492 11.9378 8.90492Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Customers</div>
+                <div class="text-base font-semibold">Customers</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/pages.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 1H18.5521C19.9036 1 21 2.1059 21 3.47018V6.7641C21 8.12735 19.9036 9.23429 18.5521 9.23429H15.2855C13.933 9.23429 12.8366 8.12735 12.8366 6.7641V3.47018C12.8366 2.1059 13.933 1 15.2855 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -348,11 +349,11 @@ input:focus-visible {
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 12.7656H18.5521C19.9036 12.7656 21 13.8715 21 15.2368V18.5297C21 19.894 19.9036 20.9999 18.5521 20.9999H15.2855C13.933 20.9999 12.8366 19.894 12.8366 18.5297V15.2368C12.8366 13.8715 13.933 12.7656 15.2855 12.7656Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Pages</div>
+                <div class="text-base font-semibold">Pages</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/subscriptions.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 14.2065C5.0334 14.2065 1.7504 14.7875 1.7504 17.1155C1.7504 19.4425 5.0124 20.0455 8.8774 20.0455C12.7214 20.0455 16.0044 19.4635 16.0044 17.1365C16.0044 14.8095 12.7424 14.2065 8.8774 14.2065Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -367,11 +368,11 @@ input:focus-visible {
                       <path d="M20.25 9.67432H16.16" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Subscriptions</div>
+                <div class="text-base font-semibold">Subscriptions</div>
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/adpay.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
                       <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -380,7 +381,7 @@ input:focus-visible {
                       <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Adpay</div>
+                <div class="text-base font-semibold">Adpay</div>
               </a>
             </li>
           </ul>
@@ -401,7 +402,7 @@ input:focus-visible {
                       <path d="M12 13V12.7692C12 12.0151 12.505 11.6062 13.011 11.2924C13.505 10.985 14 10.5845 14 9.84604C14 8.8261 13.105 8 12 8C10.895 8 10 8.8261 10 9.84604" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">FAQ</div>
+                <div class="text-base font-semibold">FAQ</div>
               </a>
             </li>
             <li>
@@ -416,7 +417,7 @@ input:focus-visible {
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M11.02 1C5.21 1 1 5.74612 1 11.015C1 12.6975 1.49 14.4291 2.35 16.0115C2.51 16.2729 2.53 16.6024 2.42 16.9139L1.75 19.1572C1.6 19.698 2.06 20.0976 2.57 19.9374L4.59 19.3375C5.14 19.1572 5.57 19.3866 6.08 19.698C7.54 20.5583 9.36 21 11 21C15.96 21 21 17.1642 21 10.985C21 5.65598 16.7 1 11.02 1Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg></div>
                 </div>
-                <div class="text-size-medium text-weight-semibold">Help center</div>
+                <div class="text-base font-semibold">Help center</div>
               </a>
             </li>
           </ul>
@@ -439,6 +440,8 @@ document.addEventListener('DOMContentLoaded',() => {
     <div class="dashboard-header">
       <div class="dashboard-header-title">Home</div>
       <div class="dashboard-header-actions">
+        <a href="/pages/dashboard/faq.html" class="dashboard-header-link">FAQ</a>
+        <a href="/pages/dashboard/help-center.html" class="dashboard-header-link">Help center</a>
         <div class="dashboard-header-btn">
             <div class="notigication-point"></div>
             <div class="square-btn-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
@@ -446,7 +449,7 @@ document.addEventListener('DOMContentLoaded',() => {
                 <path d="M7.55493 19.8518C8.05421 20.4785 8.78739 20.884 9.59222 20.9788C10.3971 21.0735 11.2072 20.8495 11.8433 20.3564C12.0389 20.2106 12.2149 20.041 12.3672 19.8518" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg></div>
             <div id="notification" class="btn-trigger"></div>
-        </div>
+          </div>
         <div class="dashboard-header-btn">
             <div class="dynamic-icon-wrapper">
               <div class="square-btn-icon hide w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
@@ -459,7 +462,7 @@ document.addEventListener('DOMContentLoaded',() => {
                 </svg></div>
             </div>
             <div id="settings" class="btn-trigger"></div>
-        </div>
+          </div>
           <div class="padding-right padding-medium-s"></div>
           <div class="store-panel-btn">
             <div class="h-flex left-center"><img loading="lazy" src="/assets/images/Screenshot-2024-02-27-at-11.17-1.avif" alt="" class="brand-logo">
@@ -489,8 +492,8 @@ document.addEventListener('DOMContentLoaded',() => {
               </div>
               <div class="spacer-medium-s"></div>
               <div class="grid-3-col">
-                <div class="service-item-wrapper">
-                  <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
+                <div class="dashboard-card">
+                  <div class="dashboard-card-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_1398_12050)">
                         <path d="M27.1454 4.85616C26.8769 4.58766 26.4417 4.58766 26.1731 4.85616L22.9165 8.1126C22.648 8.38104 22.648 8.81635 22.9165 9.08485C23.0507 9.2191 23.2267 9.28622 23.4026 9.28622C23.5785 9.28622 23.7545 9.2191 23.8887 9.08485L27.1454 5.82835C27.4139 5.55997 27.4139 5.12466 27.1454 4.85616Z" fill="#EE5A29"></path>
                         <path d="M29.8286 11.1074C29.7492 10.7361 29.3841 10.4997 29.0124 10.5791L25.7557 11.2765C25.3845 11.356 25.1479 11.7214 25.2275 12.0928C25.2966 12.4156 25.5818 12.6364 25.8991 12.6364C25.9467 12.6364 25.9952 12.6314 26.0437 12.6211L29.3003 11.9236C29.6716 11.8441 29.9081 11.4787 29.8286 11.1074Z" fill="#EE5A29"></path>
@@ -506,12 +509,13 @@ document.addEventListener('DOMContentLoaded',() => {
                         </clippath>
                       </defs>
                     </svg></div>
-                  <div>
-                    <div class="text-size-medium text-weight-semibold">Create a payment link</div>
-                    <div class="text-size-small text-color-primary-opacity-65">Create a payment link without using code.</div>
+                  <div class="dashboard-card-content">
+                    <div class="dashboard-card-title">Create a payment link</div>
+                    <div class="dashboard-card-description">Create a payment link without using code.</div>
                   </div>
-                  <a data-w-id="d0b541e7-c7a2-c523-9b03-a00fd9dc4db7" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Create</div>
+                  <div class="dashboard-card-footer">
+                    <a data-w-id="d0b541e7-c7a2-c523-9b03-a00fd9dc4db7" href="#" class="dashboard-btn-link w-inline-block">
+                    <div class="text-base font-medium">Create</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewbox="0 0 17 14" fill="none">
                           <path d="M16 7.02441L1 7.02441" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -524,8 +528,8 @@ document.addEventListener('DOMContentLoaded',() => {
                     </div>
                   </a>
                 </div>
-                <div class="service-item-wrapper">
-                  <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
+                <div class="dashboard-card">
+                  <div class="dashboard-card-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_1398_12155)">
                         <path d="M31.7957 0.204296C31.6243 0.0328663 31.3767 -0.0369752 31.1411 0.018898L9.96579 5.03162C9.71944 5.08939 9.52388 5.27606 9.45468 5.51987C9.38547 5.76305 9.45341 6.02464 9.63182 6.20368L14.7937 11.3872V16.5079C14.7937 16.8939 15.1061 17.2063 15.4922 17.2063H20.6128L25.7963 22.3682C25.929 22.5003 26.1068 22.572 26.289 22.572C26.3532 22.572 26.4173 22.5631 26.4801 22.5453C26.724 22.4761 26.9106 22.2806 26.9684 22.0342L31.9811 0.858901C32.037 0.623345 31.9671 0.375725 31.7957 0.204296ZM25.8973 20.4971L21.8008 16.4177L26.0351 10.0526C26.2484 9.73132 26.1614 9.29767 25.8401 9.08433C25.5195 8.87036 25.0858 8.95735 24.8719 9.27862L20.5277 15.8094H16.1906V11.4723L22.7214 7.12813C23.0427 6.91416 23.1297 6.48115 22.9157 6.15987C22.7023 5.8386 22.2687 5.75162 21.9474 5.96495L15.5823 10.1993L11.5029 6.10273L30.3614 1.63859L25.8973 20.4971Z" fill="#333333"></path>
                         <path d="M14.1672 30.8166C13.2175 30.8166 12.3246 30.4467 11.653 29.7752C10.3547 28.4769 9.78057 26.8028 9.9499 24.8611C7.33986 25.8112 5.14582 27.8449 5.08664 27.9011C4.81363 28.1697 4.37445 28.1684 4.10308 27.8971C3.83038 27.6243 3.83038 27.1821 4.10308 26.9093C4.12004 26.8924 5.99827 25.1207 8.47269 23.9685C9.07472 23.6882 9.66107 23.4676 10.2298 23.3066C10.2775 23.128 10.3309 22.9476 10.3897 22.7656C11.0352 20.7698 12.1531 19.1898 12.3707 18.8934C12.5966 18.5807 13.0345 18.5087 13.3471 18.7345C13.6598 18.9604 13.7314 19.3952 13.5055 19.7079L13.4968 19.7198C13.3083 19.9767 12.3665 21.3073 11.7803 23.0109C13.6886 22.8339 15.3497 23.4153 16.6813 24.7469C18.0676 26.1332 18.0676 28.3889 16.6813 29.7752C16.0098 30.4467 15.1169 30.8166 14.1672 30.8166ZM11.4045 24.4686C11.1157 26.2274 11.5294 27.6761 12.6407 28.7874C13.0485 29.1952 13.5906 29.4197 14.1672 29.4197C14.7438 29.4197 15.2859 29.1951 15.6937 28.7874C16.5354 27.9457 16.5354 26.5762 15.6937 25.7345C14.426 24.467 12.8992 24.2174 11.4045 24.4686Z" fill="#EE5A29"></path>
@@ -537,12 +541,13 @@ document.addEventListener('DOMContentLoaded',() => {
                         </clippath>
                       </defs>
                     </svg></div>
-                  <div>
-                    <div class="text-size-medium text-weight-semibold">Share a payment link</div>
-                    <div class="text-size-small text-color-primary-opacity-65">Share a payment link with your customers.</div>
+                  <div class="dashboard-card-content">
+                    <div class="dashboard-card-title">Share a payment link</div>
+                    <div class="dashboard-card-description">Share a payment link with your customers.</div>
                   </div>
-                  <a data-w-id="44a3cacc-1154-d5d4-6423-34e9e9df3f0e" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Share</div>
+                  <div class="dashboard-card-footer">
+                    <a data-w-id="44a3cacc-1154-d5d4-6423-34e9e9df3f0e" href="#" class="dashboard-btn-link w-inline-block">
+                    <div class="text-base font-medium">Share</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
                           <path d="M15.75 7.72559L0.75 7.72559" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -551,12 +556,13 @@ document.addEventListener('DOMContentLoaded',() => {
                       <div style="opacity:0" class="dynamic-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="14" viewbox="0 0 17 14" fill="none">
                           <path d="M16 7.02441L1 7.02441" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                           <path d="M9.9502 1.00007L16.0002 7.02407L9.9502 13.0491" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg></div>
+                        </svg>                      </div>
                     </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-                <div class="service-item-wrapper spacer-medium">
-                  <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
+                <div class="dashboard-card spacer-medium">
+                  <div class="dashboard-card-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_1398_12186)">
                         <path d="M7.46073 28.2913C7.32655 28.2913 7.19142 28.2856 7.0553 28.2739C5.80332 28.1667 4.66696 27.5773 3.85559 26.614C3.04423 25.6508 2.65636 24.4309 2.76361 23.1791C2.98523 20.5916 5.2707 18.6668 7.85916 18.8882C9.11115 18.9954 10.2475 19.5849 11.0589 20.548C11.8702 21.5113 12.2581 22.7311 12.1509 23.9829C11.9409 26.4345 9.87789 28.2911 7.46073 28.2913ZM7.45473 20.2459C5.74294 20.2459 4.28221 21.5606 4.13353 23.2965C4.05759 24.1824 4.3324 25.046 4.90714 25.7282C5.48188 26.4105 6.28644 26.8281 7.17255 26.904C7.26886 26.9122 7.36473 26.9163 7.45967 26.9163C9.17152 26.9163 10.6322 25.6017 10.7809 23.8657C10.8567 22.9798 10.582 22.1163 10.0073 21.434C9.43252 20.7517 8.62797 20.3341 7.74185 20.2582C7.64554 20.25 7.54967 20.2459 7.45473 20.2459Z" fill="#EE5A29"></path>
                         <path d="M31.9722 22.945C31.9149 22.2771 31.7708 21.637 31.5519 21.035C31.5504 21.0268 31.5487 21.0187 31.5469 21.0105L28.924 9.25255C28.6454 8.004 27.9517 6.89058 26.9596 6.09096L26.1814 3.40519C25.7338 1.86021 24.2466 0.838036 22.6427 0.975785C21.0398 1.11303 19.747 2.37289 19.5686 3.97137L19.2679 6.66614C18.6847 7.30089 18.2587 8.05631 18.0159 8.87211H13.9839C13.7412 8.05631 13.3152 7.30089 12.732 6.66614L12.4313 3.97143C12.2529 2.37289 10.96 1.11303 9.35712 0.975785C7.75451 0.838411 6.26603 1.86021 5.81842 3.40519L5.0403 6.09096C4.04819 6.89058 3.35451 8.004 3.07595 9.25255L0.453051 21.0106C0.451239 21.0187 0.449614 21.0268 0.448114 21.0349C0.22918 21.6369 0.084994 22.2771 0.0278073 22.945C-0.142128 24.9292 0.470926 26.8607 1.75403 28.3838C3.03708 29.9069 4.83655 30.8394 6.82096 31.0092C7.03652 31.0277 7.25021 31.0367 7.46271 31.0367C11.2888 31.0367 14.5544 28.0976 14.8867 24.2172C14.9439 23.5498 14.9124 22.8883 14.7967 22.2463C14.7965 22.2397 14.7964 22.2332 14.796 22.2266L14.6957 20.162H17.3044L17.204 22.2266C17.2037 22.2332 17.2035 22.2397 17.2034 22.2463C17.0876 22.8883 17.0563 23.5498 17.1134 24.2172C17.4458 28.0979 20.711 31.0368 24.5373 31.0367C24.7496 31.0367 24.9638 31.0277 25.1791 31.0092C27.1635 30.8393 28.963 29.9069 30.246 28.3838C31.5291 26.8607 32.1421 24.9292 31.9722 22.945ZM22.7601 2.34577C23.71 2.26414 24.595 2.8707 24.8608 3.78787L25.2551 5.14879C24.5175 4.89498 23.7293 4.79498 22.9395 4.86273C22.1786 4.92786 21.4458 5.14598 20.7818 5.49754L20.9352 4.12387C21.041 3.17507 21.8085 2.4272 22.7601 2.34577ZM23.0568 6.23271C25.1731 6.05103 27.1194 7.47838 27.582 9.55192L29.463 17.9839C27.989 16.6892 26.0109 15.9727 23.9065 16.153C21.922 16.323 20.1225 17.2553 18.8395 18.7784C18.8067 18.8173 18.7744 18.8565 18.7425 18.8959L19.1619 10.2728C19.2652 8.15087 20.9396 6.41402 23.0568 6.23271ZM9.23993 2.34577C10.1915 2.4272 10.959 3.17507 11.0648 4.12393L11.2182 5.4976C10.5542 5.14604 9.8213 4.92792 9.0605 4.86279C8.27069 4.79517 7.48246 4.89511 6.74484 5.14892L7.13921 3.78787C7.40502 2.87076 8.28907 2.26427 9.23993 2.34577ZM4.418 9.55192C4.88049 7.47832 6.82653 6.0514 8.94318 6.23271C11.0604 6.41402 12.7348 8.15087 12.838 10.2728L13.2574 18.8959C13.2255 18.8565 13.1932 18.8174 13.1604 18.7785C11.8774 17.2554 10.0779 16.3229 8.09345 16.1531C5.98904 15.9728 4.01088 16.6893 2.53696 17.9839L4.418 9.55192ZM13.5167 24.1C13.2456 27.2649 10.5825 29.6619 7.46164 29.6618C7.28852 29.6618 7.1139 29.6544 6.93828 29.6393C5.31974 29.5008 3.85207 28.7403 2.80558 27.498C1.75916 26.2559 1.25917 24.6805 1.39779 23.0624C1.66885 19.8975 4.33194 17.5006 7.45283 17.5006C7.62595 17.5006 7.80058 17.5079 7.9762 17.523C9.59474 17.6616 11.0625 18.422 12.109 19.6643C13.1554 20.9065 13.6553 22.4818 13.5167 24.1ZM14.6287 18.787L14.2134 10.2471H17.7865L17.3712 18.787H14.6287ZM29.1944 27.498C28.1479 28.7403 26.6803 29.5008 25.0617 29.6393C24.886 29.6544 24.7116 29.6618 24.5383 29.6618C21.4177 29.6616 18.7544 27.2647 18.4833 24.1C18.3447 22.4818 18.8446 20.9065 19.891 19.6643C20.9375 18.4221 22.4052 17.6616 24.0238 17.5231C24.1995 17.508 24.3739 17.5006 24.5472 17.5006C27.6678 17.5006 30.3311 19.8977 30.6022 23.0624C30.7408 24.6805 30.2408 26.2559 29.1944 27.498Z" fill="#333333"></path>
@@ -568,12 +574,13 @@ document.addEventListener('DOMContentLoaded',() => {
                         </clippath>
                       </defs>
                     </svg></div>
-                  <div>
-                    <div class="text-size-medium text-weight-semibold">Track a payment link</div>
-                    <div class="text-size-small text-color-primary-opacity-65">Track a payment link and related campaigns.</div>
+                  <div class="dashboard-card-content">
+                    <div class="dashboard-card-title">Track a payment link</div>
+                    <div class="dashboard-card-description">Track a payment link and related campaigns.</div>
                   </div>
-                  <a data-w-id="ae3fe4dc-6c4e-b494-acad-61212461980c" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Track</div>
+                  <div class="dashboard-card-footer">
+                    <a data-w-id="ae3fe4dc-6c4e-b494-acad-61212461980c" href="#" class="dashboard-btn-link w-inline-block">
+                    <div class="text-base font-medium">Track</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
                           <path d="M15.75 7.72559L0.75 7.72559" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -592,11 +599,11 @@ document.addEventListener('DOMContentLoaded',() => {
             <div class="grid-wrapper">
               <div class="h-flex">
                 <div class="padding-left padding-medium"></div>
-                <div class="text-size-large-x text-weight-semibold">Explore advanced options</div>
+                <div class="text-2xl font-semibold">Explore advanced options</div>
               </div>
               <div class="spacer-medium-s"></div>
               <div class="grid-3-col">
-                <div class="service-item-wrapper">
+                <div class="dashboard-card">
                   <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_1398_12293)">
                         <path d="M16.6875 18.5403H15.3125V28.3124H16.6875V18.5403Z" fill="#EE5A29"></path>
@@ -621,11 +628,11 @@ document.addEventListener('DOMContentLoaded',() => {
                       </defs>
                     </svg></div>
                   <div>
-                    <div class="text-size-medium text-weight-semibold">Create and manage a payment link with the API</div>
-                    <div class="text-size-small text-color-primary-opacity-65">For convenient management of your payments.</div>
+                    <div class="text-base font-semibold">Create and manage a payment link with the API</div>
+                    <div class="text-sm text-secondary">For convenient management of your payments.</div>
                   </div>
                   <a data-w-id="7d1d749f-db90-578a-906a-4e0777ab8d11" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Create</div>
+                    <div class="text-base font-medium">Create</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
                           <path d="M15.75 7.72559L0.75 7.72559" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -638,7 +645,7 @@ document.addEventListener('DOMContentLoaded',() => {
                     </div>
                   </a>
                 </div>
-                <div class="service-item-wrapper">
+                <div class="dashboard-card">
                   <div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewbox="0 0 32 32" fill="none">
                       <g clip-path="url(#clip0_1398_12317)">
                         <path d="M7.10473 3.82031H4.56323C4.18354 3.82031 3.87573 4.12813 3.87573 4.50781V9.60131V12.1481C3.87573 12.5278 4.18354 12.8356 4.56323 12.8356C4.94292 12.8356 5.25073 12.5278 5.25073 12.1481V10.2888H7.10473C8.88523 10.2888 10.3337 8.83794 10.3337 7.05456C10.3337 5.27119 8.88523 3.82031 7.10473 3.82031ZM7.10473 8.91381H5.25073V5.19531H7.10473C8.12705 5.19531 8.95873 6.02938 8.95873 7.05456C8.95873 8.07975 8.12705 8.91381 7.10473 8.91381Z" fill="#EE5A29"></path>
@@ -653,11 +660,11 @@ document.addEventListener('DOMContentLoaded',() => {
                       </defs>
                     </svg></div>
                   <div>
-                    <div class="text-size-medium text-weight-semibold">Create an embeddable buy button</div>
-                    <div class="text-size-small text-color-primary-opacity-65">To sell a product, subscription, or accept a payment on your website.</div>
+                    <div class="text-base font-semibold">Create an embeddable buy button</div>
+                    <div class="text-sm text-secondary">To sell a product, subscription, or accept a payment on your website.</div>
                   </div>
                   <a data-w-id="7d1d749f-db90-578a-906a-4e0777ab8d1e" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Try</div>
+                    <div class="text-base font-medium">Try</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
                           <path d="M15.75 7.72559L0.75 7.72559" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -684,11 +691,11 @@ document.addEventListener('DOMContentLoaded',() => {
                       </defs>
                     </svg></div>
                   <div>
-                    <div class="text-size-medium text-weight-semibold">Customize your checkout experience</div>
-                    <div class="text-size-small text-color-primary-opacity-65">Choose the information you collect from cutomers at checkout.</div>
+                    <div class="text-base font-semibold">Customize your checkout experience</div>
+                    <div class="text-sm text-secondary">Choose the information you collect from cutomers at checkout.</div>
                   </div>
                   <a data-w-id="7d1d749f-db90-578a-906a-4e0777ab8d2b" href="#" class="btn-link-block w-inline-block">
-                    <div class="text-size-regular text-weight-medium">Customize</div>
+                    <div class="text-base font-medium">Customize</div>
                     <div class="div-block-48">
                       <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewbox="0 0 17 15" fill="none">
                           <path d="M15.75 7.72559L0.75 7.72559" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -792,5 +799,6 @@ if (!checkLinkContainsDashboard(link)) {
 </script>
   <script src="/assets/js/api.js" type="text/javascript"></script>
   <script src="/assets/js/auth.js" type="text/javascript"></script>
+  <script src="/assets/js/design-system-toggle.js" type="text/javascript"></script>
 </body>
 </html>

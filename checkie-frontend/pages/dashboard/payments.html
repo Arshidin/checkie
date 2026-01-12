@@ -21,6 +21,7 @@
   <link href="/assets/css/design-system/components.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/dashboard.css" rel="stylesheet" type="text/css">
   <link href="/assets/css/design-system/legacy-compat.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/design-system/toggle.css" rel="stylesheet" type="text/css">
   <!-- Legacy styles (will be gradually removed) -->
   <link href="/assets/css/checkie-stage.webflow.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -310,7 +311,7 @@ input:focus-visible {
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/customers.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewbox="0 0 24 18" fill="none">
                       <path d="M17.5948 7.93189C19.1972 7.93189 20.497 6.63298 20.497 5.03064C20.497 3.42831 19.1972 2.12939 17.5948 2.12939" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -333,7 +334,7 @@ input:focus-visible {
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/pages.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2855 1H18.5521C19.9036 1 21 2.1059 21 3.47018V6.7641C21 8.12735 19.9036 9.23429 18.5521 9.23429H15.2855C13.933 9.23429 12.8366 8.12735 12.8366 6.7641V3.47018C12.8366 2.1059 13.933 1 15.2855 1Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -352,7 +353,7 @@ input:focus-visible {
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/subscriptions.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M8.8774 14.2065C5.0334 14.2065 1.7504 14.7875 1.7504 17.1155C1.7504 19.4425 5.0124 20.0455 8.8774 20.0455C12.7214 20.0455 16.0044 19.4635 16.0044 17.1365C16.0044 14.8095 12.7424 14.2065 8.8774 14.2065Z" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -371,7 +372,7 @@ input:focus-visible {
               </a>
             </li>
             <li class="dashboard-nav-item">
-              <a href="/pages/public/coming-soon.html" class="dashboard-nav-link w-inline-block">
+              <a href="/pages/dashboard/adpay.html" class="dashboard-nav-link w-inline-block">
                 <div class="icon-block-relative">
                   <div class="icon-active w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
                       <path d="M13.1362 14.6167L19.5258 16.0558L18.4113 11.839M13.1362 14.6167L7.65251 15.9493C5.22366 16.5395 2.75568 15.1301 2.14012 12.8012C1.52456 10.4724 2.99452 8.10604 5.42337 7.51582L10.9071 6.18328L15.8106 2L16.9252 6.21673M13.1362 14.6167L15.5259 21.3702L12.5852 22L10.3813 15.9493M18.3368 5.8737C18.3539 5.86955 18.3709 5.86556 18.388 5.86173M18.388 5.86173C19.9309 5.51569 21.4973 6.46322 21.9031 7.99878C22.3135 9.55134 21.3822 11.1171 19.8229 11.496L18.4113 11.839M18.388 5.86173L16.9252 6.21673M16.9252 6.21673L18.4113 11.839M6.67213 7.21237L8.90127 15.6458" stroke="#EE5A29" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -436,23 +437,20 @@ document.addEventListener('DOMContentLoaded',() => {
 </script>
       </div>
     </section>
-    <div class="section-top-bar">
-      <div class="navbar-h-grid">
-        <div id="w-node-_7ec97429-9b79-5281-c550-4369b6e60459-9b1b0555" class="h-flex left-center">
-          <div class="padding-left padding-medium"></div>
-          <div class="text-size-large-x text-weight-semibold">Payments</div>
-        </div>
-        <div id="w-node-fb3109b9-9ef5-33ad-cb5b-1716972e2f73-972e2f73" class="h-flex">
-          <div class="navbar-btn-wrapper">
+    <div class="dashboard-header">
+      <div class="dashboard-header-title">Payments</div>
+      <div class="dashboard-header-actions">
+        <a href="/pages/dashboard/faq.html" class="dashboard-header-link">FAQ</a>
+        <a href="/pages/dashboard/help-center.html" class="dashboard-header-link">Help center</a>
+        <div class="dashboard-header-btn">
             <div class="notigication-point"></div>
             <div class="square-btn-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.50083 12.7871V12.5681C1.53295 11.9202 1.7406 11.2925 2.10236 10.7496C2.7045 10.0975 3.1167 9.29831 3.29571 8.43598C3.29571 7.7695 3.29571 7.0935 3.35393 6.42703C3.65469 3.21842 6.82728 1 9.96106 1H10.0387C13.1725 1 16.345 3.21842 16.6555 6.42703C16.7137 7.0935 16.6555 7.7695 16.704 8.43598C16.8854 9.3003 17.2972 10.1019 17.8974 10.7591C18.2618 11.2972 18.4698 11.9227 18.4989 12.5681V12.7776C18.5206 13.648 18.2208 14.4968 17.6548 15.1674C16.907 15.9515 15.8921 16.4393 14.8024 16.5384C11.607 16.8812 8.38303 16.8812 5.18762 16.5384C4.09914 16.435 3.08576 15.9479 2.33521 15.1674C1.778 14.4963 1.48224 13.6526 1.50083 12.7871Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 <path d="M7.55493 19.8518C8.05421 20.4785 8.78739 20.884 9.59222 20.9788C10.3971 21.0735 11.2072 20.8495 11.8433 20.3564C12.0389 20.2106 12.2149 20.041 12.3672 19.8518" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg></div>
             <div id="notification" class="btn-trigger"></div>
-          </div>
-          <div class="padding-right padding-medium-s"></div>
-          <div class="navbar-btn-wrapper">
+        </div>
+        <div class="dashboard-header-btn">
             <div class="dynamic-icon-wrapper">
               <div class="square-btn-icon hide w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewbox="0 0 20 22" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8067 6.62361L18.1842 5.54352C17.6577 4.6296 16.4907 4.31432 15.5755 4.83872V4.83872C15.1399 5.09534 14.6201 5.16815 14.1307 5.04109C13.6413 4.91402 13.2226 4.59752 12.9668 4.16137C12.8023 3.88415 12.7139 3.56839 12.7105 3.24604V3.24604C12.7254 2.72922 12.5304 2.2284 12.17 1.85767C11.8096 1.48694 11.3145 1.27786 10.7975 1.27808H9.5435C9.03697 1.27807 8.55131 1.47991 8.194 1.83895C7.83669 2.19798 7.63717 2.68459 7.63961 3.19112V3.19112C7.6246 4.23693 6.77248 5.07681 5.72657 5.0767C5.40421 5.07336 5.08846 4.98494 4.81123 4.82041V4.82041C3.89606 4.29601 2.72911 4.61129 2.20254 5.52522L1.53435 6.62361C1.00841 7.53639 1.3194 8.70261 2.23 9.23231V9.23231C2.8219 9.57404 3.18653 10.2056 3.18653 10.8891C3.18653 11.5725 2.8219 12.2041 2.23 12.5458V12.5458C1.32056 13.0719 1.00923 14.2353 1.53435 15.1454V15.1454L2.16593 16.2346C2.41265 16.6798 2.8266 17.0083 3.31619 17.1474C3.80578 17.2866 4.33064 17.2249 4.77462 16.976V16.976C5.21108 16.7213 5.73119 16.6516 6.21934 16.7822C6.70749 16.9128 7.12324 17.233 7.37416 17.6717C7.5387 17.9489 7.62711 18.2646 7.63046 18.587V18.587C7.63046 19.6435 8.48696 20.5 9.5435 20.5H10.7975C11.8505 20.5001 12.7055 19.6491 12.7105 18.5962V18.5962C12.7081 18.088 12.9089 17.6 13.2682 17.2407C13.6275 16.8814 14.1155 16.6807 14.6236 16.6831C14.9452 16.6917 15.2596 16.7798 15.5389 16.9394V16.9394C16.4517 17.4653 17.6179 17.1544 18.1476 16.2438V16.2438L18.8067 15.1454C19.0618 14.7075 19.1318 14.186 19.0012 13.6964C18.8706 13.2067 18.5502 12.7894 18.111 12.5367V12.5367C17.6718 12.284 17.3514 11.8666 17.2208 11.3769C17.0902 10.8873 17.1603 10.3658 17.4154 9.92796C17.5812 9.63834 17.8214 9.3982 18.111 9.23231V9.23231C19.0161 8.70289 19.3264 7.54349 18.8067 6.63277V6.63277V6.62361Z" stroke="#EE5A29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -464,9 +462,7 @@ document.addEventListener('DOMContentLoaded',() => {
                 </svg></div>
             </div>
             <div id="settings" class="btn-trigger"></div>
-          </div>
-          <div class="padding-right padding-medium-s"></div>
-          <div class="nav-menu-divider nav-bar"></div>
+        </div>
           <div class="padding-right padding-medium-s"></div>
           <div class="store-panel-btn">
             <div class="h-flex left-center"><img loading="lazy" src="/assets/images/Screenshot-2024-02-27-at-11.17-1.avif" alt="" class="brand-logo">
@@ -493,7 +489,7 @@ document.addEventListener('DOMContentLoaded',() => {
               <form id="email-form" name="email-form" data-name="Email Form" method="get" data-wf-page-id="677ba57159eca7309b1b0555" data-wf-element-id="69afc38f-7eb8-e4b1-6dca-f1647dabd399">
                 <div class="page-navigation-bar">
                   <div class="h-flex gap-medium-s">
-                    <div data-w-id="8001f22b-ea66-d975-e537-a1be1ed5ebc9" class="btn-link-block">
+                    <div data-w-id="8001f22b-ea66-d975-e537-a1be1ed5ebc9" class="dashboard-btn-link">
                       <div class="div-block-48">
                         <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewbox="0 0 22 22" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29332 21L13.0696 18.7519V12.8603L20.5593 5.26456C20.8416 4.97995 21 4.58933 21 4.18027V2.51754C21 1.67869 20.3417 1 19.5295 1H2.47049C1.65826 1 1 1.67869 1 2.51754V4.2183C1 4.60431 1.14169 4.97534 1.39719 5.2565L8.29332 12.8603V21Z" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -504,7 +500,7 @@ document.addEventListener('DOMContentLoaded',() => {
                       </div>
                       <div class="text-size-regular text-weight-medium">Filter</div>
                     </div>
-                    <div data-w-id="3e3e4d13-e726-5ac9-bc73-c085a3020e4d" class="btn-link-block">
+                    <div data-w-id="3e3e4d13-e726-5ac9-bc73-c085a3020e4d" class="dashboard-btn-link">
                       <div class="div-block-48">
                         <div style="opacity:1" class="static-icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewbox="0 0 21 21" fill="none">
                             <path d="M5.4668 13.5032L8.45993 9.61305L11.8741 12.295L14.8032 8.51465" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -694,5 +690,6 @@ if (!checkLinkContainsDashboard(link)) {
 </script>
   <script src="/assets/js/api.js" type="text/javascript"></script>
   <script src="/assets/js/auth.js" type="text/javascript"></script>
+  <script src="/assets/js/design-system-toggle.js" type="text/javascript"></script>
 </body>
 </html>
