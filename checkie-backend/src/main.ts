@@ -7,9 +7,21 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    rawBody: true,
-  });
+  const logger = new Logger('Bootstrap');
+
+  logger.log('Starting application...');
+  logger.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+  logger.log(`PORT: ${process.env.PORT}`);
+  logger.log(`DATABASE_URL: ${process.env.DATABASE_URL ? 'set' : 'NOT SET'}`);
+  logger.log(`REDIS_URL: ${process.env.REDIS_URL ? 'set' : 'NOT SET'}`);
+  logger.log(`JWT_SECRET: ${process.env.JWT_SECRET ? 'set' : 'NOT SET'}`);
+  logger.log(`ENCRYPTION_KEY length: ${process.env.ENCRYPTION_KEY?.length || 0}`);
+  logger.log(`ALLOWED_ORIGINS: ${process.env.ALLOWED_ORIGINS}`);
+
+  try {
+    const app = await NestFactory.create(AppModule, {
+      rawBody: true,
+    });
 
   // Security
   app.use(helmet());
@@ -65,9 +77,15 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   await app.listen(port);
 
-  const logger = new Logger('Bootstrap');
   logger.log(`Application is running on: http://localhost:${port}`);
   logger.log(`Swagger documentation: http://localhost:${port}/api/docs`);
+  } catch (error) {
+    logger.error('Failed to start application:', error);
+    throw error;
+  }
 }
 
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Bootstrap failed:', err);
+  process.exit(1);
+});
